@@ -1,5 +1,101 @@
 {
 	"welcome": "¡Bienvenido!",
+	"home": {
+		"navigation": {
+			"features": "Características",
+			"howItWorks": "Cómo funciona",
+			"pricing": "Precios",
+			"docs": "Documentación",
+			"signIn": "Iniciar sesión",
+			"getStarted": "Comenzar"
+		},
+		"hero": {
+			"badge": "🚀 Constructor de Agentes de IA Visual",
+			"title": "Construye, Despliega y Comparte\nAgentes de IA Visualmente",
+			"description": "Crea agentes de IA potentes con nuestra interfaz intuitiva de arrastrar y soltar. Conecta múltiples modelos, construye herramientas personalizadas y despliega en cualquier lugar.",
+			"startBuilding": "Comenzar Gratis",
+			"starOnGithub": "Destacar en GitHub"
+		},
+		"features": {
+			"title": "Características Potentes",
+			"description": "Todo lo que necesitas para construir agentes de IA listos para producción",
+			"visualBuilder": {
+				"title": "Constructor de Flujos de Trabajo Visual",
+				"description": "Arrastra y suelta nodos para crear flujos de trabajo de IA complejos. Añade condiciones, bucles y lógica.",
+				"tags": ["Inicio/Fin", "Condiciones", "Bucles"]
+			},
+			"multiModel": {
+				"title": "Soporte Multi-Modelo",
+				"description": "Conéctate a cualquier modelo de IA - OpenAI, Gemini, modelos locales o puntos finales personalizados.",
+				"tags": ["OpenAI", "Gemini", "Local"]
+			},
+			"multiLanguage": {
+				"title": "Exportación Multi-Idioma",
+				"description": "Exporta tus agentes a Python, JavaScript, TypeScript y más.",
+				"tags": ["Python", "JavaScript", "TypeScript"]
+			},
+			"apiIntegration": {
+				"title": "Integración API",
+				"description": "Activa tus agentes a través de API REST. Perfecto para integración con tus aplicaciones."
+			},
+			"shareCollaborate": {
+				"title": "Compartir y Colaborar",
+				"description": "Publica agentes públicamente o mantenlos privados. Colabora con tu equipo."
+			},
+			"containerSupport": {
+				"title": "Soporte de Contenedores",
+				"description": "Ejecuta modelos en contenedores Docker para aislamiento y escalabilidad."
+			}
+		},
+		"nodeLibrary": {
+			"title": "Biblioteca de Nodos Rica",
+			"description": "Más de 20 tipos de nodos para construir cualquier flujo de trabajo que puedas imaginar",
+			"types": [
+				"Nodos de Modelo", "Nodos de Herramientas", "Nodos API", "Nodos Condicionales",
+				"Nodos de Bucle", "Nodos de Entrada", "Nodos de Salida", "Nodos de Transformación",
+				"Inicio/Fin", "Nodos de Ramificación", "Nodos de Fusión", "Nodos de Código"
+			]
+		},
+		"export": {
+			"title": "Exportar en Cualquier Lugar",
+			"description": "Construye una vez, despliega en cualquier lugar. Exporta tus agentes al lenguaje de programación que prefieras.",
+			"languages": ["Python", "JavaScript", "TypeScript", "Java", "Go", "Rust"],
+			"viewDocs": "Ver Documentación"
+		},
+		"stats": {
+			"agentsBuilt": "Agentes Construidos",
+			"nodeTypes": "Tipos de Nodos",
+			"integrations": "Integraciones",
+			"happyDevelopers": "Desarrolladores Felices"
+		},
+		"cta": {
+			"title": "¿Listo para Construir tu Primer Agente?",
+			"description": "Únete a miles de desarrolladores construyendo agentes de IA con nuestra plataforma.",
+			"getStarted": "Comenzar Gratis",
+			"scheduleDemo": "Agendar Demo"
+		},
+		"footer": {
+			"description": "Construye, despliega y comparte agentes de IA visualmente.",
+			"product": {
+				"title": "Producto",
+				"features": "Características",
+				"pricing": "Precios",
+				"documentation": "Documentación",
+				"api": "API"
+			},
+			"company": {
+				"title": "Empresa",
+				"about": "Acerca de",
+				"blog": "Blog",
+				"careers": "Carreras",
+				"contact": "Contacto"
+			},
+			"connect": {
+				"title": "Conectar"
+			},
+			"copyright": "© 2024 AgentBuilder. Todos los derechos reservados."
+		}
+	},
 	"settings": {
 		"title": "Configuración",
 		"description": "Gestiona tus preferencias y personaliza tu experiencia",

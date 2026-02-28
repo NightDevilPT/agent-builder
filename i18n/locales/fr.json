@@ -1,5 +1,101 @@
 {
 	"welcome": "Bienvenue !",
+	"home": {
+		"navigation": {
+			"features": "Fonctionnalités",
+			"howItWorks": "Comment ça marche",
+			"pricing": "Tarifs",
+			"docs": "Documentation",
+			"signIn": "Se connecter",
+			"getStarted": "Commencer"
+		},
+		"hero": {
+			"badge": "🚀 Constructeur d'Agents IA Visuel",
+			"title": "Construisez, Déployez et Partagez\nDes Agents IA Visuellement",
+			"description": "Créez des agents IA puissants avec notre interface intuitive de glisser-déposer. Connectez plusieurs modèles, construisez des outils personnalisés et déployez n'importe où.",
+			"startBuilding": "Commencer Gratuitement",
+			"starOnGithub": "Mettre en Favori sur GitHub"
+		},
+		"features": {
+			"title": "Fonctionnalités Puissantes",
+			"description": "Tout ce dont vous avez besoin pour créer des agents IA prêts pour la production",
+			"visualBuilder": {
+				"title": "Constructeur de Flux de Travail Visuel",
+				"description": "Glissez et déposez des nœuds pour créer des flux de travail IA complexes. Ajoutez des conditions, des boucles et de la logique.",
+				"tags": ["Début/Fin", "Conditions", "Boucles"]
+			},
+			"multiModel": {
+				"title": "Support Multi-Modèle",
+				"description": "Connectez-vous à n'importe quel modèle IA - OpenAI, Gemini, modèles locaux ou points de terminaison personnalisés.",
+				"tags": ["OpenAI", "Gemini", "Local"]
+			},
+			"multiLanguage": {
+				"title": "Export Multi-Langues",
+				"description": "Exportez vos agents vers Python, JavaScript, TypeScript et plus encore.",
+				"tags": ["Python", "JavaScript", "TypeScript"]
+			},
+			"apiIntegration": {
+				"title": "Intégration API",
+				"description": "Déclenchez vos agents via l'API REST. Parfait pour l'intégration avec vos applications."
+			},
+			"shareCollaborate": {
+				"title": "Partager et Collaborer",
+				"description": "Publiez des agents publiquement ou gardez-les privés. Collaborez avec votre équipe."
+			},
+			"containerSupport": {
+				"title": "Support des Conteneurs",
+				"description": "Exécutez des modèles dans des conteneurs Docker pour l'isolation et l'évolutivité."
+			}
+		},
+		"nodeLibrary": {
+			"title": "Bibliothèque de Nœuds Riche",
+			"description": "Plus de 20 types de nœuds pour construire n'importe quel flux de travail imaginable",
+			"types": [
+				"Nœuds de Modèle", "Nœuds d'Outils", "Nœuds API", "Nœuds Conditionnels",
+				"Nœuds de Boucle", "Nœuds d'Entrée", "Nœuds de Sortie", "Nœuds de Transformation",
+				"Début/Fin", "Nœuds de Branchement", "Nœuds de Fusion", "Nœuds de Code"
+			]
+		},
+		"export": {
+			"title": "Exporter N'importe Où",
+			"description": "Construisez une fois, déployez partout. Exportez vos agents vers le langage de programmation de votre choix.",
+			"languages": ["Python", "JavaScript", "TypeScript", "Java", "Go", "Rust"],
+			"viewDocs": "Voir la Documentation"
+		},
+		"stats": {
+			"agentsBuilt": "Agents Construits",
+			"nodeTypes": "Types de Nœuds",
+			"integrations": "Intégrations",
+			"happyDevelopers": "Développeurs Satisfaits"
+		},
+		"cta": {
+			"title": "Prêt à Construire votre Premier Agent ?",
+			"description": "Rejoignez des milliers de développeurs qui créent des agents IA avec notre plateforme.",
+			"getStarted": "Commencer Gratuitement",
+			"scheduleDemo": "Planifier une Démo"
+		},
+		"footer": {
+			"description": "Construisez, déployez et partagez des agents IA visuellement.",
+			"product": {
+				"title": "Produit",
+				"features": "Fonctionnalités",
+				"pricing": "Tarifs",
+				"documentation": "Documentation",
+				"api": "API"
+			},
+			"company": {
+				"title": "Entreprise",
+				"about": "À Propos",
+				"blog": "Blog",
+				"careers": "Carrières",
+				"contact": "Contact"
+			},
+			"connect": {
+				"title": "Connecter"
+			},
+			"copyright": "© 2024 AgentBuilder. Tous droits réservés."
+		}
+	},
 	"settings": {
 		"title": "Paramètres",
 		"description": "Gérez vos préférences et personnalisez votre expérience",

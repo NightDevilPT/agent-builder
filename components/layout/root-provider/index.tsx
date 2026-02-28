@@ -8,14 +8,10 @@ import { SidebarRoutes } from "@/routes/route";
 import { useTheme } from "@/components/context/theme-context";
 
 export function RootProvider({ children }: { children: ReactNode }) {
-
 	return (
 		<ThemeContextProvider>
 			<LayoutProvider
-				header={
-					<HeaderLogo
-					/>
-				}
+				header={<HeaderLogo />}
 				footer={<div>jhhjjh</div>}
 				sidebarRoute={SidebarRoutes}
 			>

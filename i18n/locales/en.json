@@ -1,5 +1,101 @@
 {
 	"welcome": "Welcome!",
+	"home": {
+		"navigation": {
+			"features": "Features",
+			"howItWorks": "How it Works",
+			"pricing": "Pricing",
+			"docs": "Docs",
+			"signIn": "Sign In",
+			"getStarted": "Get Started"
+		},
+		"hero": {
+			"badge": "Visual AI Agent Builder",
+			"title": "Build, Deploy & Share\nAI Agents Visually",
+			"description": "Create powerful AI agents with our intuitive drag-and-drop interface. Connect multiple models, build custom tools, and deploy anywhere.",
+			"startBuilding": "Start Building Free",
+			"starOnGithub": "Star on GitHub"
+		},
+		"features": {
+			"title": "Powerful Features",
+			"description": "Everything you need to build production-ready AI agents",
+			"visualBuilder": {
+				"title": "Visual Workflow Builder",
+				"description": "Drag and drop nodes to create complex AI workflows. Add conditions, loops, and logic.",
+				"tags": ["Start/End", "Conditions", "Loops"]
+			},
+			"multiModel": {
+				"title": "Multi-Model Support",
+				"description": "Connect to any AI model - OpenAI, Gemini, local models, or custom endpoints.",
+				"tags": ["OpenAI", "Gemini", "Local"]
+			},
+			"multiLanguage": {
+				"title": "Multi-Language Export",
+				"description": "Export your agents to Python, JavaScript, TypeScript, and more.",
+				"tags": ["Python", "JavaScript", "TypeScript"]
+			},
+			"apiIntegration": {
+				"title": "API Integration",
+				"description": "Trigger your agents via REST API. Perfect for integration with your apps."
+			},
+			"shareCollaborate": {
+				"title": "Share & Collaborate",
+				"description": "Publish agents publicly or keep them private. Collaborate with your team."
+			},
+			"containerSupport": {
+				"title": "Container Support",
+				"description": "Run models in Docker containers for isolation and scalability."
+			}
+		},
+		"nodeLibrary": {
+			"title": "Rich Node Library",
+			"description": "20+ node types to build any workflow you can imagine",
+			"types": [
+				"Model Nodes", "Tool Nodes", "API Nodes", "Condition Nodes",
+				"Loop Nodes", "Input Nodes", "Output Nodes", "Transform Nodes",
+				"Start/End", "Branch Nodes", "Merge Nodes", "Code Nodes"
+			]
+		},
+		"export": {
+			"title": "Export Anywhere",
+			"description": "Build once, deploy anywhere. Export your agents to your preferred programming language.",
+			"languages": ["Python", "JavaScript", "TypeScript", "Java", "Go", "Rust"],
+			"viewDocs": "View Documentation"
+		},
+		"stats": {
+			"agentsBuilt": "Agents Built",
+			"nodeTypes": "Node Types",
+			"integrations": "Integrations",
+			"happyDevelopers": "Happy Developers"
+		},
+		"cta": {
+			"title": "Ready to Build Your First Agent?",
+			"description": "Join thousands of developers building AI agents with our platform.",
+			"getStarted": "Get Started Free",
+			"scheduleDemo": "Schedule Demo"
+		},
+		"footer": {
+			"description": "Build, deploy, and share AI agents visually.",
+			"product": {
+				"title": "Product",
+				"features": "Features",
+				"pricing": "Pricing",
+				"documentation": "Documentation",
+				"api": "API"
+			},
+			"company": {
+				"title": "Company",
+				"about": "About",
+				"blog": "Blog",
+				"careers": "Careers",
+				"contact": "Contact"
+			},
+			"connect": {
+				"title": "Connect"
+			},
+			"copyright": "© 2024 AgentBuilder. All rights reserved."
+		}
+	},
 	"settings": {
 		"title": "Settings",
 		"description": "Manage your preferences and customize your experience",

@@ -71,7 +71,7 @@ export function SidebarSection() {
 						<Button
 							variant={
 								sidebarView === ISidebarView.RIGHT
-									? "secondary"
+									? "default"
 									: "ghost"
 							}
 							size="sm"

@@ -1,5 +1,101 @@
 {
 	"welcome": "Willkommen!",
+	"home": {
+		"navigation": {
+			"features": "Funktionen",
+			"howItWorks": "So funktioniert's",
+			"pricing": "Preise",
+			"docs": "Dokumentation",
+			"signIn": "Anmelden",
+			"getStarted": "Loslegen"
+		},
+		"hero": {
+			"badge": "🚀 Visueller AI-Agent-Builder",
+			"title": "Erstellen, Bereitstellen & Teilen\nKI-Agenten visuell",
+			"description": "Erstellen Sie leistungsstarke KI-Agenten mit unserer intuitiven Drag-and-Drop-Oberfläche. Verbinden Sie mehrere Modelle, erstellen Sie benutzerdefinierte Tools und stellen Sie sie überall bereit.",
+			"startBuilding": "Kostenlos beginnen",
+			"starOnGithub": "Auf GitHub markieren"
+		},
+		"features": {
+			"title": "Leistungsstarke Funktionen",
+			"description": "Alles, was Sie brauchen, um produktionsreife KI-Agenten zu erstellen",
+			"visualBuilder": {
+				"title": "Visueller Workflow-Builder",
+				"description": "Ziehen und Ablegen von Knoten, um komplexe KI-Workflows zu erstellen. Fügen Sie Bedingungen, Schleifen und Logik hinzu.",
+				"tags": ["Start/Ende", "Bedingungen", "Schleifen"]
+			},
+			"multiModel": {
+				"title": "Multi-Modell-Unterstützung",
+				"description": "Verbinden Sie sich mit jedem KI-Modell - OpenAI, Gemini, lokale Modelle oder benutzerdefinierte Endpunkte.",
+				"tags": ["OpenAI", "Gemini", "Lokal"]
+			},
+			"multiLanguage": {
+				"title": "Multi-Sprachen-Export",
+				"description": "Exportieren Sie Ihre Agenten nach Python, JavaScript, TypeScript und mehr.",
+				"tags": ["Python", "JavaScript", "TypeScript"]
+			},
+			"apiIntegration": {
+				"title": "API-Integration",
+				"description": "Lösen Sie Ihre Agenten über REST-API aus. Perfekt für die Integration mit Ihren Apps."
+			},
+			"shareCollaborate": {
+				"title": "Teilen & Zusammenarbeiten",
+				"description": "Veröffentlichen Sie Agenten öffentlich oder halten Sie sie privat. Arbeiten Sie mit Ihrem Team zusammen."
+			},
+			"containerSupport": {
+				"title": "Container-Unterstützung",
+				"description": "Führen Sie Modelle in Docker-Containern für Isolation und Skalierbarkeit aus."
+			}
+		},
+		"nodeLibrary": {
+			"title": "Umfangreiche Knotenbibliothek",
+			"description": "20+ Knotentypen, um jeden Workflow zu erstellen, den Sie sich vorstellen können",
+			"types": [
+				"Modell-Knoten", "Tool-Knoten", "API-Knoten", "Bedingungs-Knoten",
+				"Schleifen-Knoten", "Eingabe-Knoten", "Ausgabe-Knoten", "Transformations-Knoten",
+				"Start/Ende", "Verzweigungs-Knoten", "Zusammenführungs-Knoten", "Code-Knoten"
+			]
+		},
+		"export": {
+			"title": "Überall exportieren",
+			"description": "Einmal erstellen, überall bereitstellen. Exportieren Sie Ihre Agenten in Ihre bevorzugte Programmiersprache.",
+			"languages": ["Python", "JavaScript", "TypeScript", "Java", "Go", "Rust"],
+			"viewDocs": "Dokumentation anzeigen"
+		},
+		"stats": {
+			"agentsBuilt": "Agenten erstellt",
+			"nodeTypes": "Knotentypen",
+			"integrations": "Integrationen",
+			"happyDevelopers": "Zufriedene Entwickler"
+		},
+		"cta": {
+			"title": "Bereit, Ihren ersten Agenten zu erstellen?",
+			"description": "Schließen Sie sich Tausenden von Entwicklern an, die mit unserer Plattform KI-Agenten erstellen.",
+			"getStarted": "Kostenlos loslegen",
+			"scheduleDemo": "Demo planen"
+		},
+		"footer": {
+			"description": "Erstellen, bereitstellen und teilen Sie KI-Agenten visuell.",
+			"product": {
+				"title": "Produkt",
+				"features": "Funktionen",
+				"pricing": "Preise",
+				"documentation": "Dokumentation",
+				"api": "API"
+			},
+			"company": {
+				"title": "Unternehmen",
+				"about": "Über uns",
+				"blog": "Blog",
+				"careers": "Karriere",
+				"contact": "Kontakt"
+			},
+			"connect": {
+				"title": "Verbinden"
+			},
+			"copyright": "© 2024 AgentBuilder. Alle Rechte vorbehalten."
+		}
+	},
 	"settings": {
 		"title": "Einstellungen",
 		"description": "Verwalten Sie Ihre Einstellungen und passen Sie Ihr Erlebnis an",

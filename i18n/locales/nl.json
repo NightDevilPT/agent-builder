@@ -1,5 +1,101 @@
 {
 	"welcome": "Welkom!",
+	"home": {
+		"navigation": {
+			"features": "Functies",
+			"howItWorks": "Hoe het werkt",
+			"pricing": "Prijzen",
+			"docs": "Documentatie",
+			"signIn": "Inloggen",
+			"getStarted": "Aan de slag"
+		},
+		"hero": {
+			"badge": "🚀 Visuele AI Agent Builder",
+			"title": "Bouw, Implementeer & Deel\nAI Agents Visueel",
+			"description": "Creëer krachtige AI agents met onze intuïtieve drag-and-drop interface. Verbind meerdere modellen, bouw aangepaste tools en implementeer overal.",
+			"startBuilding": "Gratis Beginnen",
+			"starOnGithub": "Ster op GitHub"
+		},
+		"features": {
+			"title": "Krachtige Functies",
+			"description": "Alles wat je nodig hebt om productie-ready AI agents te bouwen",
+			"visualBuilder": {
+				"title": "Visuele Workflow Builder",
+				"description": "Sleep en plaats nodes om complexe AI workflows te creëren. Voeg voorwaarden, lussen en logica toe.",
+				"tags": ["Start/Einde", "Voorwaarden", "Lussen"]
+			},
+			"multiModel": {
+				"title": "Multi-Model Ondersteuning",
+				"description": "Verbind met elk AI model - OpenAI, Gemini, lokale modellen of aangepaste eindpunten.",
+				"tags": ["OpenAI", "Gemini", "Lokaal"]
+			},
+			"multiLanguage": {
+				"title": "Multi-Taal Export",
+				"description": "Exporteer je agents naar Python, JavaScript, TypeScript en meer.",
+				"tags": ["Python", "JavaScript", "TypeScript"]
+			},
+			"apiIntegration": {
+				"title": "API Integratie",
+				"description": "Activeer je agents via REST API. Perfect voor integratie met je apps."
+			},
+			"shareCollaborate": {
+				"title": "Delen & Samenwerken",
+				"description": "Publiceer agents openbaar of houd ze privé. Werk samen met je team."
+			},
+			"containerSupport": {
+				"title": "Container Ondersteuning",
+				"description": "Voer modellen uit in Docker containers voor isolatie en schaalbaarheid."
+			}
+		},
+		"nodeLibrary": {
+			"title": "Rijke Node Bibliotheek",
+			"description": "20+ node types om elke workflow te bouwen die je je kunt voorstellen",
+			"types": [
+				"Model Nodes", "Tool Nodes", "API Nodes", "Voorwaarde Nodes",
+				"Lus Nodes", "Input Nodes", "Output Nodes", "Transformatie Nodes",
+				"Start/Einde", "Vertakkings Nodes", "Samenvoegings Nodes", "Code Nodes"
+			]
+		},
+		"export": {
+			"title": "Exporteer Overal",
+			"description": "Bouw eenmaal, implementeer overal. Exporteer je agents naar je voorkeur programmeertaal.",
+			"languages": ["Python", "JavaScript", "TypeScript", "Java", "Go", "Rust"],
+			"viewDocs": "Bekijk Documentatie"
+		},
+		"stats": {
+			"agentsBuilt": "Agents Gebouwd",
+			"nodeTypes": "Node Types",
+			"integrations": "Integraties",
+			"happyDevelopers": "Tevreden Ontwikkelaars"
+		},
+		"cta": {
+			"title": "Klaar om je Eerste Agent te Bouwen?",
+			"description": "Sluit je aan bij duizenden ontwikkelaars die AI agents bouwen met ons platform.",
+			"getStarted": "Gratis Aan de slag",
+			"scheduleDemo": "Plan een Demo"
+		},
+		"footer": {
+			"description": "Bouw, implementeer en deel AI agents visueel.",
+			"product": {
+				"title": "Product",
+				"features": "Functies",
+				"pricing": "Prijzen",
+				"documentation": "Documentatie",
+				"api": "API"
+			},
+			"company": {
+				"title": "Bedrijf",
+				"about": "Over",
+				"blog": "Blog",
+				"careers": "Carrières",
+				"contact": "Contact"
+			},
+			"connect": {
+				"title": "Verbinden"
+			},
+			"copyright": "© 2024 AgentBuilder. Alle rechten voorbehouden."
+		}
+	},
 	"settings": {
 		"title": "Instellingen",
 		"description": "Beheer je voorkeuren en pas je ervaring aan",

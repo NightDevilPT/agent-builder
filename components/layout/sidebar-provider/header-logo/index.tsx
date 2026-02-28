@@ -2,7 +2,7 @@
 
 import { Label } from "@/components/ui/label";
 import { useSidebar } from "@/components/ui/sidebar";
-import { BrainCircuitIcon, CpuIcon, ShieldCheck } from "lucide-react";
+import { Bot } from "lucide-react";
 import { useTheme } from "@/components/context/theme-context";
 
 interface IHeaderLogoProps {
@@ -25,7 +25,7 @@ const HeaderLogo = ({ title, subtitle }: IHeaderLogoProps) => {
 				<div
 					className={`w-full h-full flex justify-center items-center border-2 rounded-md border-foreground/20`}
 				>
-					<CpuIcon className="!h-8 text-foreground" />
+					<Bot className="!h-8 text-foreground" />
 				</div>
 				<div
 					className={`ml-3 overflow-hidden transition-all duration-300 text-nowrap ${
@@ -51,7 +51,7 @@ const HeaderLogo = ({ title, subtitle }: IHeaderLogoProps) => {
 			<div
 				className={`w-full h-full flex justify-center items-center border-2 rounded-md border-foreground/20`}
 			>
-				<CpuIcon className="!h-8 text-foreground" />
+				<Bot className="!h-8 text-foreground" />
 			</div>
 
 			<div

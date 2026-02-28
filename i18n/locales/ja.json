@@ -1,5 +1,101 @@
 {
 	"welcome": "ようこそ！",
+	"home": {
+		"navigation": {
+			"features": "機能",
+			"howItWorks": "使い方",
+			"pricing": "価格",
+			"docs": "ドキュメント",
+			"signIn": "サインイン",
+			"getStarted": "始める"
+		},
+		"hero": {
+			"badge": "🚀ビアルAIエージェントビルダー",
+			"title": "ビルド、デプロイ、シェア\nAIエージェントを視覚的に",
+			"description": "直感的なドラッグ＆ドロップフースで強力なAIエージェントを作成します。複数のモデルを接続し、カスタムツールを構築、どこにでもデプロイできます。",
+			"startBuilding": "無料で始める",
+			"starOnGithub": "GitHubでスターを付ける"
+		},
+		"features": {
+			"title": "強力な機能",
+			"description": "本番環境対応AIエージェントを構築必要なすべて",
+			"visualBuilder": {
+				"title": "ビジュアルワークフロビダー",
+				"description": "ノードをドラッグ＆ドロップして複雑AIワークフローを作成します。条件、ループ、ロジックを追加できます。",
+				"tags": ["開始/終了", "条件", "ループ"]
+			},
+			"multiModel": {
+				"title": "マルチモデルサポート",
+				"description": "OpenAI、Gemini、ロカモデル、またはカスタムエンドポイントなど、あらゆるAIモデルに接続できます。",
+				"tags": ["OpenAI", "Gemini", "ロカ"]
+			},
+			"multiLanguage": {
+				"title": "マルチ言語エクスポート",
+				"description": "エージェントをPython、JavaScript、TypeScriptなどにエクスポートできます。",
+				"tags": ["Python", "JavaScript", "TypeScript"]
+			},
+			"apiIntegration": {
+				"title": "API統合",
+				"description": "REST API経でエージェントを起動します。アプリとの統合に最適です。"
+			},
+			"shareCollaborate": {
+				"title": "共有とコラボレーション",
+				"description": "エージェントを公開するか非公開のままにします。チームと協力できます。"
+			},
+			"containerSupport": {
+				"title": "コンテナサポート",
+				"description": "Dockerコンテナでモデルを実行し、分離とスケラリティを実現します。"
+			}
+		},
+		"nodeLibrary": {
+			"title": "豊なノードライブラリ",
+			"description": "想像できるあらゆるワークフローを構築するための20以上のノードタイプ",
+			"types": [
+				"モデルノード", "ツールノード", "APIノード", "条件ノード",
+				"ループノード", "入力ノード", "出力ノード", "変換ノード",
+				"開始/終了", "分岐ノード", "マージノード", "コードノード"
+			]
+		},
+		"export": {
+			"title": "どこにでもエクスポート",
+			"description": "一度構築すれば、どこにでもデプロイ。お好みのプログラミング言語にエージェントをエクスポートします。",
+			"languages": ["Python", "JavaScript", "TypeScript", "Java", "Go", "Rust"],
+			"viewDocs": "ドキュメントを表示"
+		},
+		"stats": {
+			"agentsBuilt": "構築されたエージェント",
+			"nodeTypes": "ノードタイプ",
+			"integrations": "統合",
+			"happyDevelopers": "満している開発"
+		},
+		"cta": {
+			"title": "最初のエージェント構築の準備はできましたか？",
+			"description": "当社プラットフォームでAIエージェントを構築している数千人の開発者に参加してください。",
+			"getStarted": "無料で始める",
+			"scheduleDemo": "デモをスケジュール"
+		},
+		"footer": {
+			"description": "AIエージェントを視覚的に構築、デプロイ、共有します。",
+			"product": {
+				"title": "製品",
+				"features": "機能",
+				"pricing": "価格",
+				"documentation": "ドキュメント",
+				"api": "API"
+			},
+			"company": {
+				"title": "会社",
+				"about": "会社概要",
+				"blog": "ブログ",
+				"careers": "キャリア",
+				"contact": "お問い合わせ"
+			},
+			"connect": {
+				"title": "接続"
+			},
+			"copyright": "© 2024 AgentBuilder. すべての権予約。"
+		}
+	},
 	"settings": {
 		"title": "設定",
 		"description": "設定を管理し、体験をカスタマイズします",

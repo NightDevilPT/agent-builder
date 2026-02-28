@@ -112,7 +112,7 @@ export function LanguageSwitcher({
 					aria-expanded={open}
 					className={cn(
 						"justify-between gap-2",
-						size === "icon" ? "w-10 px-0" : "px-3",
+						size === "icon" ? "w-10 px-0 justify-center" : "px-3",
 						className
 					)}
 				>
