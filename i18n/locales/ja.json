@@ -1,0 +1,117 @@
+{
+	"welcome": "ようこそ！",
+	"settings": {
+		"title": "設定",
+		"description": "設定を管理し、体験をカスタマイズします",
+		"sections": {
+			"theme": {
+				"title": "テーマと外観",
+				"description": "インターフェースのルック＆フィールをカスタマイズします。ライトテーマとダークテーマを切り替えて、体験をパーソナライズします。",
+				"mode": {
+					"title": "テーマモード",
+					"description": "アプリケーションがデバイス上でどのように表示されるかをカスタマイズします。ライトまたはダークテーマを選択してください。"
+				}
+			},
+			"language": {
+				"title": "言語と地域",
+				"description": "アプリケーションインターフェースの希望する言語を選択します。これにより、アプリ全体のテキストとコンテンツの言語が変更されます。",
+				"appLanguage": {
+					"title": "アプリケーション言語",
+					"description": "メニュー、ボタン、インターフェーステキストの希望する言語を選択します。"
+				}
+			},
+			"sidebar": {
+				"title": "サイドバー設定",
+				"description": "サイドバーのレイアウトと動作を設定して、ワークスペースのナビゲーションと整理を最適化します。",
+				"position": {
+					"title": "位置",
+					"description": "サイドバーが画面上のどこに表示されるかを選択します"
+				},
+				"style": {
+					"title": "スタイル",
+					"description": "サイドバーの視覚スタイルを選択します"
+				}
+			},
+			"view": {
+				"title": "表示モード",
+				"description": "希望するデータ表示レイアウトを選択します。グリッドビューとリストビューを切り替えて、コンテンツの表示方法をカスタマイズします。",
+				"layout": {
+					"title": "表示レイアウト",
+					"description": "インターフェースでデータがどのように表示されるかを選択します"
+				}
+			},
+			"colors": {
+				"title": "カラースキーム",
+				"description": "インターフェース全体のアクセントカラーをパーソナライズします。好みに合ったさまざまなカラーパレットから選択してください。",
+				"palette": {
+					"title": "カラーパレット",
+					"description": "希望するアクセントカラーを選択します"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"dashboard": "ダッシュボード",
+		"agents": {
+			"title": "エージェント",
+			"myAgents": "マイエージェント",
+			"publicAgents": "公開エージェント"
+		},
+		"tools": {
+			"title": "ツール",
+			"myTools": "マイツール",
+			"manageTools": "ツールの管理"
+		},
+		"settings": "設定"
+	},
+	"header": {
+		"title": "Agent Builder",
+		"subtitle": "エージェントビルダーを管理"
+	},
+	"footer": {
+		"content": "フッター"
+	},
+	"theme": {
+		"toggle": {
+			"light": "ライト",
+			"dark": "ダーク",
+			"system": "システム",
+			"srLabel": "テーマを切り替える"
+		}
+	},
+	"language": {
+		"switcher": {
+			"searchPlaceholder": "言語を検索...",
+			"noLanguageFound": "言語が見つかりません",
+			"english": "英語",
+			"french": "フランス語",
+			"spanish": "スペイン語",
+			"japanese": "日本語",
+			"german": "ドイツ語"
+		}
+	},
+	"common": {
+		"buttons": {
+			"grid": "グリッド",
+			"table": "テーブル",
+			"sidebar": "サイドバー",
+			"inset": "インセット",
+			"floating": "フローティング",
+			"default": "デフォルト"
+		},
+		"positions": {
+			"left": "左",
+			"right": "右"
+		},
+		"colors": {
+			"default": "デフォルト",
+			"red": "赤",
+			"rose": "ローズ",
+			"orange": "オレンジ",
+			"blue": "青",
+			"green": "緑",
+			"violet": "バイオレット",
+			"yellow": "黄"
+		}
+	}
+}

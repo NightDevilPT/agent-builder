@@ -1,0 +1,117 @@
+{
+	"welcome": "Willkommen!",
+	"settings": {
+		"title": "Einstellungen",
+		"description": "Verwalten Sie Ihre Einstellungen und passen Sie Ihr Erlebnis an",
+		"sections": {
+			"theme": {
+				"title": "Design & Erscheinungsbild",
+				"description": "Passen Sie das Aussehen Ihrer Benutzeroberfläche an. Wechseln Sie zwischen hellem und dunklem Design, um Ihr Erlebnis zu personalisieren.",
+				"mode": {
+					"title": "Design-Modus",
+					"description": "Passen Sie an, wie die Anwendung auf Ihrem Gerät aussieht. Wählen Sie zwischen hellem oder dunklem Design."
+				}
+			},
+			"language": {
+				"title": "Sprache & Region",
+				"description": "Wählen Sie Ihre bevorzugte Sprache für die Anwendungsschnittstelle. Dies ändert die Sprache von Texten und Inhalten in der gesamten App.",
+				"appLanguage": {
+					"title": "Anwendungssprache",
+					"description": "Wählen Sie Ihre bevorzugte Sprache für Menüs, Schaltflächen und Oberflächentexte."
+				}
+			},
+			"sidebar": {
+				"title": "Seitenleisten-Konfiguration",
+				"description": "Konfigurieren Sie das Layout und Verhalten der Seitenleiste, um Ihre Arbeitsplatznavigation und -organisation zu optimieren.",
+				"position": {
+					"title": "Position",
+					"description": "Wählen Sie, wo die Seitenleiste auf dem Bildschirm angezeigt wird"
+				},
+				"style": {
+					"title": "Stil",
+					"description": "Wählen Sie den visuellen Stil Ihrer Seitenleiste"
+				}
+			},
+			"view": {
+				"title": "Ansichtsmodus",
+				"description": "Wählen Sie Ihr bevorzugtes Datenanzeige-Layout. Wechseln Sie zwischen Raster- und Listenansichten, um die Darstellung von Inhalten anzupassen.",
+				"layout": {
+					"title": "Anzeige-Layout",
+					"description": "Wählen Sie, wie Ihre Daten in der Benutzeroberfläche angezeigt werden"
+				}
+			},
+			"colors": {
+				"title": "Farbschema",
+				"description": "Personalisieren Sie die Akzentfarben in der gesamten Benutzeroberfläche. Wählen Sie aus verschiedenen Farbpaletten, die zu Ihren Vorlieben passen.",
+				"palette": {
+					"title": "Farbpalette",
+					"description": "Wählen Sie Ihre bevorzugten Akzentfarben"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"dashboard": "Dashboard",
+		"agents": {
+			"title": "Agenten",
+			"myAgents": "Meine Agenten",
+			"publicAgents": "Öffentliche Agenten"
+		},
+		"tools": {
+			"title": "Werkzeuge",
+			"myTools": "Meine Werkzeuge",
+			"manageTools": "Werkzeuge verwalten"
+		},
+		"settings": "Einstellungen"
+	},
+	"header": {
+		"title": "Agent Builder",
+		"subtitle": "Verwalten Sie Ihren Agent Builder"
+	},
+	"footer": {
+		"content": "Fußzeile"
+	},
+	"theme": {
+		"toggle": {
+			"light": "Hell",
+			"dark": "Dunkel",
+			"system": "System",
+			"srLabel": "Design wechseln"
+		}
+	},
+	"language": {
+		"switcher": {
+			"searchPlaceholder": "Sprachen suchen...",
+			"noLanguageFound": "Keine Sprache gefunden",
+			"english": "Englisch",
+			"french": "Französisch",
+			"spanish": "Spanisch",
+			"japanese": "Japanisch",
+			"german": "Deutsch"
+		}
+	},
+	"common": {
+		"buttons": {
+			"grid": "Raster",
+			"table": "Tabelle",
+			"sidebar": "Seitenleiste",
+			"inset": "Eingebettet",
+			"floating": "Schwebend",
+			"default": "Standard"
+		},
+		"positions": {
+			"left": "Links",
+			"right": "Rechts"
+		},
+		"colors": {
+			"default": "Standard",
+			"red": "Rot",
+			"rose": "Rosa",
+			"orange": "Orange",
+			"blue": "Blau",
+			"green": "Grün",
+			"violet": "Violett",
+			"yellow": "Gelb"
+		}
+	}
+}

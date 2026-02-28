@@ -1,0 +1,117 @@
+{
+	"welcome": "Welcome!",
+	"settings": {
+		"title": "Settings",
+		"description": "Manage your preferences and customize your experience",
+		"sections": {
+			"theme": {
+				"title": "Theme & Appearance",
+				"description": "Customize the look and feel of your interface. Switch between light and dark theme to personalize your experience.",
+				"mode": {
+					"title": "Theme Mode",
+					"description": "Customize how the application looks on your device. Choose between light or dark theme."
+				}
+			},
+			"language": {
+				"title": "Language & Region",
+				"description": "Choose your preferred language for the application interface. This will change the text and content language throughout the app.",
+				"appLanguage": {
+					"title": "Application Language",
+					"description": "Select your preferred language for menus, buttons, and interface text."
+				}
+			},
+			"sidebar": {
+				"title": "Sidebar Configuration",
+				"description": "Configure sidebar layout and behavior to optimize your workspace navigation and organization.",
+				"position": {
+					"title": "Position",
+					"description": "Choose where the sidebar appears on the screen"
+				},
+				"style": {
+					"title": "Style",
+					"description": "Select the visual style of your sidebar"
+				}
+			},
+			"view": {
+				"title": "View Mode",
+				"description": "Select your preferred data display layout. Switch between grid and list views to customize how content appears.",
+				"layout": {
+					"title": "Display Layout",
+					"description": "Choose how your data is displayed in the interface"
+				}
+			},
+			"colors": {
+				"title": "Color Scheme",
+				"description": "Personalize the accent colors throughout the interface. Choose from various color palettes to match your preference.",
+				"palette": {
+					"title": "Color Palette",
+					"description": "Choose your preferred accent colors"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"dashboard": "Dashboard",
+		"agents": {
+			"title": "Agents",
+			"myAgents": "My Agents",
+			"publicAgents": "Public Agents"
+		},
+		"tools": {
+			"title": "Tools",
+			"myTools": "My Tools",
+			"manageTools": "Manage Tools"
+		},
+		"settings": "Settings"
+	},
+	"header": {
+		"title": "Agent Builder",
+		"subtitle": "Manage your agent builder"
+	},
+	"footer": {
+		"content": "Footer"
+	},
+	"theme": {
+		"toggle": {
+			"light": "Light",
+			"dark": "Dark",
+			"system": "System",
+			"srLabel": "Toggle theme"
+		}
+	},
+	"language": {
+		"switcher": {
+			"searchPlaceholder": "Search languages...",
+			"noLanguageFound": "No language found",
+			"english": "English",
+			"french": "French",
+			"spanish": "Spanish",
+			"japanese": "Japanese",
+			"german": "German"
+		}
+	},
+	"common": {
+		"buttons": {
+			"grid": "Grid",
+			"table": "Table",
+			"sidebar": "Sidebar",
+			"inset": "Inset",
+			"floating": "Floating",
+			"default": "Default"
+		},
+		"positions": {
+			"left": "Left",
+			"right": "Right"
+		},
+		"colors": {
+			"default": "Default",
+			"red": "Red",
+			"rose": "Rose",
+			"orange": "Orange",
+			"blue": "Blue",
+			"green": "Green",
+			"violet": "Violet",
+			"yellow": "Yellow"
+		}
+	}
+}

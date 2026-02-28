@@ -1,0 +1,117 @@
+{
+	"welcome": "Welkom!",
+	"settings": {
+		"title": "Instellingen",
+		"description": "Beheer je voorkeuren en pas je ervaring aan",
+		"sections": {
+			"theme": {
+				"title": "Thema & Uiterlijk",
+				"description": "Pas het uiterlijk van je interface aan. Schakel tussen licht en donker thema om je ervaring te personaliseren.",
+				"mode": {
+					"title": "Thema Modus",
+					"description": "Pas aan hoe de applicatie eruit ziet op je apparaat. Kies tussen licht of donker thema."
+				}
+			},
+			"language": {
+				"title": "Taal & Regio",
+				"description": "Kies je voorkeurstaal voor de applicatie-interface. Dit verandert de tekst- en contenttaal in de hele app.",
+				"appLanguage": {
+					"title": "Applicatietaal",
+					"description": "Selecteer je voorkeurstaal voor menu's, knoppen en interfacetekst."
+				}
+			},
+			"sidebar": {
+				"title": "Zijbalk Configuratie",
+				"description": "Configureer de zijbalk lay-out en gedrag om je werkruimte navigatie en organisatie te optimaliseren.",
+				"position": {
+					"title": "Positie",
+					"description": "Kies waar de zijbalk op het scherm verschijnt"
+				},
+				"style": {
+					"title": "Stijl",
+					"description": "Selecteer de visuele stijl van je zijbalk"
+				}
+			},
+			"view": {
+				"title": "Weergavemodus",
+				"description": "Selecteer je voorkeurs lay-out voor gegevensweergave. Schakel tussen raster- en lijstweergaven om aan te passen hoe content verschijnt.",
+				"layout": {
+					"title": "Weergavelay-out",
+					"description": "Kies hoe je gegevens worden weergegeven in de interface"
+				}
+			},
+			"colors": {
+				"title": "Kleurenschema",
+				"description": "Personaliseer de accentkleuren in de hele interface. Kies uit verschillende kleurenpaletten die bij je voorkeur passen.",
+				"palette": {
+					"title": "Kleurenpalet",
+					"description": "Kies je voorkeursaccentkleuren"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"dashboard": "Dashboard",
+		"agents": {
+			"title": "Agents",
+			"myAgents": "Mijn Agents",
+			"publicAgents": "Openbare Agents"
+		},
+		"tools": {
+			"title": "Tools",
+			"myTools": "Mijn Tools",
+			"manageTools": "Tools Beheren"
+		},
+		"settings": "Instellingen"
+	},
+	"header": {
+		"title": "Agent Builder",
+		"subtitle": "Beheer je agent builder"
+	},
+	"footer": {
+		"content": "Footer"
+	},
+	"theme": {
+		"toggle": {
+			"light": "Licht",
+			"dark": "Donker",
+			"system": "Systeem",
+			"srLabel": "Thema wisselen"
+		}
+	},
+	"language": {
+		"switcher": {
+			"searchPlaceholder": "Zoek talen...",
+			"noLanguageFound": "Geen taal gevonden",
+			"english": "Engels",
+			"french": "Frans",
+			"spanish": "Spaans",
+			"japanese": "Japans",
+			"german": "Duits"
+		}
+	},
+	"common": {
+		"buttons": {
+			"grid": "Raster",
+			"table": "Tabel",
+			"sidebar": "Zijbalk",
+			"inset": "Ingezet",
+			"floating": "Zwevend",
+			"default": "Standaard"
+		},
+		"positions": {
+			"left": "Links",
+			"right": "Rechts"
+		},
+		"colors": {
+			"default": "Standaard",
+			"red": "Rood",
+			"rose": "Roos",
+			"orange": "Oranje",
+			"blue": "Blauw",
+			"green": "Groen",
+			"violet": "Violet",
+			"yellow": "Geel"
+		}
+	}
+}

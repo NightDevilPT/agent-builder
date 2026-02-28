@@ -1,0 +1,117 @@
+{
+	"welcome": "¡Bienvenido!",
+	"settings": {
+		"title": "Configuración",
+		"description": "Gestiona tus preferencias y personaliza tu experiencia",
+		"sections": {
+			"theme": {
+				"title": "Tema y Apariencia",
+				"description": "Personaliza la apariencia de tu interfaz. Cambia entre tema claro y oscuro para personalizar tu experiencia.",
+				"mode": {
+					"title": "Modo de Tema",
+					"description": "Personaliza cómo se ve la aplicación en tu dispositivo. Elige entre tema claro u oscuro."
+				}
+			},
+			"language": {
+				"title": "Idioma y Región",
+				"description": "Elige tu idioma preferido para la interfaz de la aplicación. Esto cambiará el idioma del texto y contenido en toda la aplicación.",
+				"appLanguage": {
+					"title": "Idioma de la Aplicación",
+					"description": "Selecciona tu idioma preferido para menús, botones y texto de la interfaz."
+				}
+			},
+			"sidebar": {
+				"title": "Configuración de Barra Lateral",
+				"description": "Configura el diseño y comportamiento de la barra lateral para optimizar la navegación y organización de tu espacio de trabajo.",
+				"position": {
+					"title": "Posición",
+					"description": "Elige dónde aparece la barra lateral en la pantalla"
+				},
+				"style": {
+					"title": "Estilo",
+					"description": "Selecciona el estilo visual de tu barra lateral"
+				}
+			},
+			"view": {
+				"title": "Modo de Vista",
+				"description": "Selecciona tu diseño de visualización de datos preferido. Cambia entre vistas de cuadrícula y lista para personalizar cómo aparece el contenido.",
+				"layout": {
+					"title": "Diseño de Visualización",
+					"description": "Elige cómo se muestran tus datos en la interfaz"
+				}
+			},
+			"colors": {
+				"title": "Esquema de Color",
+				"description": "Personaliza los colores de énfasis en toda la interfaz. Elige entre varias paletas de colores que se adapten a tus preferencias.",
+				"palette": {
+					"title": "Paleta de Colores",
+					"description": "Elige tus colores de énfasis preferidos"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"dashboard": "Panel de Control",
+		"agents": {
+			"title": "Agentes",
+			"myAgents": "Mis Agentes",
+			"publicAgents": "Agentes Públicos"
+		},
+		"tools": {
+			"title": "Herramientas",
+			"myTools": "Mis Herramientas",
+			"manageTools": "Gestionar Herramientas"
+		},
+		"settings": "Configuración"
+	},
+	"header": {
+		"title": "Constructor de Agentes",
+		"subtitle": "Gestiona tu constructor de agentes"
+	},
+	"footer": {
+		"content": "Pie de página"
+	},
+	"theme": {
+		"toggle": {
+			"light": "Claro",
+			"dark": "Oscuro",
+			"system": "Sistema",
+			"srLabel": "Cambiar tema"
+		}
+	},
+	"language": {
+		"switcher": {
+			"searchPlaceholder": "Buscar idiomas...",
+			"noLanguageFound": "No se encontró idioma",
+			"english": "Inglés",
+			"french": "Francés",
+			"spanish": "Español",
+			"japanese": "Japonés",
+			"german": "Alemán"
+		}
+	},
+	"common": {
+		"buttons": {
+			"grid": "Cuadrícula",
+			"table": "Tabla",
+			"sidebar": "Barra Lateral",
+			"inset": "Insertada",
+			"floating": "Flotante",
+			"default": "Predeterminado"
+		},
+		"positions": {
+			"left": "Izquierda",
+			"right": "Derecha"
+		},
+		"colors": {
+			"default": "Predeterminado",
+			"red": "Rojo",
+			"rose": "Rosa",
+			"orange": "Naranja",
+			"blue": "Azul",
+			"green": "Verde",
+			"violet": "Violeta",
+			"yellow": "Amarillo"
+		}
+	}
+}

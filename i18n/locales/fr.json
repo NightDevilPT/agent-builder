@@ -1,0 +1,117 @@
+{
+	"welcome": "Bienvenue !",
+	"settings": {
+		"title": "Paramètres",
+		"description": "Gérez vos préférences et personnalisez votre expérience",
+		"sections": {
+			"theme": {
+				"title": "Thème et Apparence",
+				"description": "Personnalisez l'apparence de votre interface. Basculez entre le thème clair et sombre pour personnaliser votre expérience.",
+				"mode": {
+					"title": "Mode du Thème",
+					"description": "Personnalisez l'apparence de l'application sur votre appareil. Choisissez entre le thème clair ou sombre."
+				}
+			},
+			"language": {
+				"title": "Langue et Région",
+				"description": "Choisissez votre langue préférée pour l'interface de l'application. Cela changera la langue du texte et du contenu dans toute l'application.",
+				"appLanguage": {
+					"title": "Langue de l'Application",
+					"description": "Sélectionnez votre langue préférée pour les menus, les boutons et le texte de l'interface."
+				}
+			},
+			"sidebar": {
+				"title": "Configuration de la Barre Latérale",
+				"description": "Configurez la disposition et le comportement de la barre latérale pour optimiser la navigation et l'organisation de votre espace de travail.",
+				"position": {
+					"title": "Position",
+					"description": "Choisissez où la barre latérale apparaît sur l'écran"
+				},
+				"style": {
+					"title": "Style",
+					"description": "Sélectionnez le style visuel de votre barre latérale"
+				}
+			},
+			"view": {
+				"title": "Mode d'Affichage",
+				"description": "Sélectionnez votre disposition d'affichage des données préférée. Basculez entre les vues grille et liste pour personnaliser l'apparence du contenu.",
+				"layout": {
+					"title": "Disposition d'Affichage",
+					"description": "Choisissez comment vos données sont affichées dans l'interface"
+				}
+			},
+			"colors": {
+				"title": "Schéma de Couleurs",
+				"description": "Personnalisez les couleurs d'accentuation dans toute l'interface. Choisissez parmi différentes palettes de couleurs qui correspondent à vos préférences.",
+				"palette": {
+					"title": "Palette de Couleurs",
+					"description": "Choisissez vos couleurs d'accentuation préférées"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"dashboard": "Tableau de Bord",
+		"agents": {
+			"title": "Agents",
+			"myAgents": "Mes Agents",
+			"publicAgents": "Agents Publics"
+		},
+		"tools": {
+			"title": "Outils",
+			"myTools": "Mes Outils",
+			"manageTools": "Gérer les Outils"
+		},
+		"settings": "Paramètres"
+	},
+	"header": {
+		"title": "Agent Builder",
+		"subtitle": "Gérez votre constructeur d'agents"
+	},
+	"footer": {
+		"content": "Pied de page"
+	},
+	"theme": {
+		"toggle": {
+			"light": "Clair",
+			"dark": "Sombre",
+			"system": "Système",
+			"srLabel": "Changer de thème"
+		}
+	},
+	"language": {
+		"switcher": {
+			"searchPlaceholder": "Rechercher des langues...",
+			"noLanguageFound": "Aucune langue trouvée",
+			"english": "Anglais",
+			"french": "Français",
+			"spanish": "Espagnol",
+			"japanese": "Japonais",
+			"german": "Allemand"
+		}
+	},
+	"common": {
+		"buttons": {
+			"grid": "Grille",
+			"table": "Tableau",
+			"sidebar": "Barre Latérale",
+			"inset": "Intégrée",
+			"floating": "Flottante",
+			"default": "Par Défaut"
+		},
+		"positions": {
+			"left": "Gauche",
+			"right": "Droite"
+		},
+		"colors": {
+			"default": "Par Défaut",
+			"red": "Rouge",
+			"rose": "Rose",
+			"orange": "Orange",
+			"blue": "Bleu",
+			"green": "Vert",
+			"violet": "Violet",
+			"yellow": "Jaune"
+		}
+	}
+}
