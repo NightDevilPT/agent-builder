@@ -9,8 +9,8 @@ import {
 	SidebarProvider,
 } from "@/components/ui/sidebar";
 import { NavMain } from "./nav-main";
-import { Separator } from "@/components/ui/separator";
 import HeaderSection from "./header-section";
+import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useTheme } from "@/components/context/theme-context";
 
@@ -37,10 +37,14 @@ export function LayoutProvider({
 	sidebarRoute,
 	groupLabel,
 }: ILayoutProviderProps) {
-	const { sidebarVariant, sidebarCollapsible } = useTheme();
+	const { sidebarVariant, sidebarCollapsible, sidebarState } = useTheme();
 	return (
 		<SidebarProvider>
-			<Sidebar variant={sidebarVariant} collapsible={sidebarCollapsible}>
+			<Sidebar
+				variant={sidebarVariant}
+				defaultState={sidebarState}
+				collapsible={sidebarCollapsible}
+			>
 				<SidebarHeader className="h-[60px]">{header}</SidebarHeader>
 				<Separator />
 				<SidebarContent>
@@ -52,7 +56,7 @@ export function LayoutProvider({
 				<HeaderSection />
 				<Separator />
 				<ScrollArea
-					className={`h-[calc(100vh-61px)] px-5 overflow-hidden overflow-y-auto`}
+					className={`h-[calc(100vh-61px)] p-5 overflow-hidden overflow-y-auto`}
 				>
 					{children}
 				</ScrollArea>

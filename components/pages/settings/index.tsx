@@ -1,31 +1,19 @@
 "use client";
 
+import { Card } from "@/components/ui/card";
 import { useState, useEffect } from "react";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-	Settings,
-	Palette,
-	Monitor,
-	Sidebar,
-	View,
-	Languages,
-	Sparkles,
-	Sun,
-	Moon,
-} from "lucide-react";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { LanguageSwitcher } from "@/components/shared/language-switcher";
-import { ColorSchemeSection } from "./_components/ColorSchemeSection";
 import { SidebarSection } from "./_components/SidebarSection";
-import { ViewModeSection } from "./_components/ViewModeSection";
 import { useTheme } from "@/components/context/theme-context";
-import { Switch } from "@/components/ui/switch";
-import { IThemeMode } from "@/components/context/theme-context";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { ViewModeSection } from "./_components/ViewModeSection";
+import { ColorSchemeSection } from "./_components/ColorSchemeSection";
+import { Palette, Sidebar, View, Languages, Sparkles } from "lucide-react";
+import { LanguageSwitcher } from "@/components/shared/language-switcher";
 
 export default function SettingsPage() {
-	const { themeMode, setThemeMode, dictionary } = useTheme();
+	const { dictionary } = useTheme();
 	const [isMounted, setIsMounted] = useState(false);
 
 	useEffect(() => {
@@ -74,9 +62,14 @@ export default function SettingsPage() {
 				<div className="space-y-4">
 					<Card className="p-3 px-5 rounded-md grid grid-cols-[1fr_70px]">
 						<div className="w-full h-auto grid grid-cols-1 gap-1 place-content-start place-items-start">
-							<h3 className="font-medium">{dictionary.settings.sections.theme.mode.title}</h3>
+							<h3 className="font-medium">
+								{dictionary.settings.sections.theme.mode.title}
+							</h3>
 							<span className="text-xs text-muted-foreground">
-								{dictionary.settings.sections.theme.mode.description}
+								{
+									dictionary.settings.sections.theme.mode
+										.description
+								}
 							</span>
 						</div>
 						<div className="flex w-full justify-center items-center">
@@ -94,9 +87,17 @@ export default function SettingsPage() {
 			component: (
 				<Card className="p-3 px-5 rounded-md grid grid-cols-[1fr_auto]">
 					<div className="w-full h-auto grid grid-cols-1 gap-1 place-content-start place-items-start">
-						<h3>{dictionary.settings.sections.language.appLanguage.title}</h3>
+						<h3>
+							{
+								dictionary.settings.sections.language
+									.appLanguage.title
+							}
+						</h3>
 						<span className="text-xs text-muted-foreground">
-							{dictionary.settings.sections.language.appLanguage.description}
+							{
+								dictionary.settings.sections.language
+									.appLanguage.description
+							}
 						</span>
 					</div>
 					<div className="flex w-full justify-center items-center">
@@ -131,7 +132,7 @@ export default function SettingsPage() {
 			description: dictionary.settings.sections.colors.description,
 			icon: Sparkles,
 			component: <ColorSchemeSection />,
-		}
+		},
 	];
 
 	return (

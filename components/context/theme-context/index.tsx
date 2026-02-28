@@ -1,11 +1,11 @@
 "use client";
 
-import { getDictionary } from "@/i18n";
 import {
 	useTheme as useNextTheme,
 	ThemeProvider as NextThemesProvider,
 } from "next-themes";
 import * as React from "react";
+import { getDictionary } from "@/i18n";
 
 // Define available themes and colors
 enum IThemeMode {

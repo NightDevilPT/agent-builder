@@ -1,9 +1,17 @@
 "use client";
 
+import {
+	Breadcrumb,
+	BreadcrumbEllipsis,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 // Interface for breadcrumb items
 interface RouteBreadcrumb {
@@ -48,7 +56,7 @@ export const RouteBreadcrumb: React.FC = () => {
 				breadcrumbItems.length > 1
 					? breadcrumbItems[breadcrumbItems.length - 1]
 					: undefined,
-			].filter((item): item is RouteBreadcrumb => item !== undefined)
+		  ].filter((item): item is RouteBreadcrumb => item !== undefined)
 		: breadcrumbItems;
 
 	return (

@@ -1,11 +1,6 @@
 // components/ColorPaletteSwitcher.tsx
 "use client";
 
-import { useState } from "react";
-import { Check, ChevronDown, Palette } from "lucide-react";
-import { IColorScheme, useTheme } from "@/components/context/theme-context";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import {
 	Popover,
 	PopoverContent,
@@ -19,7 +14,12 @@ import {
 	CommandItem,
 	CommandList,
 } from "@/components/ui/command";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { ColorSchemas } from "@/interfaces/color-schema";
+import { Check, ChevronDown, Palette } from "lucide-react";
+import { IColorScheme, useTheme } from "@/components/context/theme-context";
 
 interface ColorPaletteSwitcherProps {
 	variant?: "default" | "outline" | "ghost" | "link";

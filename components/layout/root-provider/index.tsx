@@ -1,22 +1,25 @@
 "use client";
 
-import { ThemeContextProvider } from "@/components/context/theme-context";
 import { ReactNode } from "react";
-import { LayoutProvider } from "../sidebar-provider/layout";
-import HeaderLogo from "../sidebar-provider/header-logo";
 import { SidebarRoutes } from "@/routes/route";
-import { useTheme } from "@/components/context/theme-context";
+import { UserNav } from "../sidebar-provider/user-nav";
+import HeaderLogo from "../sidebar-provider/header-logo";
+import { LayoutProvider } from "../sidebar-provider/layout";
+import { UserProvider } from "@/components/context/user-context";
+import { ThemeContextProvider } from "@/components/context/theme-context";
 
 export function RootProvider({ children }: { children: ReactNode }) {
 	return (
 		<ThemeContextProvider>
-			<LayoutProvider
-				header={<HeaderLogo />}
-				footer={<div>jhhjjh</div>}
-				sidebarRoute={SidebarRoutes}
-			>
-				{children}
-			</LayoutProvider>
+			<UserProvider>
+				<LayoutProvider
+					header={<HeaderLogo />}
+					footer={<UserNav />}
+					sidebarRoute={SidebarRoutes}
+				>
+					{children}
+				</LayoutProvider>
+			</UserProvider>
 		</ThemeContextProvider>
 	);
 }

@@ -1,8 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
-import { ISidebarRoutes } from "../layout";
 import {
 	SidebarGroup,
 	SidebarGroupLabel,
@@ -25,6 +22,11 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { ISidebarRoutes } from "../layout";
+import { ChevronRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useTheme } from "@/components/context/theme-context";
 
 interface NavMainProps {
@@ -40,6 +42,7 @@ const getNestedProperty = (obj: any, path: string): string => {
 export function NavMain({ items, groupLabel }: NavMainProps) {
 	const { state } = useSidebar();
 	const { dictionary } = useTheme();
+	const pathname = usePathname();
 	const isCollapsed = state === "collapsed";
 	
 	if (!dictionary) {
@@ -63,6 +66,12 @@ export function NavMain({ items, groupLabel }: NavMainProps) {
 		return label;
 	};
 
+	// Check if a route is active - exact match only
+	const isActiveRoute = (href?: string): boolean => {
+		if (!href) return false;
+		return pathname === href;
+	};
+
 	return (
 		<SidebarGroup>
 			{groupLabel && <SidebarGroupLabel>{groupLabel}</SidebarGroupLabel>}
@@ -83,7 +92,10 @@ export function NavMain({ items, groupLabel }: NavMainProps) {
 									<DropdownMenuTrigger asChild>
 										<SidebarMenuButton
 											tooltip={resolveLabel(item.label)}
-											className="flex items-center justify-between w-full"
+											className={cn(
+												"flex items-center justify-between w-full",
+												isActiveRoute(item.href) && "bg-accent text-accent-foreground"
+											)}
 										>
 											<div className="flex items-center">
 												{item.icon && (
@@ -142,6 +154,9 @@ export function NavMain({ items, groupLabel }: NavMainProps) {
 															<DropdownMenuItem
 																key={subItem.id}
 																asChild
+																className={cn(
+																	isActiveRoute(subItem.href) && "bg-accent text-accent-foreground"
+																)}
 															>
 																<Link
 																	href={
@@ -173,7 +188,10 @@ export function NavMain({ items, groupLabel }: NavMainProps) {
 									<CollapsibleTrigger asChild>
 										<SidebarMenuButton
 											tooltip={resolveLabel(item.label)}
-											className="flex items-center justify-between"
+											className={cn(
+												"flex items-center justify-between",
+												isActiveRoute(item.href) && "bg-accent text-accent-foreground"
+											)}
 											asChild={!!item.href && !item.child}
 										>
 											{item.href && !item.child ? (
@@ -213,6 +231,9 @@ export function NavMain({ items, groupLabel }: NavMainProps) {
 													>
 														<SidebarMenuSubButton
 															asChild
+															className={cn(
+																isActiveRoute(subItem.href) && "bg-accent text-accent-foreground"
+															)}
 														>
 															<Link
 																href={

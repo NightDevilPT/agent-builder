@@ -126,6 +126,10 @@
 				"style": {
 					"title": "Style",
 					"description": "Select the visual style of your sidebar"
+				},
+				"state": {
+					"title": "State",
+					"description": "Control the expansion state of your sidebar"
 				}
 			},
 			"view": {
@@ -156,7 +160,15 @@
 		"tools": {
 			"title": "Tools",
 			"myTools": "My Tools",
-			"manageTools": "Manage Tools"
+			"publicTools": "Public Tools"
+		},
+		"billing": {
+			"title": "Billing",
+			"subscription": "Subscription",
+			"plans": "Plans",
+			"paymentMethods": "Payment Methods",
+			"invoices": "Invoices",
+			"usage": "Usage"
 		},
 		"settings": "Settings"
 	},
@@ -193,7 +205,9 @@
 			"sidebar": "Sidebar",
 			"inset": "Inset",
 			"floating": "Floating",
-			"default": "Default"
+			"default": "Default",
+			"expanded": "Expanded",
+			"collapsed": "Collapsed"
 		},
 		"positions": {
 			"left": "Left",

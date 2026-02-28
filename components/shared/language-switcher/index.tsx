@@ -1,14 +1,24 @@
 // components/LanguageSwitcher.tsx
 "use client";
 
-
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Check, ChevronDown, Globe } from "lucide-react";
 import { ILanguage, useTheme } from "@/components/context/theme-context";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 
 // Define supported languages with their metadata
 const SUPPORTED_LANGUAGES = {
@@ -138,9 +148,15 @@ export function LanguageSwitcher({
 				sideOffset={5}
 			>
 				<Command>
-					<CommandInput placeholder={dictionary.language.switcher.searchPlaceholder} />
+					<CommandInput
+						placeholder={
+							dictionary.language.switcher.searchPlaceholder
+						}
+					/>
 					<CommandList className="max-h-[300px] overflow-y-auto">
-						<CommandEmpty>{dictionary.language.switcher.noLanguageFound}</CommandEmpty>
+						<CommandEmpty>
+							{dictionary.language.switcher.noLanguageFound}
+						</CommandEmpty>
 						<CommandGroup>
 							{Object.entries(SUPPORTED_LANGUAGES).map(
 								([code, { name, flag }]) => (
@@ -155,7 +171,9 @@ export function LanguageSwitcher({
 										className="cursor-pointer gap-2"
 									>
 										<span className="text-lg">{flag}</span>
-										<span>{getLanguageTranslationKey(code)}</span>
+										<span>
+											{getLanguageTranslationKey(code)}
+										</span>
 										<Check
 											className={cn(
 												"ml-auto h-4 w-4",

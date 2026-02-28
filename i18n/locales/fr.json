@@ -156,7 +156,15 @@
 		"tools": {
 			"title": "Outils",
 			"myTools": "Mes Outils",
-			"manageTools": "Gérer les Outils"
+			"publicTools": "Outils Publics"
+		},
+		"billing": {
+			"title": "Facturation",
+			"subscription": "Abonnement",
+			"plans": "Forfaits",
+			"paymentMethods": "Moyens de Paiement",
+			"invoices": "Factures",
+			"usage": "Utilisation"
 		},
 		"settings": "Paramètres"
 	},

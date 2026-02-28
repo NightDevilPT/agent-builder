@@ -155,13 +155,15 @@ function Sidebar({
   side = "left",
   variant = "sidebar",
   collapsible = "offcanvas",
+  defaultState = "expanded",
   className,
   children,
   ...props
 }: React.ComponentProps<"div"> & {
   side?: "left" | "right"
   variant?: "sidebar" | "floating" | "inset"
-  collapsible?: "offcanvas" | "icon" | "none"
+  collapsible?: "offcanvas" | "icon" | "none",
+  defaultState?: "expanded" | "collapsed",
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
 
@@ -204,6 +206,8 @@ function Sidebar({
       </Sheet>
     )
   }
+
+  console.log("Sidebar rendered",defaultState)
 
   return (
     <div

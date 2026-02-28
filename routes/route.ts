@@ -1,66 +1,147 @@
-import { ISidebarRoutes } from "@/components/layout/sidebar-provider/layout";
 import {
 	LayoutDashboard,
-	FileText,
-	Building2,
-	Users,
-	Settings,
 	Brain,
-	Globe,
-	EarthLock,
-	Earth,
 	Wrench,
+	Settings,
+	User,
+	Globe,
+	CreditCard,
+	Receipt,
+	Sparkles,
+	Shield,
+	History,
+	BarChart,
+	HelpCircle,
 } from "lucide-react";
+import { ISidebarRoutes } from "@/components/layout/sidebar-provider/layout";
 
+// Route paths
+export const ROUTES = {
+	// Main
+	DASHBOARD: '/dashboard',
+	
+	// Agents
+	AGENTS: '/agents',
+	AGENTS_MY: '/agents/my-agents',
+	AGENTS_PUBLIC: '/agents',
+	
+	// Tools
+	TOOLS: '/tools',
+	TOOLS_MY: '/tools/my-tools',
+	TOOLS_PUBLIC: '/tools',
+	
+	// Billing & Subscription
+	BILLING: '/billing',
+	BILLING_SUBSCRIPTION: '/subscription',
+	BILLING_PLANS: '/plans',
+	BILLING_PAYMENT_METHODS: '/payment-methods',
+	BILLING_INVOICES: '/invoices',
+	BILLING_USAGE: '/usage',
+	
+	// Settings
+	SETTINGS: '/settings',
+} as const;
+
+// Route IDs
+export const ROUTE_IDS = {
+	DASHBOARD: 'dashboard',
+	AGENTS: 'agents',
+	AGENTS_MY: 'my-agents',
+	AGENTS_PUBLIC: 'public-agents',
+	TOOLS: 'tools',
+	TOOLS_MY: 'my-tools',
+	TOOLS_PUBLIC: 'public-tools',
+	BILLING: 'billing',
+	BILLING_SUBSCRIPTION: 'billing-subscription',
+	BILLING_PLANS: 'billing-plans',
+	BILLING_PAYMENT_METHODS: 'billing-payment-methods',
+	BILLING_INVOICES: 'billing-invoices',
+	BILLING_USAGE: 'billing-usage',
+	SETTINGS: 'settings',
+} as const;
+
+// Sidebar routes configuration
 export const SidebarRoutes: ISidebarRoutes[] = [
 	{
-		id: "dashboard",
+		id: ROUTE_IDS.DASHBOARD,
 		label: "navigation.dashboard",
 		icon: LayoutDashboard,
-		href: "/",
+		href: ROUTES.DASHBOARD,
 	},
 	{
-		id: "agents",
+		id: ROUTE_IDS.AGENTS,
 		label: "navigation.agents.title",
 		icon: Brain,
 		child: [
 			{
-				id: "my-agents",
+				id: ROUTE_IDS.AGENTS_MY,
 				label: "navigation.agents.myAgents",
-				icon: Earth,
-				href: "/agents/my-agents",
+				icon: User,
+				href: ROUTES.AGENTS_MY,
 			},
 			{
-				id: "public-agents",
+				id: ROUTE_IDS.AGENTS_PUBLIC,
 				label: "navigation.agents.publicAgents",
-				icon: EarthLock,
-				href: "/agents/public-agents",
+				icon: Globe,
+				href: ROUTES.AGENTS_PUBLIC,
 			},
 		],
 	},
 	{
-		id: "tools",
+		id: ROUTE_IDS.TOOLS,
 		label: "navigation.tools.title",
 		icon: Wrench,
 		child: [
 			{
-				id: "my-tools",
+				id: ROUTE_IDS.TOOLS_MY,
 				label: "navigation.tools.myTools",
-				icon: Earth,
-				href: "/tools/my-tools",
+				icon: User,
+				href: ROUTES.TOOLS_MY,
 			},
 			{
-				id: "public-tools",
-				label: "navigation.tools.manageTools",
-				icon: EarthLock,
-				href: "/tools/public-tools",
+				id: ROUTE_IDS.TOOLS_PUBLIC,
+				label: "navigation.tools.publicTools",
+				icon: Globe,
+				href: ROUTES.TOOLS_PUBLIC,
 			},
 		],
 	},
 	{
-		id: "settings",
+		id: ROUTE_IDS.BILLING,
+		label: "navigation.billing.title",
+		icon: CreditCard,
+		href: ROUTES.BILLING,
+		child: [
+			{
+				id: ROUTE_IDS.BILLING_SUBSCRIPTION,
+				label: "navigation.billing.subscription",
+				icon: Sparkles,
+				href: ROUTES.BILLING_SUBSCRIPTION,
+			},
+			{
+				id: ROUTE_IDS.BILLING_PLANS,
+				label: "navigation.billing.plans",
+				icon: Shield,
+				href: ROUTES.BILLING_PLANS,
+			},
+			{
+				id: ROUTE_IDS.BILLING_INVOICES,
+				label: "navigation.billing.invoices",
+				icon: Receipt,
+				href: ROUTES.BILLING_INVOICES,
+			},
+			{
+				id: ROUTE_IDS.BILLING_USAGE,
+				label: "navigation.billing.usage",
+				icon: BarChart,
+				href: ROUTES.BILLING_USAGE,
+			},
+		],
+	},
+	{
+		id: ROUTE_IDS.SETTINGS,
 		label: "navigation.settings",
 		icon: Settings,
-		href: "/settings",
+		href: ROUTES.SETTINGS,
 	},
 ];

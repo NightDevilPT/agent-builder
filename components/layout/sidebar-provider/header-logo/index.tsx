@@ -1,8 +1,8 @@
 "use client";
 
+import { Bot } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { useSidebar } from "@/components/ui/sidebar";
-import { Bot } from "lucide-react";
 import { useTheme } from "@/components/context/theme-context";
 
 interface IHeaderLogoProps {
@@ -59,7 +59,9 @@ const HeaderLogo = ({ title, subtitle }: IHeaderLogoProps) => {
 					state === "expanded" ? "w-full pr-3" : "w-0 hidden"
 				}`}
 			>
-				<Label className="text-base block truncate">{dictionary.header.title}</Label>
+				<Label className="text-base block truncate">
+					{dictionary.header.title}
+				</Label>
 				<Label className="text-xs text-muted-foreground block truncate">
 					{dictionary.header.subtitle}
 				</Label>

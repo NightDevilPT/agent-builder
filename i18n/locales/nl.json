@@ -156,7 +156,15 @@
 		"tools": {
 			"title": "Tools",
 			"myTools": "Mijn Tools",
-			"manageTools": "Tools Beheren"
+			"publicTools": "Openbare Tools"
+		},
+		"billing": {
+			"title": "Facturering",
+			"subscription": "Abonnement",
+			"plans": "Pakketten",
+			"paymentMethods": "Betaalmethoden",
+			"invoices": "Facturen",
+			"usage": "Gebruik"
 		},
 		"settings": "Instellingen"
 	},

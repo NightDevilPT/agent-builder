@@ -1,10 +1,10 @@
 "use client";
 
-import { IColorScheme, useTheme } from "@/components/context/theme-context";
 import { cn } from "@/lib/utils";
-import { Check, CheckCheck } from "lucide-react";
+import { CheckCheck } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ColorSchemas } from "@/interfaces/color-schema";
+import { IColorScheme, useTheme } from "@/components/context/theme-context";
 
 export function ColorSchemeSection() {
 	const { colorScheme, setColorScheme, resolvedTheme, dictionary } =
@@ -185,7 +185,9 @@ export function ColorSchemeSection() {
 								>
 									{schemeKey === "default"
 										? dictionary.common.buttons.default
-										: dictionary.common.colors[schemeKey as keyof typeof dictionary.common.colors] || schemeKey}
+										: dictionary.common.colors[
+												schemeKey as keyof typeof dictionary.common.colors
+										  ] || schemeKey}
 								</span>
 							</button>
 						);

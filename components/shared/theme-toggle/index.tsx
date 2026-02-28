@@ -1,17 +1,17 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { IThemeMode, useTheme } from "@/components/context/theme-context";
+import { Button } from "@/components/ui/button";
 import { Moon, Sun, Monitor } from "lucide-react";
+import { IThemeMode, useTheme } from "@/components/context/theme-context";
 
 function ThemeToggle() {
 	const { themeMode, setThemeMode, dictionary } = useTheme();
-	
+
 	if (!dictionary) {
 		return (
 			<Button variant="outline" size="icon" className="relative" disabled>
@@ -28,7 +28,9 @@ function ThemeToggle() {
 				<Button variant="outline" size="icon" className="relative">
 					<Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
 					<Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-					<span className="sr-only">{dictionary.theme.toggle.srLabel}</span>
+					<span className="sr-only">
+						{dictionary.theme.toggle.srLabel}
+					</span>
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">

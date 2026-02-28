@@ -156,7 +156,15 @@
 		"tools": {
 			"title": "ツール",
 			"myTools": "マイツール",
-			"manageTools": "ツールの管理"
+			"publicTools": "公開ツール"
+		},
+		"billing": {
+			"title": "請求",
+			"subscription": "サブスクリプション",
+			"plans": "プラン",
+			"paymentMethods": "支払い方法",
+			"invoices": "請求書",
+			"usage": "使用量"
 		},
 		"settings": "設定"
 	},
