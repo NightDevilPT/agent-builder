@@ -223,5 +223,85 @@
 			"violet": "Violet",
 			"yellow": "Yellow"
 		}
+	},
+	"flow": {
+		"controls": {
+			"undo": "Undo",
+			"redo": "Redo",
+			"selectMode": "Select Mode",
+			"panMode": "Pan Mode",
+			"zoomIn": "Zoom In",
+			"zoomOut": "Zoom Out",
+			"verticalLayout": "Vertical Layout",
+			"horizontalLayout": "Horizontal Layout",
+			"toggleGrid": "Toggle Grid",
+			"toggleMinimap": "Toggle Minimap",
+			"save": "Save",
+			"export": "Export",
+			"import": "Import",
+			"clearAll": "Clear All",
+			"fullscreen": "Fullscreen",
+			"exitFullscreen": "Exit Fullscreen"
+		},
+		"tooltips": {
+			"noChanges": "(No changes)",
+			"disabled": "(Disabled)"
+		},
+		"nodeTypes": {
+			"categories": {
+				"initNode": "Init Node",
+				"basicNode": "Basic Node",
+				"controlFlow": "Control Flow",
+				"integration": "Integration",
+				"aiMl": "AI/ML",
+				"tools": "Tools"
+			},
+			"nodes": {
+				"startNode": {
+					"label": "Start Node",
+					"description": "Entry point of the workflow"
+				},
+				"endNode": {
+					"label": "End Node",
+					"description": "Exit point of the workflow"
+				},
+				"textNode": {
+					"label": "Text Node",
+					"description": "Process text data"
+				},
+				"numberNode": {
+					"label": "Number Node",
+					"description": "Perform numeric operations"
+				},
+				"conditionalNode": {
+					"label": "Conditional Node",
+					"description": "Branch logic based on conditions"
+				},
+				"loopNode": {
+					"label": "Loop Node",
+					"description": "Repeat operations"
+				},
+				"apiNode": {
+					"label": "API Node",
+					"description": "Make API requests"
+				},
+				"modelNode": {
+					"label": "Model Node",
+					"description": "Run AI models"
+				},
+				"toolNode": {
+					"label": "Tool Node",
+					"description": "Utility tools"
+				}
+			}
+		},
+		"sidebar": {
+			"title": "Node Library",
+			"expandAll": "Expand All",
+			"collapseAll": "Collapse All",
+			"searchPlaceholder": "Search nodes...",
+			"noNodesFound": "No nodes found",
+			"dragToCanvas": "Drag nodes to canvas"
+		}
 	}
 }

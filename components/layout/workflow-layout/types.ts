@@ -1,27 +1,32 @@
 import React from "react";
 import { Node } from "@xyflow/react";
 
+// interfaces/reactflow.interface.ts
 export enum NodeTypesEnum {
-	TEXT_NODE = "TEXT_NODE",
+	// Basic Node
+	TEXT_NODE = "TEXT_NODE", // Basic Node
 	NUMBER_NODE = "NUMBER_NODE",
-	FILE_NODE = "FILE_NODE",
+	// Start and End nodes
+	START_NODE = "START_NODE",
+	END_NODE = "END_NODE",
+	// Conditional Node
+	CONDITIONAL_NODE = "CONDITIONAL_NODE",
+	// Loop Node
+	LOOP_NODE = "LOOP_NODE",
+	// API Node
+	API_NODE = "API_NODE",
+	// Model Node
+	MODEL_NODE = "MODEL_NODE",
+	// Tool Node
+	TOOL_NODE = "TOOL_NODE",
 }
 
-export interface NodeRegistryType {
-	[key: string]: {
-		component: React.ElementType;
-		config: any;
-	};
+export enum NodeStatus {
+	IDLE = "IDLE",
+	RUNNING = "RUNNING",
+	SUCCESS = "SUCCESS",
+	FAILURE = "FAILURE",
 }
-
-type ValueTypes =
-	| string
-	| number
-	| object
-	| string[]
-	| number[]
-	| { key: string; value: string }[] // For headers or query parameters
-	| null;
 
 export interface NodeHeaderProps {
 	nodeId?: string; // ID of the node (useful for copying or deleting the node)
@@ -40,8 +45,8 @@ export interface NodeHeaderProps {
 	};
 	info?: React.ElementType;
 	type?: NodeTypesEnum;
+	status: NodeStatus;
 }
-
 
 export interface AppNodeData {
 	icon: React.ElementType;
@@ -57,4 +62,13 @@ export interface AppNodeData {
 
 export interface AppNode extends Node {
 	data: AppNodeData;
+}
+
+export interface NodeSidebar {
+	id: string;
+	label: string;
+	description?: string;
+	icon: React.ElementType;
+	type: NodeTypesEnum;
+	color: string;
 }

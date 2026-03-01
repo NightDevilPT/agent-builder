@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Agent Builder: My Tools",
-	description: "Agent Builder my tools portal",
+	title: "Agent Builder: Agent Details",
+	description: "Agent Builder agent details portal",
 };
 
 export default function RootLayout({

@@ -126,6 +126,10 @@
 				"style": {
 					"title": "Stil",
 					"description": "Wählen Sie den visuellen Stil Ihrer Seitenleiste"
+				},
+				"state": {
+					"title": "Zustand",
+					"description": "Wählen Sie den Zustand Ihrer Seitenleiste"
 				}
 			},
 			"view": {
@@ -201,7 +205,9 @@
 			"sidebar": "Seitenleiste",
 			"inset": "Eingebettet",
 			"floating": "Schwebend",
-			"default": "Standard"
+			"default": "Standard",
+			"expanded": "Erweitert",
+			"collapsed": "Gekollabiert"
 		},
 		"positions": {
 			"left": "Links",
@@ -216,6 +222,86 @@
 			"green": "Grün",
 			"violet": "Violett",
 			"yellow": "Gelb"
+		}
+	},
+	"flow": {
+		"controls": {
+			"undo": "Rückgängig",
+			"redo": "Wiederholen",
+			"selectMode": "Auswahlmodus",
+			"panMode": "Verschiebemodus",
+			"zoomIn": "Vergrößern",
+			"zoomOut": "Verkleinern",
+			"verticalLayout": "Vertikales Layout",
+			"horizontalLayout": "Horizontales Layout",
+			"toggleGrid": "Raster umschalten",
+			"toggleMinimap": "Minimap umschalten",
+			"save": "Speichern",
+			"export": "Exportieren",
+			"import": "Importieren",
+			"clearAll": "Alles löschen",
+			"fullscreen": "Vollbild",
+			"exitFullscreen": "Vollbild beenden"
+		},
+		"tooltips": {
+			"noChanges": "(Keine Änderungen)",
+			"disabled": "(Deaktiviert)"
+		},
+		"nodeTypes": {
+			"categories": {
+				"initNode": "Startknoten",
+				"basicNode": "Basis-Knoten",
+				"controlFlow": "Kontrollfluss",
+				"integration": "Integration",
+				"aiMl": "KI/ML",
+				"tools": "Werkzeuge"
+			},
+			"nodes": {
+				"startNode": {
+					"label": "Start-Knoten",
+					"description": "Einstiegspunkt des Workflows"
+				},
+				"endNode": {
+					"label": "End-Knoten",
+					"description": "Endpunkt des Workflows"
+				},
+				"textNode": {
+					"label": "Text-Knoten",
+					"description": "Textdaten verarbeiten"
+				},
+				"numberNode": {
+					"label": "Zahlen-Knoten",
+					"description": "Numerische Operationen durchführen"
+				},
+				"conditionalNode": {
+					"label": "Bedingungs-Knoten",
+					"description": "Verzweigungslogik basierend auf Bedingungen"
+				},
+				"loopNode": {
+					"label": "Schleifen-Knoten",
+					"description": "Operationen wiederholen"
+				},
+				"apiNode": {
+					"label": "API-Knoten",
+					"description": "API-Anfragen stellen"
+				},
+				"modelNode": {
+					"label": "Modell-Knoten",
+					"description": "KI-Modelle ausführen"
+				},
+				"toolNode": {
+					"label": "Werkzeug-Knoten",
+					"description": "Dienstprogramme"
+				}
+			}
+		},
+		"sidebar": {
+			"title": "Knotenbibliothek",
+			"expandAll": "Alle Erweitern",
+			"collapseAll": "Alle Reduzieren",
+			"searchPlaceholder": "Knoten suchen...",
+			"noNodesFound": "Keine Knoten gefunden",
+			"dragToCanvas": "Ziehe Knoten auf die Leinwand"
 		}
 	}
 }

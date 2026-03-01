@@ -126,6 +126,10 @@
 				"style": {
 					"title": "Estilo",
 					"description": "Selecciona el estilo visual de tu barra lateral"
+				},
+				"state": {
+					"title": "Estado",
+					"description": "Elige el estado de tu barra lateral"
 				}
 			},
 			"view": {
@@ -201,7 +205,9 @@
 			"sidebar": "Barra Lateral",
 			"inset": "Insertada",
 			"floating": "Flotante",
-			"default": "Predeterminado"
+			"default": "Predeterminado",
+			"expanded": "Expandido",
+			"collapsed": "Colapsado"
 		},
 		"positions": {
 			"left": "Izquierda",
@@ -216,6 +222,86 @@
 			"green": "Verde",
 			"violet": "Violeta",
 			"yellow": "Amarillo"
+		}
+	},
+	"flow": {
+		"controls": {
+			"undo": "Deshacer",
+			"redo": "Rehacer",
+			"selectMode": "Modo de Selección",
+			"panMode": "Modo de Desplazamiento",
+			"zoomIn": "Acercar",
+			"zoomOut": "Alejar",
+			"verticalLayout": "Diseño Vertical",
+			"horizontalLayout": "Diseño Horizontal",
+			"toggleGrid": "Alternar Cuadrícula",
+			"toggleMinimap": "Alternar Minimapa",
+			"save": "Guardar",
+			"export": "Exportar",
+			"import": "Importar",
+			"clearAll": "Limpiar Todo",
+			"fullscreen": "Pantalla Completa",
+			"exitFullscreen": "Salir de Pantalla Completa"
+		},
+		"tooltips": {
+			"noChanges": "(Sin cambios)",
+			"disabled": "(Deshabilitado)"
+		},
+		"nodeTypes": {
+			"categories": {
+				"initNode": "Nodo Inicial",
+				"basicNode": "Nodo Básico",
+				"controlFlow": "Flujo de Control",
+				"integration": "Integración",
+				"aiMl": "IA/ML",
+				"tools": "Herramientas"
+			},
+			"nodes": {
+				"startNode": {
+					"label": "Nodo de Inicio",
+					"description": "Punto de entrada del flujo de trabajo"
+				},
+				"endNode": {
+					"label": "Nodo Final",
+					"description": "Punto de salida del flujo de trabajo"
+				},
+				"textNode": {
+					"label": "Nodo de Texto",
+					"description": "Procesar datos de texto"
+				},
+				"numberNode": {
+					"label": "Nodo Numérico",
+					"description": "Realizar operaciones numéricas"
+				},
+				"conditionalNode": {
+					"label": "Nodo Condicional",
+					"description": "Lógica de ramificación basada en condiciones"
+				},
+				"loopNode": {
+					"label": "Nodo de Bucle",
+					"description": "Repetir operaciones"
+				},
+				"apiNode": {
+					"label": "Nodo API",
+					"description": "Realizar solicitudes API"
+				},
+				"modelNode": {
+					"label": "Nodo de Modelo",
+					"description": "Ejecutar modelos de IA"
+				},
+				"toolNode": {
+					"label": "Nodo de Herramienta",
+					"description": "Herramientas de utilidad"
+				}
+			}
+		},
+		"sidebar": {
+			"title": "Biblioteca de Nodos",
+			"expandAll": "Expandir Todo",
+			"collapseAll": "Colapsar Todo",
+			"searchPlaceholder": "Buscar nodos...",
+			"noNodesFound": "No se encontraron nodos",
+			"dragToCanvas": "Arrastra nodos al lienzo"
 		}
 	}
 }

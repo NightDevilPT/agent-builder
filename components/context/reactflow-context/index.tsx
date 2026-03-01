@@ -1,3 +1,4 @@
+// components/context/flow-context.tsx
 "use client";
 
 import React, {
@@ -19,12 +20,14 @@ import {
 	Viewport,
 	XYPosition,
 } from "@xyflow/react";
+import { v4 as uuidv4 } from "uuid";
 import {
 	AppNode,
 	AppNodeData,
+	NodeStatus,
 	NodeTypesEnum,
-} from "@/interfaces/reactflow.interface";
-import { v4 as uuidv4 } from "uuid";
+} from "@/components/layout/workflow-layout/types";
+import { BaseNodeTypes } from "@/components/layout/workflow-layout/config";
 
 // Flow Editor State
 export interface FlowEditorState {
@@ -106,6 +109,15 @@ const ensureAppNodes = (nodes: any[]): AppNode[] => {
 			...node.data,
 		},
 	}));
+};
+
+// Helper to get node config by type
+const getNodeConfigByType = (type: NodeTypesEnum) => {
+	for (const nodes of Object.values(BaseNodeTypes)) {
+		const node = nodes.find((n) => n.type === type);
+		if (node) return node;
+	}
+	return null;
 };
 
 // Reducer
@@ -257,7 +269,7 @@ const flowReducer = (
 		case "RESET_FLOW":
 			return {
 				...initialState,
-				flowId: state.flowId, // Preserve the flow ID
+				flowId: state.flowId,
 			};
 
 		default:
@@ -302,6 +314,11 @@ interface FlowContextType {
 	redo: () => void;
 	canUndo: boolean;
 	canRedo: boolean;
+
+	// Event Handlers for ReactFlow
+	onNodesChange: (changes: NodeChange[]) => void;
+	onEdgesChange: (changes: EdgeChange[]) => void;
+	onConnect: (connection: Connection) => void;
 }
 
 // Create Context
@@ -352,24 +369,27 @@ export function FlowProvider({
 			data?: Partial<AppNodeData>
 		) => {
 			const nodeId = `node-${uuidv4()}`;
+			const nodeConfig = getNodeConfigByType(type);
+
 			const newNode: AppNode = {
 				id: nodeId,
-				type: type as string, // Cast to string for ReactFlow compatibility
+				type: type,
 				position,
 				data: {
-					icon: data?.icon || (() => null),
-					label: data?.label || "New Node",
-					description: data?.description,
+					icon: nodeConfig?.icon || (() => null),
+					label: nodeConfig?.label || "Node",
+					description: nodeConfig?.description,
 					type: type,
 					header: {
 						nodeId: nodeId,
-						label: data?.label || "New Node",
+						label: nodeConfig?.label || "Node",
 						copy: { isCopy: true },
 						delete: { isDelete: true },
 						type: type,
+						status: NodeStatus.IDLE,
 					},
-					isStartNode: data?.isStartNode || false,
-					isEndNode: data?.isEndNode || false,
+					isStartNode: type === NodeTypesEnum.START_NODE,
+					isEndNode: type === NodeTypesEnum.END_NODE,
 					...data,
 				},
 			};
@@ -399,6 +419,28 @@ export function FlowProvider({
 			if (!nodeToDuplicate) return;
 
 			const newNodeId = `node-${uuidv4()}`;
+
+			// Create a copy suffix translation key or use a constant
+			const copySuffix = " (Copy)"; // Or use translation: dictionary?.common?.copySuffix || " (Copy)"
+
+			const newNodeData: AppNodeData = {
+				...nodeToDuplicate.data,
+				// If label is a translation key, we need to handle it carefully
+				// Option 1: Keep the same translation key (label will be same as original)
+				label: nodeToDuplicate.data.label,
+				// Option 2: If you want to add " (Copy)" but still support translation,
+				// you'd need to handle this in the BaseNodeWrapper by checking if it's a copy
+				header: {
+					...nodeToDuplicate.data.header,
+					nodeId: newNodeId,
+					label:
+						nodeToDuplicate.data.header?.label ||
+						nodeToDuplicate.data.label,
+					status: NodeStatus.IDLE,
+				},
+				execution: undefined,
+			};
+
 			const newNode: AppNode = {
 				...nodeToDuplicate,
 				id: newNodeId,
@@ -406,15 +448,8 @@ export function FlowProvider({
 					x: nodeToDuplicate.position.x + 50,
 					y: nodeToDuplicate.position.y + 50,
 				},
-				data: {
-					...nodeToDuplicate.data,
-					label: `${nodeToDuplicate.data.label} (Copy)`,
-					header: {
-						...nodeToDuplicate.data.header,
-						nodeId: newNodeId,
-						label: `${nodeToDuplicate.data.label} (Copy)`,
-					},
-				},
+				data: newNodeData,
+				selected: false,
 			};
 
 			dispatch({ type: "SET_NODES", payload: [...state.nodes, newNode] });
@@ -424,7 +459,6 @@ export function FlowProvider({
 
 	const removeNode = useCallback(
 		(nodeId: string) => {
-			// Remove node and its connected edges
 			const filteredNodes = state.nodes.filter(
 				(node) => node.id !== nodeId
 			);
@@ -483,7 +517,6 @@ export function FlowProvider({
 
 		dispatch({ type: "SET_LOADING", payload: true });
 		try {
-			// API call to save flow
 			const flowData = {
 				id: state.flowId,
 				name: state.flowName,
@@ -492,8 +525,8 @@ export function FlowProvider({
 				updatedAt: new Date(),
 			};
 
-			// await api.saveFlow(flowData);
 			console.log("Saving flow:", flowData);
+			// await api.saveFlow(flowData);
 
 			dispatch({ type: "SET_DIRTY", payload: false });
 			dispatch({ type: "SET_ERROR", payload: null });
@@ -507,7 +540,6 @@ export function FlowProvider({
 	const loadFlow = useCallback(async (flowId: string) => {
 		dispatch({ type: "SET_LOADING", payload: true });
 		try {
-			// API call to load flow
 			// const flowData = await api.loadFlow(flowId);
 			const flowData = {
 				nodes: [],
@@ -561,6 +593,19 @@ export function FlowProvider({
 	const canUndo = state.history.past.length > 0;
 	const canRedo = state.history.future.length > 0;
 
+	// ReactFlow Event Handlers
+	const onNodesChange = useCallback((changes: NodeChange[]) => {
+		dispatch({ type: "ON_NODES_CHANGE", payload: changes });
+	}, []);
+
+	const onEdgesChange = useCallback((changes: EdgeChange[]) => {
+		dispatch({ type: "ON_EDGES_CHANGE", payload: changes });
+	}, []);
+
+	const onConnect = useCallback((connection: Connection) => {
+		dispatch({ type: "ON_CONNECT", payload: connection });
+	}, []);
+
 	const value: FlowContextType = {
 		state,
 		dispatch,
@@ -580,6 +625,9 @@ export function FlowProvider({
 		redo,
 		canUndo,
 		canRedo,
+		onNodesChange,
+		onEdgesChange,
+		onConnect,
 	};
 
 	return (

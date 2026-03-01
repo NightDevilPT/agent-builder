@@ -72,39 +72,13 @@ export const SidebarRoutes: ISidebarRoutes[] = [
 		id: ROUTE_IDS.AGENTS,
 		label: "navigation.agents.title",
 		icon: Brain,
-		child: [
-			{
-				id: ROUTE_IDS.AGENTS_MY,
-				label: "navigation.agents.myAgents",
-				icon: User,
-				href: ROUTES.AGENTS_MY,
-			},
-			{
-				id: ROUTE_IDS.AGENTS_PUBLIC,
-				label: "navigation.agents.publicAgents",
-				icon: Globe,
-				href: ROUTES.AGENTS_PUBLIC,
-			},
-		],
+		href: ROUTES.AGENTS,
 	},
 	{
 		id: ROUTE_IDS.TOOLS,
 		label: "navigation.tools.title",
 		icon: Wrench,
-		child: [
-			{
-				id: ROUTE_IDS.TOOLS_MY,
-				label: "navigation.tools.myTools",
-				icon: User,
-				href: ROUTES.TOOLS_MY,
-			},
-			{
-				id: ROUTE_IDS.TOOLS_PUBLIC,
-				label: "navigation.tools.publicTools",
-				icon: Globe,
-				href: ROUTES.TOOLS_PUBLIC,
-			},
-		],
+		href: ROUTES.TOOLS,
 	},
 	{
 		id: ROUTE_IDS.BILLING,

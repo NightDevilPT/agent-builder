@@ -123,6 +123,10 @@
 					"title": "位置",
 					"description": "サイドバーが画面上のどこに表示されるかを選択します"
 				},
+				"state": {
+					"title": "状態",
+					"description": "サイドバーの状態を選択します"
+				},
 				"style": {
 					"title": "スタイル",
 					"description": "サイドバーの視覚スタイルを選択します"
@@ -201,7 +205,9 @@
 			"sidebar": "サイドバー",
 			"inset": "インセット",
 			"floating": "フローティング",
-			"default": "デフォルト"
+			"default": "デフォルト",
+			"expanded": "展開",
+			"collapsed": "収縮"
 		},
 		"positions": {
 			"left": "左",
@@ -216,6 +222,86 @@
 			"green": "緑",
 			"violet": "バイオレット",
 			"yellow": "黄"
+		}
+	},
+	"flow": {
+		"controls": {
+			"undo": "元に戻す",
+			"redo": "やり直す",
+			"selectMode": "選択モード",
+			"panMode": "パンモード",
+			"zoomIn": "ズームイン",
+			"zoomOut": "ズームアウト",
+			"verticalLayout": "垂直レイアウト",
+			"horizontalLayout": "水平レイアウト",
+			"toggleGrid": "グリッド切り替え",
+			"toggleMinimap": "ミニマップ切り替え",
+			"save": "保存",
+			"export": "エクスポート",
+			"import": "インポート",
+			"clearAll": "すべてクリア",
+			"fullscreen": "全画面表示",
+			"exitFullscreen": "全画面表示を終了"
+		},
+		"tooltips": {
+			"noChanges": "(変更なし)",
+			"disabled": "(無効)"
+		},
+		"nodeTypes": {
+			"categories": {
+				"initNode": "初期ノード",
+				"basicNode": "基本ノード",
+				"controlFlow": "制御フロー",
+				"integration": "統合",
+				"aiMl": "AI/ML",
+				"tools": "ツール"
+			},
+			"nodes": {
+				"startNode": {
+					"label": "開始ノード",
+					"description": "ワークフローのエントリポント"
+				},
+				"endNode": {
+					"label": "終了ノード",
+					"description": "ワークフローの終了ポイント"
+				},
+				"textNode": {
+					"label": "テキストノード",
+					"description": "テキストデータを処"
+				},
+				"numberNode": {
+					"label": "数値ード",
+					"description": "数値算を実行"
+				},
+				"conditionalNode": {
+					"label": "条件ノード",
+					"description": "条件に基づく分岐ロジック"
+				},
+				"loopNode": {
+					"label": "ループノード",
+					"description": "操作を繰返す"
+				},
+				"apiNode": {
+					"label": "APIノード",
+					"description": "APIリクエストを行う"
+				},
+				"modelNode": {
+					"label": "モデルノード",
+					"description": "AIモデルを実行"
+				},
+				"toolNode": {
+					"label": "ツールノード",
+					"description": "ユテリティツール"
+				}
+			}
+		},
+		"sidebar": {
+			"title": "ノードライブラリ",
+			"expandAll": "すべて展開",
+			"collapseAll": "すべて折りたたむ",
+			"searchPlaceholder": "ノードを検...",
+			"noNodesFound": "ノードが見つかりません",
+			"dragToCanvas": "ノードをキャンバスにドラッグ"
 		}
 	}
 }

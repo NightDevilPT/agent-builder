@@ -123,6 +123,10 @@
 					"title": "Positie",
 					"description": "Kies waar de zijbalk op het scherm verschijnt"
 				},
+				"state": {
+					"title": "Status",
+					"description": "Kies de status van je zijbalk"
+				},
 				"style": {
 					"title": "Stijl",
 					"description": "Selecteer de visuele stijl van je zijbalk"
@@ -201,7 +205,9 @@
 			"sidebar": "Zijbalk",
 			"inset": "Ingezet",
 			"floating": "Zwevend",
-			"default": "Standaard"
+			"default": "Standaard",
+			"expanded": "Uitgebreid",
+			"collapsed": "Gekollabiert"
 		},
 		"positions": {
 			"left": "Links",
@@ -216,6 +222,86 @@
 			"green": "Groen",
 			"violet": "Violet",
 			"yellow": "Geel"
+		}
+	},
+	"flow": {
+		"controls": {
+			"undo": "Ongedaan maken",
+			"redo": "Opnieuw",
+			"selectMode": "Selectiemodus",
+			"panMode": "Verschuifmodus",
+			"zoomIn": "Inzoomen",
+			"zoomOut": "Uitzoomen",
+			"verticalLayout": "Verticale Lay-out",
+			"horizontalLayout": "Horizontale Lay-out",
+			"toggleGrid": "Raster wisselen",
+			"toggleMinimap": "Minimap wisselen",
+			"save": "Opslaan",
+			"export": "Exporteren",
+			"import": "Importeren",
+			"clearAll": "Alles wissen",
+			"fullscreen": "Volledig scherm",
+			"exitFullscreen": "Volledig scherm afsluiten"
+		},
+		"tooltips": {
+			"noChanges": "(Geen wijzigingen)",
+			"disabled": "(Uitgeschakeld)"
+		},
+		"nodeTypes": {
+			"categories": {
+				"initNode": "Init Node",
+				"basicNode": "Basis Node",
+				"controlFlow": "Controle Stroom",
+				"integration": "Integratie",
+				"aiMl": "AI/ML",
+				"tools": "Tools"
+			},
+			"nodes": {
+				"startNode": {
+					"label": "Start Node",
+					"description": "Ingangspunt van de workflow"
+				},
+				"endNode": {
+					"label": "Eind Node",
+					"description": "Uitgangspunt van de workflow"
+				},
+				"textNode": {
+					"label": "Tekst Node",
+					"description": "Verwerk tekstgegevens"
+				},
+				"numberNode": {
+					"label": "Nummer Node",
+					"description": "Voer numerieke bewerkingen uit"
+				},
+				"conditionalNode": {
+					"label": "Voorwaardelijke Node",
+					"description": "Vertakkingslogica gebaseerd op voorwaarden"
+				},
+				"loopNode": {
+					"label": "Lus Node",
+					"description": "Herhaal bewerkingen"
+				},
+				"apiNode": {
+					"label": "API Node",
+					"description": "Voer API-aanvragen uit"
+				},
+				"modelNode": {
+					"label": "Model Node",
+					"description": "Voer AI-modellen uit"
+				},
+				"toolNode": {
+					"label": "Tool Node",
+					"description": "Hulpprogramma's"
+				}
+			}
+		},
+		"sidebar": {
+			"title": "Node Bibliotheek",
+			"expandAll": "Alles Uitvouwen",
+			"collapseAll": "Alles Inklappen",
+			"searchPlaceholder": "Zoek nodes...",
+			"noNodesFound": "Geen nodes gevonden",
+			"dragToCanvas": "Sleep nodes naar het canvas"
 		}
 	}
 }

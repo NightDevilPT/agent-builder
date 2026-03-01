@@ -123,6 +123,10 @@
 					"title": "Position",
 					"description": "Choisissez où la barre latérale apparaît sur l'écran"
 				},
+				"state": {
+					"title": "État",
+					"description": "Choisissez l'état de votre barre latérale"
+				},
 				"style": {
 					"title": "Style",
 					"description": "Sélectionnez le style visuel de votre barre latérale"
@@ -201,7 +205,9 @@
 			"sidebar": "Barre Latérale",
 			"inset": "Intégrée",
 			"floating": "Flottante",
-			"default": "Par Défaut"
+			"default": "Par Défaut",
+			"expanded": "Expandido",
+			"collapsed": "Colapsado"
 		},
 		"positions": {
 			"left": "Gauche",
@@ -216,6 +222,86 @@
 			"green": "Vert",
 			"violet": "Violet",
 			"yellow": "Jaune"
+		}
+	},
+	"flow": {
+		"controls": {
+			"undo": "Annuler",
+			"redo": "Rétablir",
+			"selectMode": "Mode Sélection",
+			"panMode": "Mode Déplacement",
+			"zoomIn": "Zoom Avant",
+			"zoomOut": "Zoom Arrière",
+			"verticalLayout": "Disposition Verticale",
+			"horizontalLayout": "Disposition Horizontale",
+			"toggleGrid": "Basculer la Grille",
+			"toggleMinimap": "Basculer le Minimap",
+			"save": "Enregistrer",
+			"export": "Exporter",
+			"import": "Importer",
+			"clearAll": "Tout Effacer",
+			"fullscreen": "Plein Écran",
+			"exitFullscreen": "Quitter le Plein Écran"
+		},
+		"tooltips": {
+			"noChanges": "(Aucun changement)",
+			"disabled": "(Désactivé)"
+		},
+		"nodeTypes": {
+			"categories": {
+				"initNode": "Nœud Initial",
+				"basicNode": "Nœud Basique",
+				"controlFlow": "Flux de Contrôle",
+				"integration": "Intégration",
+				"aiMl": "IA/ML",
+				"tools": "Outils"
+			},
+			"nodes": {
+				"startNode": {
+					"label": "Nœud de Début",
+					"description": "Point d'entrée du flux de travail"
+				},
+				"endNode": {
+					"label": "Nœud de Fin",
+					"description": "Point de sortie du flux de travail"
+				},
+				"textNode": {
+					"label": "Nœud Texte",
+					"description": "Traiter les données textuelles"
+				},
+				"numberNode": {
+					"label": "Nœud Numérique",
+					"description": "Effectuer des opérations numériques"
+				},
+				"conditionalNode": {
+					"label": "Nœud Conditionnel",
+					"description": "Logique de branchement basée sur des conditions"
+				},
+				"loopNode": {
+					"label": "Nœud de Boucle",
+					"description": "Répéter des opérations"
+				},
+				"apiNode": {
+					"label": "Nœud API",
+					"description": "Effectuer des requêtes API"
+				},
+				"modelNode": {
+					"label": "Nœud de Modèle",
+					"description": "Exécuter des modèles d'IA"
+				},
+				"toolNode": {
+					"label": "Nœud d'Outil",
+					"description": "Outils utilitaires"
+				}
+			}
+		},
+		"sidebar": {
+			"title": "Bibliothèque de Nœuds",
+			"expandAll": "Tout Développer",
+			"collapseAll": "Tout Réduire",
+			"searchPlaceholder": "Rechercher des nœuds...",
+			"noNodesFound": "Aucun nœud trouvé",
+			"dragToCanvas": "Glisser les nœuds sur le canevas"
 		}
 	}
 }
