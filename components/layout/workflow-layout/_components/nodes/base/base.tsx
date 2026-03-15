@@ -28,6 +28,7 @@ import { useTheme } from "@/components/context/theme-context";
 import { useFlow } from "@/components/context/reactflow-context";
 import { Copy, Trash2, Play, Info, GripVertical } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface BaseNodeWrapperProps {
 	children: React.ReactNode;
@@ -123,53 +124,13 @@ const BaseNodeWrapper = ({
 						"border-green-500 ring-1 ring-green-200",
 					nodeType === NodeTypesEnum.END_NODE &&
 						"border-red-500 ring-1 ring-red-200",
-					className
+					className,
 				)}
 			>
 				{/* Header Section */}
 				<BaseNodeHeader className="flex items-center justify-between p-2 border-b bg-muted/30">
 					{/* Left Section - Node Info */}
 					<div className="flex items-center gap-2 flex-1 min-w-0">
-						{/* Drag Handle */}
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<div
-										className="cursor-move p-1 hover:bg-accent rounded"
-										draggable
-										onDragStart={handleDragStart}
-									>
-										<GripVertical className="h-4 w-4 text-muted-foreground" />
-									</div>
-								</TooltipTrigger>
-								<TooltipContent side="top">
-									{actionLabels.drag}
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
-
-						{/* Status Indicator */}
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<div
-										className={cn(
-											"w-2 h-2 rounded-full",
-											statusColors[data?.header?.status]
-										)}
-									/>
-								</TooltipTrigger>
-								<TooltipContent side="top">
-									{
-										statusTranslations[
-											data?.header?.status ||
-												NodeStatus.IDLE
-										]
-									}
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
-
 						{/* Node Icon */}
 						{data?.icon && (
 							<div className="shrink-0">
@@ -207,9 +168,11 @@ const BaseNodeWrapper = ({
 												{translatedLabel} - Information
 											</span>
 										</DialogTitle>
-										<Separator />
+										<Separator className="my-2" />
 										<DialogDescription>
-											<InfoComponent />
+											<ScrollArea className="max-h-[600px] overflow-auto pr-2">
+												<InfoComponent />
+											</ScrollArea>
 										</DialogDescription>
 									</DialogHeader>
 								</DialogContent>
@@ -290,6 +253,46 @@ const BaseNodeWrapper = ({
 								</Tooltip>
 							</TooltipProvider>
 						)}
+
+						{/* Status Indicator */}
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<div
+										className={cn(
+											"w-2 h-2 rounded-full",
+											statusColors[data?.header?.status],
+										)}
+									/>
+								</TooltipTrigger>
+								<TooltipContent side="top">
+									{
+										statusTranslations[
+											data?.header?.status ||
+												NodeStatus.IDLE
+										]
+									}
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
+
+						{/* Drag Handle */}
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<div
+										className="cursor-move p-1 hover:bg-accent rounded"
+										draggable
+										onDragStart={handleDragStart}
+									>
+										<GripVertical className="h-4 w-4 text-muted-foreground" />
+									</div>
+								</TooltipTrigger>
+								<TooltipContent side="top">
+									{actionLabels.drag}
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
 					</div>
 				</BaseNodeHeader>
 
@@ -297,18 +300,6 @@ const BaseNodeWrapper = ({
 				<BaseNodeContent className="p-3 space-y-3">
 					{children}
 				</BaseNodeContent>
-
-				{/* Footer Section - Only for Start/End Nodes */}
-				{(nodeType === NodeTypesEnum.START_NODE ||
-					nodeType === NodeTypesEnum.END_NODE) && (
-					<BaseNodeFooter className="p-2 border-t bg-muted/20 text-[10px] text-muted-foreground">
-						{nodeType === NodeTypesEnum.START_NODE
-							? dictionary?.flow?.nodeTypes?.startNode ||
-							  "Start Point"
-							: dictionary?.flow?.nodeTypes?.endNode ||
-							  "End Point"}
-					</BaseNodeFooter>
-				)}
 			</BaseNode>
 		</>
 	);

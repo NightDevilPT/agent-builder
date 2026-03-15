@@ -54,6 +54,7 @@ export interface AppNodeData {
 	description?: string;
 	type: NodeTypesEnum;
 	header: NodeHeaderProps;
+	nodePreview?: React.ElementType;
 	execution?: () => void;
 	isStartNode: boolean;
 	isEndNode: boolean;
@@ -71,4 +72,5 @@ export interface NodeSidebar {
 	icon: React.ElementType;
 	type: NodeTypesEnum;
 	color: string;
+	disabled?: boolean;
 }

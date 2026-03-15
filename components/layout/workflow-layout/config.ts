@@ -10,9 +10,9 @@ import {
 	Brain,
 	Wrench,
 } from "lucide-react";
-import { NodeSidebar, NodeTypesEnum } from "./types";
-import TextNode from "./_components/nodes/text";
-import { TextNodeConfig } from "./_components/nodes/text/config";
+import { AppNodeData, NodeSidebar, NodeTypesEnum } from "./types";
+import { startNodeConfig } from "./_components/nodes/start-node/config";
+import StartNode from "./_components/nodes/start-node";
 
 // Category translation keys
 export const NODE_CATEGORIES = {
@@ -34,6 +34,7 @@ export const BaseNodeTypes: Record<string, NodeSidebar[]> = {
 			icon: PlayCircle,
 			type: NodeTypesEnum.START_NODE,
 			color: "bg-green-500",
+			disabled: false,
 		},
 		{
 			id: "end-node",
@@ -114,10 +115,10 @@ export const BaseNodeTypes: Record<string, NodeSidebar[]> = {
 
 // Node types with component references
 export const NodeTypes = {
-	[NodeTypesEnum.TEXT_NODE]: TextNode,
+	[NodeTypesEnum.START_NODE]: StartNode,
 };
 
 // Node type configurations with type annotations
-export const NodeTypeConfigs: Record<string, any> = {
-	[NodeTypesEnum.TEXT_NODE]: TextNodeConfig,
+export const NodeTypeConfigs: Record<string, AppNodeData> = {
+	[NodeTypesEnum.START_NODE]: startNodeConfig,
 };

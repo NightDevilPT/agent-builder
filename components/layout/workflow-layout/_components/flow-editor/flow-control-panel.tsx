@@ -1,20 +1,14 @@
 // components/layout/workflow-layout/flow-control-panel.tsx
 "use client";
 
-import React, { useMemo, useCallback } from "react";
-import { useReactFlow, Panel, useNodes, useEdges } from "@xyflow/react";
 import {
 	ZoomIn,
 	ZoomOut,
-	Maximize2,
-	Minimize2,
 	Grid,
 	MousePointer,
 	Hand,
 	Eye,
 	EyeOff,
-	ArrowDown,
-	ArrowRight,
 	Undo2,
 	Redo2,
 	Save,
@@ -24,23 +18,25 @@ import {
 	SquareSplitVertical,
 	SquareSplitHorizontal,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import Dagre from "@dagrejs/dagre";
 import {
 	useFlow,
 	useFlowHistory,
 	useFlowStatus,
 } from "@/components/context/reactflow-context";
+import { cn } from "@/lib/utils";
+import Dagre from "@dagrejs/dagre";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import React, { useMemo, useCallback } from "react";
+import { Separator } from "@/components/ui/separator";
 import { useTheme } from "@/components/context/theme-context";
+import { useReactFlow, Panel, useNodes, useEdges } from "@xyflow/react";
 
 interface ControlItem {
 	id: string;
@@ -83,7 +79,7 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction: string) => {
 			...node,
 			width: node.measured?.width ?? 200,
 			height: node.measured?.height ?? 100,
-		})
+		}),
 	);
 
 	Dagre.layout(g);
@@ -139,7 +135,7 @@ export const FlowControlPanel = ({
 				fitView({ padding: 0.2 });
 			}, 50);
 		},
-		[nodes, edges, dispatch, fitView]
+		[nodes, edges, dispatch, fitView],
 	);
 
 	// Handle export
@@ -385,7 +381,7 @@ export const FlowControlPanel = ({
 			nodes.length,
 			edges.length,
 			dictionary,
-		]
+		],
 	);
 
 	const renderControl = (control: ControlItem, index: number) => {
@@ -408,12 +404,12 @@ export const FlowControlPanel = ({
 							control.isActive &&
 								!control.variant &&
 								"text-primary",
-							control.disabled && "opacity-50 cursor-not-allowed"
+							control.disabled && "opacity-50 cursor-not-allowed",
 						)}
 						title={
 							control.disabled
 								? dictionary?.flow?.tooltips?.disabled ||
-								  "Disabled"
+									"Disabled"
 								: undefined
 						}
 						onClick={control.action}
@@ -441,7 +437,7 @@ export const FlowControlPanel = ({
 			<Card className="px-2 py-1 flex items-center gap-1 shadow-lg">
 				<TooltipProvider>
 					{controls.map((control, index) =>
-						renderControl(control, index)
+						renderControl(control, index),
 					)}
 				</TooltipProvider>
 			</Card>

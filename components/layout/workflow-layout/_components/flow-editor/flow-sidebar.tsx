@@ -1,7 +1,6 @@
 // components/layout/workflow-layout/node-library-panel.tsx
 "use client";
 
-import { Search, ChevronDown, ChevronRight, GripVertical } from "lucide-react";
 import {
 	Tooltip,
 	TooltipContent,
@@ -13,17 +12,19 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { cn, getTranslatedNodeTypes } from "@/lib/utils";
 import { Panel } from "@xyflow/react";
-import React, { useState, useMemo, useEffect } from "react";
 import { Card } from "@/components/ui/card";
-import { NodeTypesEnum, NodeSidebar } from "../../types";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { renderToString } from "react-dom/server";
+import { cn, getTranslatedNodeTypes } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { NodeTypesEnum, NodeSidebar } from "../../types";
+import React, { useState, useMemo, useEffect } from "react";
+import { BaseNodeTypes, NodeTypeConfigs } from "../../config";
 import { useTheme } from "@/components/context/theme-context";
-import { BaseNodeTypes } from "../../config";
+import { Search, ChevronDown, ChevronRight, GripVertical } from "lucide-react";
 
 interface NodeLibraryPanelProps {
 	position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
@@ -37,7 +38,7 @@ export const NodeLibraryPanel = ({
 	const { dictionary } = useTheme();
 	const [searchQuery, setSearchQuery] = useState("");
 	const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
-		new Set()
+		new Set(),
 	);
 
 	// Get translated node types
@@ -65,7 +66,7 @@ export const NodeLibraryPanel = ({
 			const filteredNodes = nodes.filter(
 				(node: NodeSidebar) =>
 					node.label.toLowerCase().includes(query) ||
-					node.description?.toLowerCase().includes(query)
+					node.description?.toLowerCase().includes(query),
 			);
 			if (filteredNodes.length > 0) {
 				filtered[category] = filteredNodes;
@@ -184,7 +185,7 @@ export const NodeLibraryPanel = ({
 												{nodes.length}
 											</Badge>
 											{expandedCategories.has(
-												category
+												category,
 											) ? (
 												<ChevronDown className="h-3 w-3" />
 											) : (
@@ -203,7 +204,7 @@ export const NodeLibraryPanel = ({
 									))}
 								</CollapsibleContent>
 							</Collapsible>
-						)
+						),
 					)}
 
 					{Object.keys(filteredNodeTypes).length === 0 && (
@@ -227,7 +228,6 @@ export const NodeLibraryPanel = ({
 	);
 };
 
-// Node Card Component
 interface NodeCardProps {
 	node: NodeSidebar;
 	onDragStart: (event: React.DragEvent, nodeType: NodeTypesEnum) => void;
@@ -237,32 +237,74 @@ const NodeCard = ({ node, onDragStart }: NodeCardProps) => {
 	const Icon = node.icon;
 
 	const handleDragStart = (e: React.DragEvent) => {
+		if (node.disabled) {
+			e.preventDefault();
+			return;
+		}
+
 		onDragStart(e, node.type);
 
-		// Set drag image
-		const dragPreview = document.createElement("div");
-		dragPreview.className = `px-3 py-2 rounded-md text-white text-sm ${node.color}`;
-		dragPreview.textContent = node.label;
-		document.body.appendChild(dragPreview);
-		e.dataTransfer.setDragImage(dragPreview, 10, 10);
-		setTimeout(() => document.body.removeChild(dragPreview), 0);
+		// Create container
+		const container = document.createElement("div");
+		container.style.position = "absolute";
+		container.style.top = "-1000px";
+		container.style.left = "-1000px";
+		document.body.appendChild(container);
+
+		// Get preview component
+		const PreviewComponent = NodeTypeConfigs[node.type]?.nodePreview;
+
+		if (PreviewComponent) {
+			// Render component to HTML string and set as innerHTML
+			const htmlString = renderToString(<PreviewComponent />);
+			container.innerHTML = htmlString;
+
+			// Apply the color class from the node to the first child
+			const firstChild = container.firstChild as HTMLElement;
+			if (firstChild) {
+				// Remove any existing bg- classes and add the node's color
+				firstChild.className = firstChild.className
+					.split(" ")
+					.filter((c) => !c.startsWith("bg-"))
+					.join(" ");
+				firstChild.classList.add(node.color);
+			}
+		} else {
+			// Fallback preview
+			const dragPreview = document.createElement("div");
+			dragPreview.className = `px-3 py-2 w-[100px] rounded-md text-white text-sm ${node.color}`;
+			dragPreview.textContent = node.label;
+			container.appendChild(dragPreview);
+		}
+
+		// Set drag image synchronously
+		e.dataTransfer.setDragImage(container, 10, 10);
+
+		// Clean up
+		requestAnimationFrame(() => {
+			if (document.body.contains(container)) {
+				document.body.removeChild(container);
+			}
+		});
 	};
 
 	return (
 		<div
 			className={cn(
-				"group flex items-start gap-2 p-2 rounded-md cursor-move",
-				"hover:bg-accent transition-colors duration-200",
-				"border border-transparent hover:border-border"
+				"group flex items-start gap-2 p-2 rounded-md",
+				!node.disabled && "cursor-move",
+				node.disabled
+					? "opacity-50 cursor-not-allowed"
+					: "hover:bg-accent transition-colors duration-200 border border-transparent hover:border-border",
 			)}
-			draggable
+			draggable={!node.disabled}
 			onDragStart={handleDragStart}
 		>
 			<div
 				className={cn(
 					"p-1.5 rounded-md shrink-0",
 					node.color,
-					"text-white"
+					"text-white",
 				)}
 			>
 				<Icon className="h-3.5 w-3.5" />
@@ -270,12 +312,14 @@ const NodeCard = ({ node, onDragStart }: NodeCardProps) => {
 			<div className="flex-1 min-w-0">
 				<div className="flex items-center gap-1">
 					<span className="text-xs font-medium">{node.label}</span>
-					<Badge
-						variant="secondary"
-						className="text-[10px] px-1 py-0 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
-					>
-						drag
-					</Badge>
+					{!node.disabled && (
+						<Badge
+							variant="secondary"
+							className="text-[10px] px-1 py-0 h-4 opacity-0 group-hover:opacity-100 transition-opacity"
+						>
+							drag
+						</Badge>
+					)}
 				</div>
 				{node.description && (
 					<p className="text-[10px] text-muted-foreground line-clamp-2 mt-0.5">

@@ -11,12 +11,15 @@ import {
 	useReactFlow,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { useState, useCallback } from "react";
-import { FlowControlPanel } from "./flow-control-panel";
-import { NodeLibraryPanel } from "./flow-sidebar";
-import { useFlow } from "@/components/context/reactflow-context";
 import { NodeTypesEnum } from "../../types";
+import { useState, useCallback, useEffect } from "react";
+import { NodeLibraryPanel } from "./flow-sidebar";
+import { FlowControlPanel } from "./flow-control-panel";
 import { NodeTypeConfigs, NodeTypes } from "../../config";
+import { useFlow } from "@/components/context/reactflow-context";
+import { PlayCircle } from "lucide-react";
+import { NodeStatus } from "../../types";
+import { startNodeConfig } from "../nodes/start-node/config";
 
 const FlowEditor = () => {
 	const { resolvedTheme } = useTheme();
@@ -31,12 +34,27 @@ const FlowEditor = () => {
 		state: { nodes, edges },
 	} = useFlow();
 
+	// Ensure default start node exists on mount
+	useEffect(() => {
+		const hasStartNode = nodes.some(
+			(node) => node.type === NodeTypesEnum.START_NODE,
+		);
+		if (!hasStartNode) {
+			// Add default start node
+			addNode(
+				NodeTypesEnum.START_NODE,
+				{ x: 100, y: 100 },
+				startNodeConfig,
+			);
+		}
+	}, []); // Run only on mount
+
 	const [showGrid, setShowGrid] = useState(true);
 	const [snapToGrid, setSnapToGrid] = useState(true);
 	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [showMinimap, setShowMinimap] = useState(true);
 	const [interactionMode, setInteractionMode] = useState<"select" | "pan">(
-		"select"
+		"select",
 	);
 
 	const toggleFullscreen = useCallback(() => {
@@ -54,7 +72,7 @@ const FlowEditor = () => {
 			event.dataTransfer.setData("application/reactflow", nodeType);
 			event.dataTransfer.effectAllowed = "move";
 		},
-		[]
+		[],
 	);
 
 	const onDragOver = useCallback((event: React.DragEvent) => {
@@ -66,7 +84,7 @@ const FlowEditor = () => {
 		(event: React.DragEvent) => {
 			event.preventDefault();
 			const type = event.dataTransfer.getData(
-				"application/reactflow"
+				"application/reactflow",
 			) as NodeTypesEnum;
 			if (!type) return;
 
@@ -80,17 +98,17 @@ const FlowEditor = () => {
 				? {
 						x: Math.round(position.x / 20) * 20,
 						y: Math.round(position.y / 20) * 20,
-				  }
+					}
 				: position;
 
 			// Add node using context
 			addNode(
 				type,
 				finalPosition,
-				NodeTypeConfigs[type as NodeTypesEnum] || {}
+				NodeTypeConfigs[type as NodeTypesEnum] || {},
 			);
 		},
-		[screenToFlowPosition, addNode, snapToGrid]
+		[screenToFlowPosition, addNode, snapToGrid],
 	);
 
 	return (
@@ -109,7 +127,7 @@ const FlowEditor = () => {
 			attributionPosition="bottom-right"
 			snapGrid={[20, 20]}
 		>
-			{showGrid && <Background />}
+			{showGrid && <Background variant={BackgroundVariant.Dots} />}
 			{showMinimap && <MiniMap className="m-4" />}
 
 			<NodeLibraryPanel position="top-left" onDragStart={onDragStart} />
