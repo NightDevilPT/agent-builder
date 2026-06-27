@@ -259,7 +259,54 @@
 			"nodes": {
 				"startNode": {
 					"label": "Start Node",
-					"description": "Entry point of the workflow"
+					"description": "Entry point of the workflow",
+					"info": {
+						"overview": {
+							"title": "Start Node Overview",
+							"subtitle": "The entry point of your workflow execution",
+							"description": "The Start Node marks the beginning of your workflow. When a workflow is executed, it always begins from this node. You can have only one start node per workflow.",
+							"required": "Required",
+							"entryPoint": "Entry Point"
+						},
+						"features": {
+							"title": "Features",
+							"list": [
+								"Automatically initializes workflow execution",
+								"Cannot be deleted or copied (workflow integrity)",
+								"Supports manual execution for testing",
+								"Visual indicator for workflow start point"
+							]
+						},
+						"guidelines": {
+							"title": "Usage Guidelines",
+							"bestPractices": {
+								"title": "Best Practices:",
+								"list": [
+									"Place the start node at the top or left of your workflow",
+									"Connect it to your first processing node",
+									"Use descriptive names for better workflow readability"
+								]
+							},
+							"limitations": {
+								"title": "Limitations:",
+								"list": [
+									"Only one start node per workflow",
+									"Cannot have incoming connections",
+									"Fixed position in some workflow layouts"
+								]
+							}
+						},
+						"technicalDetails": {
+							"title": "Technical Details",
+							"nodeType": "Node Type:",
+							"execution": "Execution:",
+							"executionValue": "Manual & Automatic",
+							"statusTracking": "Status Tracking:",
+							"statusTrackingValue": "Yes",
+							"configurable": "Configurable:",
+							"configurableValue": "Limited"
+						}
+					}
 				},
 				"endNode": {
 					"label": "End Node",

@@ -66,7 +66,7 @@ export function LayoutProvider({
 					"grid",
 					isWorkflowPage
 						? "grid-rows-[60px_1px_1fr] overflow-hidden"
-						: "grid-rows-[60px_1px_1fr]"
+						: "grid-rows-[60px_1px_1fr] overflow-y-auto"
 				)}
 			>
 				<HeaderSection />
@@ -78,7 +78,7 @@ export function LayoutProvider({
 					<div className="h-full overflow-hidden">{children}</div>
 				) : (
 					// For other pages - with ScrollArea
-					<ScrollArea className="h-full overflow-y-auto">
+					<ScrollArea className="h-[calc(100vh-61px)] overflow-y-auto">
 						<div className="p-5">{children}</div>
 					</ScrollArea>
 				)}

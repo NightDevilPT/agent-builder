@@ -34,7 +34,7 @@ export const BaseNodeTypes: Record<string, NodeSidebar[]> = {
 			icon: PlayCircle,
 			type: NodeTypesEnum.START_NODE,
 			color: "bg-green-500",
-			disabled: false,
+			disabled: true,
 		},
 		{
 			id: "end-node",
@@ -120,5 +120,5 @@ export const NodeTypes = {
 
 // Node type configurations with type annotations
 export const NodeTypeConfigs: Record<string, AppNodeData> = {
-	[NodeTypesEnum.START_NODE]: startNodeConfig,
+	[NodeTypesEnum.START_NODE]: startNodeConfig
 };

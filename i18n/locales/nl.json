@@ -259,7 +259,54 @@
 			"nodes": {
 				"startNode": {
 					"label": "Start Node",
-					"description": "Ingangspunt van de workflow"
+					"description": "Ingangspunt van de workflow",
+					"info": {
+						"overview": {
+							"title": "Startknooppunt Overzicht",
+							"subtitle": "Het startpunt van de uitvoering van uw workflow",
+							"description": "Het startknooppunt markeert het begin van uw workflow. Wanneer een workflow wordt uitgevoerd, begint deze altijd bij dit knooppunt. U kunt slechts één startknooppunt per workflow hebben.",
+							"required": "Vereist",
+							"entryPoint": "Startpunt"
+						},
+						"features": {
+							"title": "Kenmerken",
+							"list": [
+								"Initialiseert automatisch de uitvoering van de workflow",
+								"Kan niet worden verwijderd of gekopieerd (integriteit van de workflow)",
+								"Ondersteunt handmatige uitvoering om te testen",
+								"Visuele indicator voor het startpunt van de workflow"
+							]
+						},
+						"guidelines": {
+							"title": "Gebruiksrichtlijnen",
+							"bestPractices": {
+								"title": "Aanbevolen procedures:",
+								"list": [
+									"Plaats het startknooppunt bovenaan of links in uw workflow",
+									"Verbind het met uw eerste verwerkingsknooppunt",
+									"Gebruik beschrijvende namen voor een betere leesbaarheid van de workflow"
+								]
+							},
+							"limitations": {
+								"title": "Beperkingen:",
+								"list": [
+									"Slechts één startknooppunt per workflow",
+									"Kan geen inkomende verbindingen hebben",
+									"Vaste positie in sommige workflow-lay-outs"
+								]
+							}
+						},
+						"technicalDetails": {
+							"title": "Technische details",
+							"nodeType": "Knooppunttype:",
+							"execution": "Uitvoering:",
+							"executionValue": "Handmatig & Automatisch",
+							"statusTracking": "Status volgen:",
+							"statusTrackingValue": "Ja",
+							"configurable": "Configureerbaar:",
+							"configurableValue": "Beperkt"
+						}
+					}
 				},
 				"endNode": {
 					"label": "Eind Node",

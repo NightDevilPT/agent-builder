@@ -259,7 +259,54 @@
 			"nodes": {
 				"startNode": {
 					"label": "Nodo de Inicio",
-					"description": "Punto de entrada del flujo de trabajo"
+					"description": "Punto de entrada del flujo de trabajo",
+					"info": {
+						"overview": {
+							"title": "Resumen del Nodo de Inicio",
+							"subtitle": "El punto de entrada de la ejecución de su flujo de trabajo",
+							"description": "El Nodo de Inicio marka el comienzo de su flujo de trabajo. Cuando se ejecuta un flujo de trabajo, siempre comienza desde este nodo. Solo puede tener un nodo de inicio por flujo de trabajo.",
+							"required": "Requerido",
+							"entryPoint": "Punto de Entrada"
+						},
+						"features": {
+							"title": "Características",
+							"list": [
+								"Inicializa automáticamente la ejecución del flujo de trabalho",
+								"No se puede eliminar ni copiar (integridad del flujo de trabajo)",
+								"Soporta ejecución manual para pruebas",
+								"Indicador visual para el punto de inicio del flujo de trabajo"
+							]
+						},
+						"guidelines": {
+							"title": "Directrices de Uso",
+							"bestPractices": {
+								"title": "Mejores Prácticas:",
+								"list": [
+									"Coloque el nodo de inicio en la parte superior o izquierda de su flujo de trabajo",
+									"Conéctelo a su primer nodo de procesamiento",
+									"Use nombres descriptivos para una mejor legibilidad del flujo de trabajo"
+								]
+							},
+							"limitations": {
+								"title": "Limitaciones:",
+								"list": [
+									"Solo un nodo de inicio por flujo de trabajo",
+									"No puede tener conexiones entrantes",
+									"Posición fija en algunos diseños de flujo de trabajo"
+								]
+							}
+						},
+						"technicalDetails": {
+							"title": "Detalles Técnicos",
+							"nodeType": "Tipo de Nodo:",
+							"execution": "Ejecución:",
+							"executionValue": "Manual y Automática",
+							"statusTracking": "Seguimiento de Estado:",
+							"statusTrackingValue": "Sí",
+							"configurable": "Configurable:",
+							"configurableValue": "Limitado"
+						}
+					}
 				},
 				"endNode": {
 					"label": "Nodo Final",

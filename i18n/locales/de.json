@@ -259,7 +259,54 @@
 			"nodes": {
 				"startNode": {
 					"label": "Start-Knoten",
-					"description": "Einstiegspunkt des Workflows"
+					"description": "Einstiegspunkt des Workflows",
+					"info": {
+						"overview": {
+							"title": "Startknoten Übersicht",
+							"subtitle": "Der Einstiegspunkt für Ihre Workflow-Ausführung",
+							"description": "Der Startknoten markiert den Beginn Ihres Workflows. Wenn ein Workflow ausgeführt wird, beginnt er immer mit diesem Knoten. Sie können nur einen Startknoten pro Workflow haben.",
+							"required": "Erforderlich",
+							"entryPoint": "Einstiegspunkt"
+						},
+						"features": {
+							"title": "Funktionen",
+							"list": [
+								"Initialisiert automatisch die Workflow-Ausführung",
+								"Kann nicht gelöscht oder kopiert werden (Workflow-Integrität)",
+								"Unterstützt manuelle Ausführung zum Testen",
+								"Visuelle Anzeige für den Startpunkt des Workflows"
+							]
+						},
+						"guidelines": {
+							"title": "Nutzungsrichtlinien",
+							"bestPractices": {
+								"title": "Best Practices:",
+								"list": [
+									"Platzieren Sie den Startknoten oben oder links in Ihrem Workflow",
+									"Verbinden Sie ihn mit Ihrem ersten Verarbeitungsknoten",
+									"Verwenden Sie aussagekräftige Namen für eine bessere Lesbarkeit des Workflows"
+								]
+							},
+							"limitations": {
+								"title": "Einschränkungen:",
+								"list": [
+									"Nur ein Startknoten pro Workflow",
+									"Kann keine eingehenden Verbindungen haben",
+									"Feste Position in einigen Workflow-Layouts"
+								]
+							}
+						},
+						"technicalDetails": {
+							"title": "Technische Details",
+							"nodeType": "Knotentyp:",
+							"execution": "Ausführung:",
+							"executionValue": "Manuell & Automatisch",
+							"statusTracking": "Statusverfolgung:",
+							"statusTrackingValue": "Ja",
+							"configurable": "Konfigurierbar:",
+							"configurableValue": "Eingeschränkt"
+						}
+					}
 				},
 				"endNode": {
 					"label": "End-Knoten",

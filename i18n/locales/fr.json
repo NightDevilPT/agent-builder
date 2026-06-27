@@ -259,7 +259,54 @@
 			"nodes": {
 				"startNode": {
 					"label": "Nœud de Début",
-					"description": "Point d'entrée du flux de travail"
+					"description": "Point d'entrée du flux de travail",
+					"info": {
+						"overview": {
+							"title": "Aperçu du Nœud de Début",
+							"subtitle": "Le point d'entrée de l'exécution de votre flux de travail",
+							"description": "Le Nœud de Début marque le début de votre flux de travail. Lorsqu'un flux de travail est exécuté, il commence toujours par ce nœud. Vous ne pouvez avoir qu'un seul nœud de début par flux de travail.",
+							"required": "Requis",
+							"entryPoint": "Point d'Entrée"
+						},
+						"features": {
+							"title": "Fonctionnalités",
+							"list": [
+								"Initialise automatiquement l'exécution du flux de travail",
+								"Ne peut être supprimé ni copié (intégrité du flux de travail)",
+								"Prend en charge l'exécution manuelle pour les tests",
+								"Indicateur visuel pour le point de début du flux de travail"
+							]
+						},
+						"guidelines": {
+							"title": "Directives d'Utilisation",
+							"bestPractices": {
+								"title": "Meilleures Pratiques :",
+								"list": [
+									"Placez le nœud de début en haut ou à gauche de votre flux de travail",
+									"Connectez-le à votre premier nœud de traitement",
+									"Utilisez des noms descriptifs pour une meilleure lisibilité du flux de travail"
+								]
+							},
+							"limitations": {
+								"title": "Limites :",
+								"list": [
+									"Un seul nœud de début par flux de travail",
+									"Ne peut pas avoir de connexions entrantes",
+									"Position fixe dans certains schémas de flux de travail"
+								]
+							}
+						},
+						"technicalDetails": {
+							"title": "Détails Techniques",
+							"nodeType": "Type de Nœud :",
+							"execution": "Exécution :",
+							"executionValue": "Manuelle & Automatique",
+							"statusTracking": "Suivi de l'État :",
+							"statusTrackingValue": "Oui",
+							"configurable": "Configurable :",
+							"configurableValue": "Limité"
+						}
+					}
 				},
 				"endNode": {
 					"label": "Nœud de Fin",
