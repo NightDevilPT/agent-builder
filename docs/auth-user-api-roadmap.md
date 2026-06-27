@@ -9,8 +9,9 @@ Manages registration, credentials, profile updates, and active session details.
 
 | API Endpoint | Method | Description / Responsibility | Status |
 | :--- | :--- | :--- | :--- |
-| `/api/user` | `POST` | Create a new user profile | `TODO` |
-| `/api/user/profile` | `GET` | Fetch details of the logged-in user | `TODO` |
+| `/api/user` | `POST` | Create a new user profile | `DONE` |
+| `/api/user/profile` | `GET` | Fetch details of the logged-in user | `DONE` |
+| `/api/user/profile` | `PUT` | Update details of the logged-in user profile | `DONE` |
 
 ---
 

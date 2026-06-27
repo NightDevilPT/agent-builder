@@ -350,5 +350,16 @@
 			"noNodesFound": "Aucun nœud trouvé",
 			"dragToCanvas": "Glisser les nœuds sur le canevas"
 		}
+	},
+	"errors": {
+		"validation_failed": "Échec de la validation",
+		"email_already_registered": "L'adresse e-mail est déjà enregistrée",
+		"username_already_taken": "Nom d'utilisateur déjà pris",
+		"user_not_found": "Profil utilisateur introuvable",
+		"unauthorized": "Authentification requise",
+		"internal_error": "Une erreur inattendue est survenue",
+		"bad_request": "Requête incorrecte",
+		"not_found": "Introuvable",
+		"rate_limit_exceeded": "Limite de débit dépassée. Veuillez réessayer plus tard."
 	}
 }

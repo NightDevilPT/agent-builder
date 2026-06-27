@@ -350,5 +350,16 @@
 			"noNodesFound": "Keine Knoten gefunden",
 			"dragToCanvas": "Ziehe Knoten auf die Leinwand"
 		}
+	},
+	"errors": {
+		"validation_failed": "Validierung fehlgeschlagen",
+		"email_already_registered": "E-Mail-Adresse bereits registriert",
+		"username_already_taken": "Benutzername bereits vergeben",
+		"user_not_found": "Benutzerprofil nicht gefunden",
+		"unauthorized": "Authentifizierung erforderlich",
+		"internal_error": "Ein unerwarteter Fehler ist aufgetreten",
+		"bad_request": "Ungültige Anfrage",
+		"not_found": "Nicht gefunden",
+		"rate_limit_exceeded": "Ratenbegrenzung überschritten. Bitte versuchen Sie es später noch einmal."
 	}
 }

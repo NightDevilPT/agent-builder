@@ -227,3 +227,15 @@ Every API endpoint must configure its traffic thresholds.
     *   **JWT Secrets**: `config.jwt.secret`
     *   **Access Token Expiry**: `config.jwt.accessExpiry`
     *   **Site API Base URL**: `config.api.baseUrl`
+
+---
+
+## 6. OpenAPI Documentation Requirements
+
+Every developed or modified API route must be accompanied by its corresponding Swagger documentation:
+*   **File Location**: Create an `openAPI.ts` file in the same directory as the endpoint's `route.ts` (e.g., `app/api/user/openAPI.ts` next to `app/api/user/route.ts`).
+*   **Exports**: The file must export:
+    *   A path description object (e.g., `userOpenAPI` containing details like tags, summary, requestBody, responses).
+    *   A tag specification array (e.g., `userTags` specifying details like `{ name: "User", description: "..." }`).
+*   **Shared Schema Wrappers**: Wrap successful returns using the `createResponseSchema` helper imported from `@/lib/swagger/registry`.
+*   **Registry Integration**: Statically import and spread the paths and tags inside the global spec aggregator file `lib/swagger/registry.ts`.

@@ -350,5 +350,16 @@
 			"noNodesFound": "ノードが見つかりません",
 			"dragToCanvas": "ノードをキャンバスにドラッグ"
 		}
+	},
+	"errors": {
+		"validation_failed": "検証に失敗しました",
+		"email_already_registered": "メールアドレスは既に登録されています",
+		"username_already_taken": "ユーザー名は既に取得されています",
+		"user_not_found": "ユーザープロフィールが見つかりません",
+		"unauthorized": "認証が必要です",
+		"internal_error": "予期しないエラーが発生しました",
+		"bad_request": "不正なリクエスト",
+		"not_found": "見つかりません",
+		"rate_limit_exceeded": "レート制限を超えました。後でもう一度お試しください。"
 	}
 }

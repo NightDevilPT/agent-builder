@@ -350,5 +350,16 @@
 			"noNodesFound": "No nodes found",
 			"dragToCanvas": "Drag nodes to canvas"
 		}
+	},
+	"errors": {
+		"validation_failed": "Validation Failed",
+		"email_already_registered": "Email address already registered",
+		"username_already_taken": "Username already taken",
+		"user_not_found": "User profile not found",
+		"unauthorized": "Authentication required",
+		"internal_error": "An unexpected error occurred",
+		"bad_request": "Bad Request",
+		"not_found": "Not Found",
+		"rate_limit_exceeded": "Rate limit exceeded. Please try again later."
 	}
 }

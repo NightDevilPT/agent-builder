@@ -350,5 +350,16 @@
 			"noNodesFound": "No se encontraron nodos",
 			"dragToCanvas": "Arrastra nodos al lienzo"
 		}
+	},
+	"errors": {
+		"validation_failed": "Error de validación",
+		"email_already_registered": "El correo electrónico ya está registrado",
+		"username_already_taken": "El nombre de usuario ya está en uso",
+		"user_not_found": "Perfil de usuario no encontrado",
+		"unauthorized": "Autenticación requerida",
+		"internal_error": "Ocurrió un error inesperado",
+		"bad_request": "Solicitud incorrecta",
+		"not_found": "No encontrado",
+		"rate_limit_exceeded": "Límite de velocidad excedido. Por favor, inténtelo de nuevo más tarde."
 	}
 }

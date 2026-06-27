@@ -9,6 +9,8 @@ export const config = {
 	jwt: {
 		secret: process.env.JWT_SECRET || "default_jwt_secret_change_me_in_production",
 		accessExpiry: process.env.JWT_ACCESS_EXPIRY || "15m",
+		refreshSecret: process.env.JWT_REFRESH_SECRET || "default_jwt_refresh_secret_change_me_in_production",
+		refreshExpiry: process.env.JWT_REFRESH_EXPIRY || "7d",
 	},
 	rateLimits: {
 		default: {

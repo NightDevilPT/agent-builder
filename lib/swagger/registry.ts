@@ -1,13 +1,19 @@
 import { healthOpenAPI, healthTags } from "@/app/api/health/openAPI";
+import { userOpenAPI, userTags } from "@/app/api/user/openAPI";
+import { userProfileOpenAPI, userProfileTags } from "@/app/api/user/profile/openAPI";
 
 // 1. Gather all API endpoint specifications
 export const paths = {
 	...healthOpenAPI,
+	...userOpenAPI,
+	...userProfileOpenAPI,
 };
 
 // 2. Define global tags for navigation categorization by spreading imported tags
 export const tags = [
 	...healthTags,
+	...userTags,
+	...userProfileTags,
 ];
 
 // 3. Define common, reusable Swagger schemas

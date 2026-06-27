@@ -350,5 +350,16 @@
 			"noNodesFound": "Geen nodes gevonden",
 			"dragToCanvas": "Sleep nodes naar het canvas"
 		}
+	},
+	"errors": {
+		"validation_failed": "Validatie mislukt",
+		"email_already_registered": "E-mailadres is al geregistreerd",
+		"username_already_taken": "Gebruikersnaam is al bezet",
+		"user_not_found": "Gebruikersprofiel niet gevonden",
+		"unauthorized": "Authenticatie vereist",
+		"internal_error": "Er is een onverwachte fout opgetreden",
+		"bad_request": "Ongeldig verzoek",
+		"not_found": "Niet gevonden",
+		"rate_limit_exceeded": "Snelheidslimiet overschreden. Probeer het later opnieuw."
 	}
 }
