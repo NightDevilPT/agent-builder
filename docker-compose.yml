@@ -1,30 +1,31 @@
 version: '3.8'
 
 services:
-  mongodb:
-    image: mongo:latest
-    container_name: agent_builder_mongodb
+  postgres:
+    image: postgres:17-alpine
+    container_name: agent_builder_postgres
     restart: always
     ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-
-  mongo-express:
-    image: mongo-express:latest
-    container_name: agent_builder_mongo_express
-    restart: always
-    ports:
-      - "8081:8081"
+      - "5432:5432"
     environment:
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-      - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
-      - ME_CONFIG_BASICAUTH_USERNAME=admin
-      - ME_CONFIG_BASICAUTH_PASSWORD=password
+      POSTGRES_DB: agent_builder
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: agent_builder_pgadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     depends_on:
-      - mongodb
+      - postgres
 
 volumes:
-  mongodb_data:
+  postgres_data:
     driver: local
