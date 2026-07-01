@@ -5,10 +5,6 @@ import { LoaderIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
-import { ReactFlowProvider } from "@xyflow/react";
-import FlowEditor from "./_components/flow-editor";
-import { useTheme } from "@/components/context/theme-context";
-import { FlowProvider } from "@/components/context/reactflow-context";
 
 interface WorkflowLayoutProps {
 	workflowId: string;
@@ -61,19 +57,13 @@ export const WorkflowLayout = ({ workflowId }: WorkflowLayoutProps) => {
 	}
 
 	return (
-		<ReactFlowProvider>
-			<FlowProvider>
-				<div className="w-full h-full grid grid-rows-[60px_1fr]">
-					{/* Header */}
-					<header className="w-full px-6 h-full flex justify-between items-center border-b border-border">
-						<h1 className="text-xl font-semibold">
-							{workflow.name}
-						</h1>
-					</header>
-					<FlowEditor />
-				</div>
-			</FlowProvider>
-		</ReactFlowProvider>
+		<div className="w-full h-full grid grid-rows-[60px_1fr]">
+			{/* Header */}
+			<header className="w-full px-6 h-full flex justify-between items-center border-b border-border">
+				<h1 className="text-xl font-semibold">{workflow.name}</h1>
+			</header>
+			{/* <FlowEditor /> */}
+		</div>
 	);
 };
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { jwtService, TokenPayload } from "@/lib/auth/jwt.service";
+import { jwtService, TokenPayload } from "@/lib/jwt-service/jwt.service";
 import { ApiErrorCode, ApiErrorRegistry, ApiResponse } from "@/lib/api-service/api.types";
 
 export interface AuthContext {

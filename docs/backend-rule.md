@@ -712,7 +712,7 @@ const user = await prisma.user.findUnique({ where: { id: userId } });
 
 ---
 
-## 8. Authentication (`lib/auth/jwt.service.ts`)
+## 8. Authentication (`lib/jwt-service/jwt.service.ts`)
 
 Authentication is cookie-based using `httpOnly` JWT access and refresh tokens. The `withAuth` middleware handles all validation automatically — route handlers do not inspect tokens directly.
 

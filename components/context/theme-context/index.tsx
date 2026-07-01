@@ -49,10 +49,10 @@ enum ISidebarView {
 
 enum ILanguage {
 	EN = "en",
-	FR = "fr",
-	ES = "es",
-	JA = "ja",
-	DE = "de",
+	// FR = "fr",
+	// ES = "es",
+	// JA = "ja",
+	// DE = "de",
 }
 
 export type Dictionary = Record<string, any>;

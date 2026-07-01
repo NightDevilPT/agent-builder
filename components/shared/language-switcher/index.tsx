@@ -27,27 +27,27 @@ const SUPPORTED_LANGUAGES = {
 		flag: "🇺🇸",
 		nativeName: "English",
 	},
-	[ILanguage.FR]: {
-		name: "French",
-		flag: "🇫🇷",
-		nativeName: "Français",
-	},
-	[ILanguage.ES]: {
-		name: "Spanish",
-		flag: "🇪🇸",
-		nativeName: "Español",
-	},
-	// Japanese
-	[ILanguage.JA]: {
-		name: "Japanese",
-		flag: "🇯🇵", // JP flag; may display as "JP" on some platforms
-		nativeName: "日本語", // Nihongo
-	},
-	[ILanguage.DE]: {
-		name: "German",
-		flag: "🇩🇪",
-		nativeName: "Deutsch",
-	},
+	// [ILanguage.FR]: {
+	// 	name: "French",
+	// 	flag: "🇫🇷",
+	// 	nativeName: "Français",
+	// },
+	// [ILanguage.ES]: {
+	// 	name: "Spanish",
+	// 	flag: "🇪🇸",
+	// 	nativeName: "Español",
+	// },
+	// // Japanese
+	// [ILanguage.JA]: {
+	// 	name: "Japanese",
+	// 	flag: "🇯🇵", // JP flag; may display as "JP" on some platforms
+	// 	nativeName: "日本語", // Nihongo
+	// },
+	// [ILanguage.DE]: {
+	// 	name: "German",
+	// 	flag: "🇩🇪",
+	// 	nativeName: "Deutsch",
+	// },
 } as const;
 
 interface LanguageSwitcherProps {
@@ -104,10 +104,10 @@ export function LanguageSwitcher({
 	const getLanguageTranslationKey = (code: string): string => {
 		const keyMap: Record<string, string> = {
 			[ILanguage.EN]: dictionary.language.switcher.english,
-			[ILanguage.FR]: dictionary.language.switcher.french,
-			[ILanguage.ES]: dictionary.language.switcher.spanish,
-			[ILanguage.JA]: dictionary.language.switcher.japanese,
-			[ILanguage.DE]: dictionary.language.switcher.german,
+			// [ILanguage.FR]: dictionary.language.switcher.french,
+			// [ILanguage.ES]: dictionary.language.switcher.spanish,
+			// [ILanguage.JA]: dictionary.language.switcher.japanese,
+			// [ILanguage.DE]: dictionary.language.switcher.german,
 		};
 		return keyMap[code] || code;
 	};
