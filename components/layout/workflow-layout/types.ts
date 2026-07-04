@@ -1,76 +1,203 @@
-import React from "react";
-import { Node } from "@xyflow/react";
+// workflow-layout/types/node.ts
+import React, { ElementType } from "react";
+import { Node, Position } from "@xyflow/react";
 
-// interfaces/reactflow.interface.ts
-export enum NodeTypesEnum {
-	// Basic Node
-	TEXT_NODE = "TEXT_NODE", // Basic Node
-	NUMBER_NODE = "NUMBER_NODE",
-	// Start and End nodes
-	START_NODE = "START_NODE",
-	END_NODE = "END_NODE",
-	// Conditional Node
-	CONDITIONAL_NODE = "CONDITIONAL_NODE",
-	// Loop Node
-	LOOP_NODE = "LOOP_NODE",
-	// API Node
-	API_NODE = "API_NODE",
-	// Model Node
-	MODEL_NODE = "MODEL_NODE",
-	// Tool Node
-	TOOL_NODE = "TOOL_NODE",
+// ==================== Handle Enums ====================
+
+export enum HandleDataFormat {
+	STRING = "string",
+	NUMBER = "number",
+	BOOLEAN = "boolean",
+	OBJECT = "object",
+	ARRAY = "array",
+	ANY = "any",
 }
 
-export enum NodeStatus {
+export enum HandleValueSource {
+	MANUAL = "manual",
+	CONNECTED = "connected",
+	EXECUTION = "execution",
+	DEFAULT = "default",
+}
+
+// ==================== Handle Validation ====================
+
+export interface HandleValidationConfig {
+	required: boolean;
+	min?: number;
+	max?: number;
+	minLength?: number;
+	maxLength?: number;
+	pattern?: string;
+	enum?: string[];
+	message?: string;
+}
+
+export interface HandleValidation {
+	config: HandleValidationConfig;
+	validator?: (
+		value: unknown,
+		config: HandleValidationConfig,
+	) => boolean | string;
+}
+
+// ==================== Connection Validation ====================
+
+export interface ConnectionValidation {
+	maxConnections: number;
+	connectableNodes: string[];
+	required: boolean;
+}
+
+// ==================== Handle Schema ====================
+
+export interface SchemaProperty {
+	type: HandleDataFormat;
+	items?: SchemaProperty;
+	properties?: Record<string, SchemaProperty>;
+}
+
+export interface HandleSchema {
+	generated: {
+		type: HandleDataFormat;
+		properties?: Record<string, SchemaProperty>;
+	};
+	selectedPath?: string;
+	filteredValue?: unknown;
+	operations: string[];
+}
+
+// ==================== Base Handle ====================
+
+export interface BaseHandle {
+	id: string;
+	position: Position;
+	label: string;
+	description?: string;
+	placeholder?: string;
+
+	value: unknown;
+	defaultValue?: unknown;
+	source: HandleValueSource;
+	dataFormat: HandleDataFormat;
+
+	validation: HandleValidation;
+
+	schema?: HandleSchema;
+
+	tooltip?: ElementType;
+
+	visible: boolean;
+	disabled: boolean;
+}
+
+// ==================== Input Handle ====================
+
+export interface InputHandle extends BaseHandle {
+	type: "target";
+	connection: ConnectionValidation & {
+		connectedNodeId?: string;
+		connectedHandleId?: string;
+	};
+}
+
+// ==================== Output Handle ====================
+
+export interface OutputHandle extends BaseHandle {
+	type: "source";
+	connection: ConnectionValidation & {
+		connectedNodeIds: string[];
+		connectedHandleIds: string[];
+	};
+}
+
+// ==================== Handle Definition ====================
+
+export type HandleDefinition = InputHandle | OutputHandle;
+
+// ==================== Node Enums ====================
+
+export enum NodeType {
+	START = "START",
+	END = "END",
+	API = "API",
+	LLM = "LLM",
+	CONDITIONAL = "CONDITIONAL",
+	LOOP = "LOOP",
+	INPUT = "INPUT",
+	OUTPUT = "OUTPUT",
+	TEXT = "TEXT",
+	NUMBER = "NUMBER",
+	MODEL = "MODEL",
+	TOOL = "TOOL",
+	CODE = "CODE",
+	DATABASE = "DATABASE",
+	EMAIL = "EMAIL",
+	WEBHOOK = "WEBHOOK",
+	MESSAGE = "MESSAGE",
+	FILTER = "FILTER",
+	TIMER = "TIMER",
+	MAP = "MAP",
+	FILE = "FILE",
+	IMAGE = "IMAGE",
+	TABLE = "TABLE",
+	CALENDAR = "CALENDAR",
+	UPLOAD = "UPLOAD",
+}
+
+export enum NodeExecutionStatus {
 	IDLE = "IDLE",
 	RUNNING = "RUNNING",
 	SUCCESS = "SUCCESS",
 	FAILURE = "FAILURE",
+	WAITING = "WAITING",
 }
 
-export interface NodeHeaderProps {
-	nodeId?: string; // ID of the node (useful for copying or deleting the node)
-	label: string; // Title of the node
-	copy: {
-		isCopy: boolean; // Whether the node can be copied
-		copyIcon?: React.ElementType; // Icon for the copy action
-	};
-	delete: {
-		isDelete: boolean; // Whether the node can be deleted
-		deleteIcon?: React.ElementType; // Icon for the delete action
-	};
-	execute?: {
-		isExecute: boolean; // Whether the node can be deleted
-		ExecuteIcon?: React.ElementType; // Icon for the delete action
-	};
-	info?: React.ElementType;
-	type?: NodeTypesEnum;
-	status: NodeStatus;
+// ==================== Node Header ====================
+
+export interface NodeHeaderAction {
+	isEnabled: boolean;
+	icon?: React.ElementType;
+	tooltip?: string;
 }
 
-export interface AppNodeData {
-	icon: React.ElementType;
+export interface NodeHeaderInfoAction extends NodeHeaderAction {
+	component?: React.ElementType;
+}
+
+export interface NodeHeader {
 	label: string;
 	description?: string;
-	type: NodeTypesEnum;
-	header: NodeHeaderProps;
-	nodePreview?: React.ElementType;
-	execution?: () => void;
+	icon?: React.ElementType;
+	type: NodeType;
+	status: NodeExecutionStatus;
+	actions: {
+		copy: NodeHeaderAction;
+		delete: NodeHeaderAction;
+		execute?: NodeHeaderAction;
+		info?: NodeHeaderInfoAction;
+	};
+}
+
+// ==================== Node Configuration ====================
+
+export interface NodeConfig {
+	[key: string]: unknown;
+}
+
+// ==================== Node Data ====================
+
+export interface AppNodeData extends Record<string, unknown> {
+	type: NodeType;
+	header: NodeHeader;
+	config: NodeConfig;
+	inputHandles: InputHandle[];
+	outputHandles: OutputHandle[];
 	isStartNode: boolean;
 	isEndNode: boolean;
-	[key: string]: any;
+	[key: string]: unknown;
 }
 
-export interface AppNode extends Node {
-	data: AppNodeData;
-}
+// ==================== Workflow Node ====================
 
-export interface NodeSidebar {
-	id: string;
-	label: string;
-	description?: string;
-	icon: React.ElementType;
-	type: NodeTypesEnum;
-	color: string;
-	disabled?: boolean;
-}
+export type AppNode = Node<AppNodeData>;

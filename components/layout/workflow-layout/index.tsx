@@ -5,6 +5,9 @@ import { LoaderIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
+import { ReactFlowProvider } from "@xyflow/react";
+import { WorkflowProvider } from "@/components/context/workflow-context";
+import { FlowEditor } from "./_components/FlowEditor";
 
 interface WorkflowLayoutProps {
 	workflowId: string;
@@ -15,11 +18,9 @@ export const WorkflowLayout = ({ workflowId }: WorkflowLayoutProps) => {
 	const [workflow, setWorkflow] = useState<any | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 
-	// Fetch workflow data
 	useEffect(() => {
 		const fetchWorkflow = async () => {
 			try {
-				// Mock data for demonstration
 				const mockWorkflow = {
 					id: workflowId,
 					name: "Untitled Workflow",
@@ -31,11 +32,6 @@ export const WorkflowLayout = ({ workflowId }: WorkflowLayoutProps) => {
 
 				setWorkflow(mockWorkflow);
 			} catch (error) {
-				// toast({
-				//   title: "Error",
-				//   description: "Failed to load workflow",
-				//   variant: "destructive",
-				// });
 				router.push("/workflow");
 			} finally {
 				setIsLoading(false);
@@ -62,7 +58,17 @@ export const WorkflowLayout = ({ workflowId }: WorkflowLayoutProps) => {
 			<header className="w-full px-6 h-full flex justify-between items-center border-b border-border">
 				<h1 className="text-xl font-semibold">{workflow.name}</h1>
 			</header>
-			{/* <FlowEditor /> */}
+
+			{/* Flow Editor with Providers */}
+			<ReactFlowProvider>
+				<WorkflowProvider>
+					<FlowEditor
+						workflowId={workflowId}
+						initialNodes={workflow.nodes}
+						initialEdges={workflow.edges}
+					/>
+				</WorkflowProvider>
+			</ReactFlowProvider>
 		</div>
 	);
 };
