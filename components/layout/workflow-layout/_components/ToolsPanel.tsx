@@ -35,6 +35,7 @@ export const ToolsPanel = memo(
 			selectedNode,
 			isExecuting,
 			executeWorkflow,
+			executeNode,
 			resetWorkflow,
 			duplicateNode,
 			removeNode,
@@ -158,6 +159,12 @@ export const ToolsPanel = memo(
 		const nodeTools = selectedNode
 			? [
 					{
+						icon: Play,
+						label: "Run Node",
+						onClick: () => executeNode(selectedNode.id),
+						disabled: isExecuting,
+					},
+					{
 						icon: Copy,
 						label: "Duplicate Node",
 						onClick: () => duplicateNode(selectedNode.id),
@@ -245,6 +252,7 @@ export const ToolsPanel = memo(
 											variant={tool.variant || "ghost"}
 											size="icon"
 											onClick={tool.onClick}
+											disabled={tool.disabled}
 										>
 											<tool.icon className="w-4 h-4" />
 										</Button>

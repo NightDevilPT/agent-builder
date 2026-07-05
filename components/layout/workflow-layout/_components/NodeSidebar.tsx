@@ -20,7 +20,9 @@ import {
 } from "@/components/ui/accordion";
 import { Search } from "lucide-react";
 import { useWorkflow } from "@/components/context/workflow-context";
-import { cn } from "@/lib/utils";
+import { cn, getNestedProperty } from "@/lib/utils";
+import { useTheme } from "@/components/context/theme-context";
+import { useCallback } from "react";
 
 interface NodeSidebarProps {
 	onDragStart: (
@@ -33,6 +35,36 @@ export const NodeSidebar = memo(({ onDragStart }: NodeSidebarProps) => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [isCollapsed, setIsCollapsed] = useState(false);
 	const { nodes } = useWorkflow();
+	const { dictionary } = useTheme();
+
+	const t = useCallback(
+		(path: string, defaultValue: string): string => {
+			if (!dictionary) return defaultValue;
+			return getNestedProperty(dictionary, path) || defaultValue;
+		},
+		[dictionary],
+	);
+
+	// Helper to get camelCase translation key from NodeType enum
+	const getNodeTranslationKeys = useCallback((type: NodeType) => {
+		const lowercase = type.toLowerCase();
+		const camelCase = lowercase.replace(/[-_]([a-z])/g, (g) => g[1].toUpperCase());
+		return {
+			label: `flow.nodeTypes.nodes.${camelCase}Node.label`,
+			desc: `flow.nodeTypes.nodes.${camelCase}Node.description`
+		};
+	}, []);
+
+	// Helper to get category key
+	const getCategoryTranslationKey = useCallback((categoryId: string) => {
+		const mapping: Record<string, string> = {
+			flow: "controlFlow",
+			actions: "basicNode",
+			logic: "tools",
+			data: "integration"
+		};
+		return `flow.nodeTypes.categories.${mapping[categoryId] || categoryId}`;
+	}, []);
 
 	// Check which unique nodes already exist on the canvas
 	const existingUniqueNodes = useMemo(() => {
@@ -50,37 +82,56 @@ export const NodeSidebar = memo(({ onDragStart }: NodeSidebarProps) => {
 		return uniqueTypes;
 	}, [nodes]);
 
-	const filteredGroups = nodeSidebarGroups
-		.map((group) => ({
-			...group,
-			items: group.items
-				.filter(
-					(item) =>
-						item.label
-							.toLowerCase()
-							.includes(searchQuery.toLowerCase()) ||
-						item.description
-							.toLowerCase()
-							.includes(searchQuery.toLowerCase()),
-				)
-				.map((item) => ({
+	// Translate group categories and items dynamically
+	const translatedGroups = useMemo(() => {
+		return nodeSidebarGroups.map((group) => {
+			const groupLabel = t(getCategoryTranslationKey(group.id), group.label);
+			const items = group.items.map((item) => {
+				const keys = getNodeTranslationKeys(item.type);
+				const label = t(keys.label, item.label);
+				const description = t(keys.desc, item.description);
+				return {
 					...item,
+					label,
+					description,
 					disabled: item.unique && existingUniqueNodes.has(item.type),
-				})),
-		}))
-		.filter((group) => group.items.length > 0);
+				};
+			});
+			return {
+				...group,
+				label: groupLabel,
+				items,
+			};
+		});
+	}, [t, getCategoryTranslationKey, getNodeTranslationKeys, existingUniqueNodes]);
+
+	// Filter based on translated items and categories
+	const filteredGroups = useMemo(() => {
+		return translatedGroups
+			.map((group) => ({
+				...group,
+				items: group.items.filter(
+					(item) =>
+						item.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+						item.description.toLowerCase().includes(searchQuery.toLowerCase()),
+				),
+			}))
+			.filter((group) => group.items.length > 0);
+	}, [translatedGroups, searchQuery]);
 
 	return (
 		<Panel position="top-left" className="m-2">
 			<div className="w-64 bg-background border rounded-lg shadow-lg flex flex-col max-h-[calc(100vh-100px)]">
 				{/* Header */}
 				<div className="shrink-0 p-3 border-b border-border flex items-center justify-between">
-					<h3 className="font-semibold text-sm">Nodes</h3>
+					<h3 className="font-semibold text-sm">
+						{t("flow.sidebar.title", "Nodes")}
+					</h3>
 					<button
 						onClick={() => setIsCollapsed(!isCollapsed)}
 						className="text-muted-foreground hover:text-foreground text-xs"
 					>
-						{isCollapsed ? "Show" : "Hide"}
+						{isCollapsed ? t("flow.sidebar.show", "Show") : t("flow.sidebar.hide", "Hide")}
 					</button>
 				</div>
 
@@ -91,7 +142,7 @@ export const NodeSidebar = memo(({ onDragStart }: NodeSidebarProps) => {
 							<div className="relative">
 								<Search className="absolute left-2 top-2.5 w-4 h-4 text-muted-foreground" />
 								<Input
-									placeholder="Search nodes..."
+									placeholder={t("flow.sidebar.searchPlaceholder", "Search nodes...")}
 									value={searchQuery}
 									onChange={(e) =>
 										setSearchQuery(e.target.value)
@@ -106,7 +157,7 @@ export const NodeSidebar = memo(({ onDragStart }: NodeSidebarProps) => {
 							<div className="p-2">
 								{filteredGroups.length === 0 ? (
 									<div className="text-center text-sm text-muted-foreground py-4">
-										No nodes found
+										{t("flow.sidebar.noNodesFound", "No nodes found")}
 									</div>
 								) : (
 									<Accordion
@@ -179,7 +230,7 @@ export const NodeSidebar = memo(({ onDragStart }: NodeSidebarProps) => {
 																			</div>
 																			<div className="text-[10px] text-muted-foreground truncate">
 																				{isDisabled
-																					? "Already added"
+																					? t("flow.sidebar.alreadyAdded", "Already added")
 																					: item.description}
 																			</div>
 																		</div>
@@ -199,7 +250,7 @@ export const NodeSidebar = memo(({ onDragStart }: NodeSidebarProps) => {
 						{/* Footer */}
 						<div className="shrink-0 p-2 border-t border-border">
 							<div className="text-[10px] text-muted-foreground text-center">
-								Drag & drop to canvas
+								{t("flow.sidebar.dragToCanvas", "Drag & drop to canvas")}
 							</div>
 						</div>
 					</>

@@ -24,8 +24,9 @@ import {
 	AppNodeData,
 	NodeExecutionStatus,
 	NodeType,
+	HandleRowType,
 } from "@/components/layout/workflow-layout/types";
-import { getNodeConfig } from "@/components/layout/workflow-layout/nodes";
+import { getNodeConfig, getNodeExecutor } from "@/components/layout/workflow-layout/nodes";
 
 // ==================== Context Type ====================
 
@@ -184,7 +185,13 @@ export const WorkflowProvider = ({
 	const executeNode = useCallback(
 		async (nodeId: string) => {
 			const node = getNodeById(nodeId);
-			if (!node) return;
+			if (!node) {
+				console.warn(`[Workflow Engine] Execution failed: Node with ID "${nodeId}" not found.`);
+				return;
+			}
+
+			console.group(`[Workflow Engine] Executing Node: ${node.data.header.label} (${node.data.type}) [ID: ${nodeId}]`);
+			console.log(`[Workflow Engine] Current execution status -> RUNNING`);
 
 			updateNodeData(nodeId, {
 				header: {
@@ -193,23 +200,100 @@ export const WorkflowProvider = ({
 				},
 			});
 
+			// Introduce a 1000ms delay to make the running state animation visible in the UI
+			await new Promise((resolve) => setTimeout(resolve, 2000));
+
 			try {
+				// Resolve inputs from incoming connections
+				const inputValues: Record<string, any> = {};
+				
+				// 1. Set default manual input values
+				node.data.handleRows.forEach((row) => {
+					if (row.type === HandleRowType.INPUT || row.type === HandleRowType.INPUT_OUTPUT) {
+						inputValues[row.id] = row.config.value;
+					}
+				});
+				console.log(`[Workflow Engine] Manual configured inputs:`, { ...inputValues });
+
+				// 2. Resolve target values from incoming edges
+				const incomingEdges = edges.filter((edge) => edge.target === nodeId);
+				console.log(`[Workflow Engine] Found ${incomingEdges.length} incoming edge(s)`);
+				incomingEdges.forEach((edge) => {
+					const sourceNode = getNodeById(edge.source);
+					if (!sourceNode) {
+						console.warn(`[Workflow Engine] Edge resolution warning: Source node "${edge.source}" not found.`);
+						return;
+					}
+
+					const targetRow = node.data.handleRows.find(
+						(row) => row.targetHandle?.id === edge.targetHandle
+					);
+					if (!targetRow) return;
+
+					const sourceRow = sourceNode.data.handleRows.find(
+						(row) => row.sourceHandle?.id === edge.sourceHandle
+					);
+					if (!sourceRow) return;
+
+					inputValues[targetRow.id] = sourceRow.config.value;
+					console.log(`[Workflow Engine] Input resolved from connection: targetRow "${targetRow.id}" <- sourceNode "${sourceNode.data.header.label}" sourceRow "${sourceRow.id}" (Value:`, sourceRow.config.value, `)`);
+				});
+
+				console.log(`[Workflow Engine] Final resolved inputs for executor:`, inputValues);
+
+				// 3. Call registered executor if exists
+				const executor = getNodeExecutor(node.data.type);
+				let outputs: Record<string, any> = {};
+				if (executor) {
+					console.log(`[Workflow Engine] Invoking registered executor...`);
+					outputs = await executor(inputValues);
+					console.log(`[Workflow Engine] Executor outputs returned:`, outputs);
+				} else {
+					console.log(`[Workflow Engine] No custom executor registered. Skipping executor execution.`);
+				}
+
+				// 4. Update the output rows config value in state
+				const updatedRows = node.data.handleRows.map((row) => {
+					if (row.id in outputs) {
+						return {
+							...row,
+							config: {
+								...row.config,
+								value: outputs[row.id],
+							},
+						};
+					}
+					return row;
+				});
+
+				console.log(`[Workflow Engine] Node execution completed -> SUCCESS`);
 				updateNodeData(nodeId, {
+					handleRows: updatedRows,
 					header: {
 						...node.data.header,
 						status: NodeExecutionStatus.SUCCESS,
 					},
 				});
-			} catch {
+				console.groupEnd();
+
+				// 5. Propagate downstream
+				const outgoingEdges = edges.filter((edge) => edge.source === nodeId);
+				console.log(`[Workflow Engine] Propagating downstream to ${outgoingEdges.length} connected node(s):`, outgoingEdges.map(e => e.target));
+				for (const edge of outgoingEdges) {
+					await executeNode(edge.target);
+				}
+			} catch (error) {
+				console.error(`[Workflow Engine] Error executing node "${nodeId}":`, error);
 				updateNodeData(nodeId, {
 					header: {
 						...node.data.header,
 						status: NodeExecutionStatus.FAILURE,
 					},
 				});
+				console.groupEnd();
 			}
 		},
-		[getNodeById, updateNodeData],
+		[getNodeById, updateNodeData, edges],
 	);
 
 	const executeWorkflow = useCallback(async () => {

@@ -6,14 +6,15 @@ This guide outlines the architectural patterns, directory structures, coding rul
 
 ## 1. Directory Structure
 
-Every workflow node must be isolated in its own subfolder under `components/layout/workflow-layout/nodes/`. Each node folder must follow this exact naming and file layout:
+Every workflow node must be isolated in its own subfolder under `components/layout/workflow-layout/nodes/`. Each node folder must follow this exact naming and file layout (note: `executor.ts` is only required for execution-carrying logic/action nodes, while static helper/boundary nodes map to `null`):
 
 ```
 📁 components/layout/workflow-layout/nodes/
 └── 📁 {node-type-name}/               # Folder name in kebab-case (e.g., api-node)
     ├── 📄 config.ts                     # Default configuration & handle definitions
     ├── 📄 index.tsx                    # Main visual React component of the node
-    └── 📄 info.tsx                     # Info dialog component (documentation pane)
+    ├── 📄 info.tsx                     # Info dialog component (documentation pane)
+    └── 📄 executor.ts                   # Modular execution logic (Only for execution-carrying nodes)
 ```
 
 ---
@@ -28,6 +29,7 @@ To keep imports clean and consistent, implement the following naming conventions
 | **config.ts** | Configuration Object | `camelCaseNodeConfig` | `apiNodeConfig` |
 | **index.tsx** | React Component | `PascalCaseNode` | `ApiNode` |
 | **info.tsx** | Info Component | `PascalCaseNodeInfo` | `ApiNodeInfo` |
+| **executor.ts** | Execution Function (if needed) | `camelCaseNodeExecutor` | `apiNodeExecutor` |
 | **types.ts** | Enum Entry | `UPPERCASE_SNAKE_CASE` | `NodeType.API` |
 
 ---
@@ -451,7 +453,7 @@ After creating a node, it must be registered in the central systems:
 2. **Set Color**: Map the node type to a hex code color in `nodeColors` inside [nodes/index.ts](file:///C:/Users/Pawan/Desktop/FullStackProject/agent-builder/components/layout/workflow-layout/nodes/index.ts).
 3. **Register Config**: Map the configuration object in `nodeConfigs`.
 4. **Register Component**: Map the rendering component in `nodeComponents`.
-5. **Register Executor**: Register the runner logic in `nodeExecutors` (if it executes backend steps).
+5. **Register Executor**: Register the runner logic in `nodeExecutors`. Note that only execution-carrying logic/action nodes (like `UPPERCASE` or `OUTPUT`) require an `executor.ts` file; static helper or boundary nodes (like `START`, `END`, `TEXT`) should not contain execution files and must map directly to `null` in the `nodeExecutors` registry.
 6. **Sidebar Registration**: Place the node in the appropriate category in `nodeSidebarGroups` so it appears in the drag-and-drop menu.
 
 ---
@@ -706,3 +708,25 @@ export const CustomNodeInfo = memo(() => {
 
 CustomNodeInfo.displayName = "CustomNodeInfo";
 ```
+
+---
+
+## 11. Special UX & Styling Rules 🎨
+
+### A. Dynamic Header Icon Retrieval
+* **Retrieval Rule:** Every node component wrapped inside `NodeWrapper` automatically fetches its matching icon and theme color definitions directly from the central `nodeSidebarItems` configuration in `nodes/index.ts`.
+* **Rendering Pattern:** If the node's custom icon exists in the sidebar configuration, it must be rendered in the header using the node's theme color. If no sidebar icon mapping exists, fall back to rendering a standard solid circle representing the node type color.
+
+### B. Clockwise Rotating Border Animation
+* **Activation:** When a node has a status of `NodeExecutionStatus.RUNNING`, it applies the CSS helper class `.animate-node-running`.
+* **CSS Layering Mechanics:**
+  * Enforce `isolation: isolate` on the parent node container to declare a local stacking context.
+  * Use a circular `conic-gradient` spinning helper inside the `::before` pseudo-element layer (`z-index: -2`), extending slightly outside the container borders (e.g., `-inset-[1.5px]`).
+  * Use the card background color `hsl(var(--card))` inside the `::after` pseudo-element layer (`z-index: -1`) to cover the center of the spinning gradient, leaving only a 1.5px rotating gradient border contour visible.
+  * Ensures front-facing node content and xyflow connection handles remain fully interactive and visible.
+* **Uniform Themes:** Standardize border execution gradient colors to use the primary style variable (`hsl(var(--primary))`) across all nodes instead of per-node colors to maintain visual symmetry.
+
+### C. No-Input Connection Handles
+* **Data Receivers:** For handle rows that serve only to receive inputs from upstream connections (such as on the OutputNode) and do not support manual textbox entry, configure their fields using `inputType: "none"`.
+* **Hide Inputs:** The `NodeInputRenderer` returns `null` when encountering `"none"`, rendering only the handle connection port.
+

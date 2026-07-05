@@ -133,7 +133,8 @@ export interface HandleRowConfig {
 		| "textarea"
 		| "json"
 		| "key-value"
-		| "boolean";
+		| "boolean"
+		| "none";
 	placeholder?: string;
 	options?: { label: string; value: string }[];
 	keyValuePairs?: KeyValuePair[];
@@ -158,29 +159,9 @@ export type HandleDefinition = InputHandle | OutputHandle;
 export enum NodeType {
 	START = "START",
 	END = "END",
-	API = "API",
-	LLM = "LLM",
-	CONDITIONAL = "CONDITIONAL",
-	LOOP = "LOOP",
-	INPUT = "INPUT",
 	OUTPUT = "OUTPUT",
 	TEXT = "TEXT",
-	NUMBER = "NUMBER",
-	MODEL = "MODEL",
-	TOOL = "TOOL",
-	CODE = "CODE",
-	DATABASE = "DATABASE",
-	EMAIL = "EMAIL",
-	WEBHOOK = "WEBHOOK",
-	MESSAGE = "MESSAGE",
-	FILTER = "FILTER",
-	TIMER = "TIMER",
-	MAP = "MAP",
-	FILE = "FILE",
-	IMAGE = "IMAGE",
-	TABLE = "TABLE",
-	CALENDAR = "CALENDAR",
-	UPLOAD = "UPLOAD",
+	UPPERCASE = "UPPERCASE",
 }
 
 export enum NodeExecutionStatus {

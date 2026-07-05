@@ -7,24 +7,23 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { HandleRow, NodeType } from "../../types";
 import { getHandleColor } from "../index";
 import { memo, useCallback } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Handle, Position } from "@xyflow/react";
+import { HandleRow, NodeType } from "../../types";
 import { cn, getNestedProperty } from "@/lib/utils";
 import { useTheme } from "@/components/context/theme-context";
 
 interface NodeHandlesProps {
 	handleRows: HandleRow[];
-	nodeType?: string;
 	onChange?: (rowId: string, value: string | number | boolean) => void;
 }
 
 export const NodeHandles = memo(
-	({ handleRows, nodeType, onChange }: NodeHandlesProps) => {
+	({ handleRows, onChange }: NodeHandlesProps) => {
 		const { dictionary } = useTheme();
 		const t = useCallback(
 			(path: string, defaultValue: string): string => {
@@ -42,17 +41,7 @@ export const NodeHandles = memo(
 					const hasSource =
 						row.sourceHandle && row.sourceHandle.visible;
 
-					// Translate label dynamically if present
-					const nodeTypeKeyMap: Record<string, string> = {
-						[NodeType.START]: "startNode",
-						[NodeType.END]: "endNode",
-						[NodeType.TEXT]: "textNode",
-					};
-					const nodeKey = nodeTypeKeyMap[nodeType || ""] || "";
-					const fieldLabelKey = nodeKey ? `flow.nodeTypes.nodes.${nodeKey}.fields.${row.id}.label` : "";
-
-					const labelTranslationKey = fieldLabelKey || `flow.nodeHandles.labels.${row.id}`;
-					const translatedLabel = t(labelTranslationKey, row.label);
+					const translatedLabel = t(row.label, row.label);
 
 					return (
 						<div
@@ -65,7 +54,7 @@ export const NodeHandles = memo(
 									type="target"
 									position={Position.Left}
 									id={row.targetHandle!.id}
-									title={row.targetHandle!.label}
+									title={t(row.targetHandle!.label, row.targetHandle!.label)}
 									className="!w-3 !h-3 border-2 border-background shadow-sm transition-transform"
 									style={{
 										backgroundColor:
@@ -88,7 +77,6 @@ export const NodeHandles = memo(
 								</Label>
 								<NodeInputRenderer
 									row={row}
-									nodeType={nodeType}
 									onChange={onChange}
 								/>
 							</div>
@@ -99,7 +87,7 @@ export const NodeHandles = memo(
 									type="source"
 									position={Position.Right}
 									id={row.sourceHandle!.id}
-									title={row.sourceHandle!.label}
+									title={t(row.sourceHandle!.label, row.sourceHandle!.label)}
 									className="!w-3 !h-3 border-2 border-background shadow-sm transition-transform"
 									style={{
 										backgroundColor:
@@ -123,11 +111,10 @@ NodeHandles.displayName = "NodeHandles";
  */
 interface NodeInputRendererProps {
 	row: HandleRow;
-	nodeType?: string;
 	onChange?: (rowId: string, value: string | number | boolean) => void;
 }
 
-const NodeInputRenderer = ({ row, nodeType, onChange }: NodeInputRendererProps) => {
+const NodeInputRenderer = ({ row, onChange }: NodeInputRendererProps) => {
 	const { config, targetHandle } = row;
 	const isConnected = targetHandle?.source === "connected";
 	const value = config.value;
@@ -142,15 +129,7 @@ const NodeInputRenderer = ({ row, nodeType, onChange }: NodeInputRendererProps) 
 		[dictionary],
 	);
 
-	const nodeTypeKeyMap: Record<string, string> = {
-		[NodeType.START]: "startNode",
-		[NodeType.END]: "endNode",
-		[NodeType.TEXT]: "textNode",
-	};
-	const nodeKey = nodeTypeKeyMap[nodeType || ""] || "";
-	const placeholderKey = nodeKey ? `flow.nodeTypes.nodes.${nodeKey}.fields.${row.id}.placeholder` : "";
-
-	const resolvedPlaceholder = placeholderKey ? t(placeholderKey, placeholder || "") : (placeholder || "");
+	const resolvedPlaceholder = placeholder ? t(placeholder, placeholder) : "";
 
 	if (isConnected) {
 		return (
@@ -251,11 +230,7 @@ const NodeInputRenderer = ({ row, nodeType, onChange }: NodeInputRendererProps) 
 			);
 
 		default:
-			return (
-				<span className="text-xs text-muted-foreground/50 italic">
-					-
-				</span>
-			);
+			return null;
 	}
 };
 

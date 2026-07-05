@@ -1,4 +1,3 @@
-// components/layout/workflow-layout/nodes/node-wrapper/NodeWrapper.tsx
 "use client";
 
 import {
@@ -29,15 +28,15 @@ import {
 	BaseNodeHeaderTitle,
 	BaseNodeContent,
 } from "@/components/ui/base-node";
-import { getNodeColor } from "../index";
+import { getNodeColor, nodeSidebarItems } from "../index";
 import { Badge } from "@/components/ui/badge";
 import { type NodeProps } from "@xyflow/react";
 import { Button } from "@/components/ui/button";
 import { cn, getNestedProperty } from "@/lib/utils";
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { useTheme } from "@/components/context/theme-context";
 import { useWorkflow } from "@/components/context/workflow-context";
-import { AppNode, NodeExecutionStatus, NodeType } from "../../types";
+import { AppNode, NodeExecutionStatus } from "../../types";
 
 interface NodeWrapperProps extends NodeProps<AppNode> {
 	children?: React.ReactNode;
@@ -95,7 +94,12 @@ export const NodeWrapper = memo(
 		const header = data?.header;
 		const isStartNode = data?.isStartNode ?? false;
 		const isEndNode = data?.isEndNode ?? false;
-		const nodeColor = getNodeColor(data?.type);
+		const sidebarItem = useMemo(() => {
+			return nodeSidebarItems.find((item) => item.type === data?.type);
+		}, [data?.type]);
+
+		const NodeIcon = sidebarItem?.icon;
+		const nodeColor = sidebarItem?.color || getNodeColor(data?.type);
 
 		const status = header?.status ?? NodeExecutionStatus.IDLE;
 		const statusInfo = statusConfig[status];
@@ -104,9 +108,37 @@ export const NodeWrapper = memo(
 		const infoAction = header?.actions?.info;
 		const InfoComponent = infoAction?.component;
 
+		const dynamicNodeKey = useMemo(() => {
+			if (!data?.type) return "";
+			const lowercase = data.type.toLowerCase();
+			return (
+				lowercase.replace(/[-_]([a-z])/g, (g) => g[1].toUpperCase()) +
+				"Node"
+			);
+		}, [data?.type]);
+
+		const dynamicLabelKey = dynamicNodeKey
+			? `flow.nodeTypes.nodes.${dynamicNodeKey}.label`
+			: "";
+		const dynamicDescKey = dynamicNodeKey
+			? `flow.nodeTypes.nodes.${dynamicNodeKey}.description`
+			: "";
+
 		const nodeLabel = header?.label
 			? t(header.label, header.label)
-			: (data?.label ? t(data.label as string, data.label as string) : t("flow.nodeWrapper.defaultNodeLabel", "Node"));
+			: dynamicLabelKey
+				? t(
+						dynamicLabelKey,
+						(data?.label as string) ||
+							t("flow.nodeWrapper.defaultNodeLabel", "Node"),
+					)
+				: t("flow.nodeWrapper.defaultNodeLabel", "Node");
+
+		const nodeDescription = header?.description
+			? t(header.description, header.description)
+			: dynamicDescKey
+				? t(dynamicDescKey, "")
+				: "";
 
 		const handleCopy = useCallback(
 			(e: React.MouseEvent) => {
@@ -145,16 +177,79 @@ export const NodeWrapper = memo(
 			status !== NodeExecutionStatus.RUNNING;
 		const showInfoButton = infoAction?.isEnabled && !!InfoComponent;
 
+		const isRunning = status === NodeExecutionStatus.RUNNING;
+		const resolvedColor = "hsl(120, 100%, 50%)";
+
 		return (
 			<>
-				<BaseNode className={cn(selected && "ring-2 ring-primary")}>
+				{/* Local Dynamic Keyframe Animation Stylesheet */}
+{isRunning && (
+	<style>{`
+		@keyframes borderGradientRotation {
+			from {
+				transform: translate(-50%, -50%) rotate(0deg);
+			}
+			to {
+				transform: translate(-50%, -50%) rotate(360deg);
+			}
+		}
+		.rotating-border-panel {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 350%; 
+			height: 350%;
+			transform: translate(-50%, -50%);
+			/* Uses the explicit hex value of green-500 (#22c55e) to ensure flawless cross-browser rendering */
+			background: conic-gradient(
+				from 0deg,
+				transparent 0%,
+				transparent 20%,
+				#22c55e 25%,
+				transparent 30%,
+				transparent 70%,
+				#22c55e 75%,
+				transparent 80%,
+				transparent 100%
+			);
+			animation: borderGradientRotation 3s linear infinite;
+			transform-origin: center center;
+			will-change: transform;
+		}
+	`}</style>
+)}
+
+				<BaseNode
+					className={cn(
+						"relative transition-all duration-200",
+						selected &&
+							"ring-2 ring-primary ring-offset-2 ring-offset-background",
+						isRunning && "border-transparent shadow-md",
+					)}
+				>
+					{/* Running State: 360-Degree Rotating Conic Border Animation */}
+					{isRunning && (
+						<div className="absolute -inset-[1.5px] pointer-events-none rounded-[inherit] overflow-hidden z-0">
+							<div className="rotating-border-panel" />
+							{/* Inner protective theme frame mask */}
+							<div className="absolute inset-[1.5px] bg-card rounded-[inherit] z-10" />
+						</div>
+					)}
+
 					{/* Header */}
-					<BaseNodeHeader>
+					<BaseNodeHeader className="relative z-20">
 						<div className="flex items-center gap-2 flex-1 min-w-0">
-							<div
-								className="w-2.5 h-2.5 rounded-full shrink-0"
-								style={{ backgroundColor: nodeColor }}
-							/>
+							{NodeIcon ? (
+								<NodeIcon
+									className="w-4 h-4 shrink-0"
+									style={{ color: nodeColor }}
+								/>
+							) : (
+								<div
+									className="w-2.5 h-2.5 rounded-full shrink-0"
+									style={{ backgroundColor: nodeColor }}
+								/>
+							)}
 							<BaseNodeHeaderTitle className="truncate">
 								{nodeLabel}
 							</BaseNodeHeaderTitle>
@@ -171,9 +266,7 @@ export const NodeWrapper = memo(
 										<StatusIcon
 											className={cn(
 												"w-3 h-3",
-												status ===
-													NodeExecutionStatus.RUNNING &&
-													"animate-spin",
+												isRunning && "animate-spin",
 											)}
 										/>
 									</Badge>
@@ -282,7 +375,9 @@ export const NodeWrapper = memo(
 					</BaseNodeHeader>
 
 					{/* Content */}
-					<BaseNodeContent>{children}</BaseNodeContent>
+					<BaseNodeContent className="relative z-20">
+						{children}
+					</BaseNodeContent>
 				</BaseNode>
 
 				{/* Info Dialog */}
@@ -296,9 +391,9 @@ export const NodeWrapper = memo(
 								/>
 								{nodeLabel}
 							</DialogTitle>
-							{header?.description && (
+							{nodeDescription && (
 								<DialogDescription>
-									{t(header.description, header.description)}
+									{nodeDescription}
 								</DialogDescription>
 							)}
 						</DialogHeader>

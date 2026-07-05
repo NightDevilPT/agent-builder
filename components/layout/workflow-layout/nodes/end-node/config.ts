@@ -56,10 +56,9 @@ export const endNodeConfig: AppNodeData = {
 				connection: {
 					maxConnections: 1,
 					connectableNodes: [
-						NodeType.API,
-						NodeType.LLM,
-						NodeType.CONDITIONAL,
-						NodeType.LOOP,
+						NodeType.START,
+						NodeType.TEXT,
+						NodeType.UPPERCASE,
 						NodeType.OUTPUT,
 					],
 					required: false,

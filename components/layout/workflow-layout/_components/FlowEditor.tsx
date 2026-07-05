@@ -7,7 +7,7 @@ import {
   useMemo,
   type DragEvent as ReactDragEvent,
 } from "react";
-import { ReactFlow, Background, MiniMap, type ColorMode, type EdgeTypes } from "@xyflow/react";
+import { ReactFlow, Background, MiniMap, useReactFlow, type ColorMode, type EdgeTypes } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useWorkflow } from "@/components/context/workflow-context";
 import { ToolsPanel } from "./ToolsPanel";
@@ -44,6 +44,7 @@ export const FlowEditor = ({
   } = useWorkflow();
 
   const { resolvedTheme } = useTheme();
+  const { screenToFlowPosition } = useReactFlow();
 
   const colorMode: ColorMode = useMemo(() => {
     if (resolvedTheme === IThemeMode.DARK) return "dark";
@@ -72,10 +73,13 @@ export const FlowEditor = ({
       ) as NodeType;
       if (!type) return;
 
-      const position = { x: event.clientX - 300, y: event.clientY - 100 };
+      const position = screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY,
+      });
       addNode(type, position);
     },
-    [addNode],
+    [addNode, screenToFlowPosition],
   );
 
   const onDragStart = useCallback(

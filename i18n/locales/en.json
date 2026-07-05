@@ -388,6 +388,70 @@
 						"outputHandle": "Output handle sends the text value to downstream nodes"
 					}
 				},
+				"uppercaseNode": {
+					"label": "Uppercase",
+					"description": "Convert text to uppercase",
+					"fields": {
+						"input-text": {
+							"label": "Input Text",
+							"description": "The string value to be converted",
+							"placeholder": "Enter text to capitalize...",
+							"targetHandle": {
+								"label": "Input Text",
+								"description": "Receives string text"
+							},
+							"sourceHandle": {
+								"label": "Uppercase Text",
+								"description": "Outputs capitalized text"
+							}
+						}
+					},
+					"info": {
+						"title": "Uppercase Node",
+						"subtitle": "Text case modifier",
+						"description": "The Uppercase node processes string text values and converts all alphabetic characters to uppercase format. It can process text entered manually or received from preceding nodes.",
+						"usageTitle": "Usage Rules",
+						"rule1": "Accepts any text inputs via target handle or direct manual input.",
+						"rule2": "Outputs the converted uppercase string to downstream target nodes.",
+						"rule3": "Non-alphabetic characters (numbers, punctuation, emojis) are left unchanged."
+					}
+				},
+				"outputNode": {
+					"label": "Output",
+					"description": "Visualizes output data in different formats",
+					"fields": {
+						"format": {
+							"label": "Display Format",
+							"description": "Output rendering format select box",
+							"placeholder": "Choose format...",
+							"options": {
+								"text": "Text",
+								"pdf": "PDF",
+								"image": "Image",
+								"code": "Code",
+								"json": "JSON"
+							}
+						},
+						"output-data": {
+							"label": "Input Data",
+							"description": "Raw data passed to Output Node",
+							"placeholder": "Connect data to preview...",
+							"targetHandle": {
+								"label": "Input Data",
+								"description": "Incoming connection stream"
+							}
+						}
+					},
+					"info": {
+						"title": "Output Node",
+						"subtitle": "Data Visualization & Preview",
+						"description": "The Output node acts as a viewer endpoint in your workflow. It receives processed data from preceding nodes and displays it in a format of your choice, such as plain text, PDF, images, raw source code, or JSON structures.",
+						"usageTitle": "Usage Rules",
+						"rule1": "Accepts exactly one input connection via its left target handle.",
+						"rule2": "Select a display format from the dropdown to format the raw input data accordingly.",
+						"rule3": "Supports previewing live outputs like images, formatted code snippets, or raw JSON structures."
+					}
+				},
 				"numberNode": {
 					"label": "Number Node",
 					"description": "Perform numeric operations"
@@ -420,7 +484,9 @@
 			"collapseAll": "Collapse All",
 			"searchPlaceholder": "Search nodes...",
 			"noNodesFound": "No nodes found",
-			"dragToCanvas": "Drag nodes to canvas"
+			"dragToCanvas": "Drag nodes to canvas",
+			"hide": "Hide",
+			"show": "Show"
 		},
 		"nodeWrapper": {
 			"status": "Status",

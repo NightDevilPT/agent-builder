@@ -21,7 +21,7 @@ export const startNodeConfig: AppNodeData = {
 		description: "flow.nodeTypes.nodes.startNode.description",
 		icon: Play,
 		type: NodeType.START,
-		status: NodeExecutionStatus.WAITING,
+		status: NodeExecutionStatus.IDLE,
 		actions: {
 			copy: { isEnabled: false },
 			delete: { isEnabled: false },
@@ -40,7 +40,8 @@ export const startNodeConfig: AppNodeData = {
 			id: "start",
 			label: "flow.nodeTypes.nodes.startNode.fields.start.label",
 			type: HandleRowType.OUTPUT,
-			description: "flow.nodeTypes.nodes.startNode.fields.start.description",
+			description:
+				"flow.nodeTypes.nodes.startNode.fields.start.description",
 			config: {
 				value: null,
 				inputType: "text",
@@ -49,7 +50,8 @@ export const startNodeConfig: AppNodeData = {
 				id: "start-output",
 				position: Position.Right,
 				label: "flow.nodeTypes.nodes.startNode.fields.start.sourceHandle.label",
-				description: "flow.nodeTypes.nodes.startNode.fields.start.sourceHandle.description",
+				description:
+					"flow.nodeTypes.nodes.startNode.fields.start.sourceHandle.description",
 				value: null,
 				defaultValue: null,
 				source: HandleValueSource.DEFAULT,
@@ -61,11 +63,8 @@ export const startNodeConfig: AppNodeData = {
 				connection: {
 					maxConnections: 1,
 					connectableNodes: [
-						NodeType.API,
-						NodeType.LLM,
-						NodeType.CONDITIONAL,
-						NodeType.LOOP,
-						NodeType.INPUT,
+						NodeType.TEXT,
+						NodeType.UPPERCASE,
 						NodeType.OUTPUT,
 						NodeType.END,
 					],
