@@ -14,8 +14,8 @@ import { TextNodeInfo } from "./info";
 export const textNodeConfig: AppNodeData = {
 	type: NodeType.TEXT,
 	header: {
-		label: "Text",
-		description: "Text value node",
+		label: "flow.nodeTypes.nodes.textNode.label",
+		description: "flow.nodeTypes.nodes.textNode.description",
 		icon: Type,
 		type: NodeType.TEXT,
 		status: NodeExecutionStatus.IDLE,
@@ -35,19 +35,19 @@ export const textNodeConfig: AppNodeData = {
 	handleRows: [
 		{
 			id: "text-value",
-			label: "Text",
+			label: "flow.nodeTypes.nodes.textNode.fields.text-value.label",
 			type: HandleRowType.INPUT_OUTPUT,
-			description: "Text value",
+			description: "flow.nodeTypes.nodes.textNode.fields.text-value.description",
 			config: {
 				value: "",
 				inputType: "text",
-				placeholder: "Enter text...",
+				placeholder: "flow.nodeTypes.nodes.textNode.fields.text-value.placeholder",
 			},
 			targetHandle: {
 				id: "text-input",
 				position: Position.Left,
-				label: "Input",
-				description: "Receive text from another node",
+				label: "flow.nodeTypes.nodes.textNode.fields.text-value.targetHandle.label",
+				description: "flow.nodeTypes.nodes.textNode.fields.text-value.targetHandle.description",
 				value: null,
 				defaultValue: null,
 				source: HandleValueSource.DEFAULT,
@@ -71,8 +71,8 @@ export const textNodeConfig: AppNodeData = {
 			sourceHandle: {
 				id: "text-output",
 				position: Position.Right,
-				label: "Output",
-				description: "Send text to another node",
+				label: "flow.nodeTypes.nodes.textNode.fields.text-value.sourceHandle.label",
+				description: "flow.nodeTypes.nodes.textNode.fields.text-value.sourceHandle.description",
 				value: null,
 				defaultValue: null,
 				source: HandleValueSource.DEFAULT,

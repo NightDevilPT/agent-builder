@@ -1,14 +1,16 @@
 // components/layout/workflow-layout/nodes/start-node/index.tsx
 "use client";
 
-import { memo } from "react";
-import { type NodeProps } from "@xyflow/react";
-import { Handle, Position } from "@xyflow/react";
+import { Play } from "lucide-react";
 import { AppNode } from "../../types";
-import { NodeWrapper } from "../node-wrapper/NodeWrapper";
+import { memo, useCallback } from "react";
 import { startNodeConfig } from "./config";
 import { Badge } from "@/components/ui/badge";
-import { Play } from "lucide-react";
+import { getNestedProperty } from "@/lib/utils";
+import { type NodeProps } from "@xyflow/react";
+import { Handle, Position } from "@xyflow/react";
+import { NodeWrapper } from "../node-wrapper/NodeWrapper";
+import { useTheme } from "@/components/context/theme-context";
 import { getHandleColor } from "../index";
 
 type StartNodeProps = NodeProps<AppNode>;
@@ -16,6 +18,15 @@ type StartNodeProps = NodeProps<AppNode>;
 const StartNode = memo((props: StartNodeProps) => {
 	const { data } = props;
 	const handleRows = data?.handleRows ?? [];
+	const { dictionary } = useTheme();
+
+	const t = useCallback(
+		(path: string, defaultValue: string): string => {
+			if (!dictionary) return defaultValue;
+			return getNestedProperty(dictionary, path) || defaultValue;
+		},
+		[dictionary],
+	);
 
 	return (
 		<NodeWrapper {...props}>
@@ -25,10 +36,10 @@ const StartNode = memo((props: StartNodeProps) => {
 				</div>
 				<div className="flex flex-col items-center gap-1.5">
 					<Badge variant="secondary" className="text-[10px]">
-						Entry Point
+						{t("flow.nodeTypes.nodes.startNode.badge", "Entry Point")}
 					</Badge>
 					<p className="text-xs text-muted-foreground text-center">
-						Connect to start building
+						{t("flow.nodeTypes.nodes.startNode.connectMessage", "Connect to start building")}
 					</p>
 				</div>
 			</div>

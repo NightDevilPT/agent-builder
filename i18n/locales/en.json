@@ -260,7 +260,31 @@
 				"startNode": {
 					"label": "Start Node",
 					"description": "Entry point of the workflow",
+					"badge": "Entry Point",
+					"connectMessage": "Connect to start building",
+					"fields": {
+						"start": {
+							"label": "Start",
+							"description": "Triggers workflow execution",
+							"sourceHandle": {
+								"label": "Start",
+								"description": "Connect to begin workflow"
+							}
+						}
+					},
 					"info": {
+						"title": "Start Node",
+						"subtitle": "Workflow entry point",
+						"description": "The Start node marks the beginning of every workflow execution. It passes control to the next connected node when the workflow is triggered.",
+						"featuresTitle": "Key Features",
+						"triggerTitle": "Execution Trigger",
+						"triggerDesc": "Starts the workflow when triggered manually, via webhook, or on schedule",
+						"outputTitle": "Single Output",
+						"outputDesc": "Connects to one node to begin the workflow execution chain",
+						"requiredTitle": "Required Node",
+						"requiredDesc": "Every workflow must have exactly one Start node",
+						"immutableTitle": "Immutable",
+						"immutableDesc": "Cannot be deleted or duplicated. Protected workflow entry",
 						"overview": {
 							"title": "Start Node Overview",
 							"subtitle": "The entry point of your workflow execution",
@@ -310,11 +334,59 @@
 				},
 				"endNode": {
 					"label": "End Node",
-					"description": "Exit point of the workflow"
+					"description": "Exit point of the workflow",
+					"badge": "Exit Point",
+					"connectMessage": "Workflow ends here",
+					"fields": {
+						"end": {
+							"label": "End",
+							"description": "Workflow ends here",
+							"targetHandle": {
+								"label": "End",
+								"description": "Receives final output"
+							}
+						}
+					},
+					"info": {
+						"title": "End Node",
+						"subtitle": "Workflow termination point",
+						"description": "The End node marks where workflow execution stops. It receives the final output from the previous node and terminates the workflow.",
+						"featuresTitle": "Key Features",
+						"inputTitle": "Single Input",
+						"inputDesc": "Receives the final output from the last node in the workflow",
+						"terminationTitle": "Termination Point",
+						"terminationDesc": "Stops workflow execution when reached. No further nodes execute",
+						"multipleTitle": "Multiple End Nodes",
+						"multipleDesc": "You can have multiple End nodes for different workflow branches"
+					}
 				},
 				"textNode": {
 					"label": "Text Node",
-					"description": "Process text data"
+					"description": "Process text data",
+					"fields": {
+						"text-value": {
+							"label": "Text",
+							"description": "Text value",
+							"placeholder": "Enter text...",
+							"targetHandle": {
+								"label": "Input",
+								"description": "Receive text from another node"
+							},
+							"sourceHandle": {
+								"label": "Output",
+								"description": "Send text to another node"
+							}
+						}
+					},
+					"info": {
+						"title": "Text Node",
+						"subtitle": "String value storage",
+						"description": "The Text node holds a string value that can be manually entered or received from another node, and passed forward in the workflow.",
+						"howItWorks": "How it works",
+						"manualInput": "Enter text manually or receive value from a connected node",
+						"inputHandle": "Input handle receives string data from API, LLM, or other nodes",
+						"outputHandle": "Output handle sends the text value to downstream nodes"
+					}
 				},
 				"numberNode": {
 					"label": "Number Node",
@@ -349,6 +421,20 @@
 			"searchPlaceholder": "Search nodes...",
 			"noNodesFound": "No nodes found",
 			"dragToCanvas": "Drag nodes to canvas"
+		},
+		"nodeWrapper": {
+			"status": "Status",
+			"infoTooltip": "Node Info",
+			"executeTooltip": "Execute Node",
+			"duplicateTooltip": "Duplicate Node",
+			"deleteTooltip": "Delete Node",
+			"defaultNodeLabel": "Node"
+		},
+		"nodeHandles": {
+			"connected": "Connected",
+			"selectBool": "Select bool...",
+			"true": "True",
+			"false": "False"
 		}
 	},
 	"errors": {

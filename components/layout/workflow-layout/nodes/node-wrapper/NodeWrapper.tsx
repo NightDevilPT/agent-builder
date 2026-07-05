@@ -10,8 +10,14 @@ import {
 	XCircle,
 	Clock,
 	Info,
-	GripVertical,
 } from "lucide-react";
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogDescription,
+} from "@/components/ui/dialog";
 import {
 	Tooltip,
 	TooltipContent,
@@ -23,21 +29,15 @@ import {
 	BaseNodeHeaderTitle,
 	BaseNodeContent,
 } from "@/components/ui/base-node";
-import { memo, useCallback, useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-	DialogDescription,
-} from "@/components/ui/dialog";
-import { AppNode, NodeExecutionStatus } from "../../types";
-import { type NodeProps } from "@xyflow/react";
-import { useWorkflow } from "@/components/context/workflow-context";
 import { getNodeColor } from "../index";
-import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { type NodeProps } from "@xyflow/react";
+import { Button } from "@/components/ui/button";
+import { cn, getNestedProperty } from "@/lib/utils";
+import { memo, useCallback, useState } from "react";
+import { useTheme } from "@/components/context/theme-context";
+import { useWorkflow } from "@/components/context/workflow-context";
+import { AppNode, NodeExecutionStatus, NodeType } from "../../types";
 
 interface NodeWrapperProps extends NodeProps<AppNode> {
 	children?: React.ReactNode;
@@ -81,7 +81,16 @@ const statusConfig: Record<
 export const NodeWrapper = memo(
 	({ id, data, selected, children }: NodeWrapperProps) => {
 		const { duplicateNode, removeNode, executeNode } = useWorkflow();
+		const { dictionary } = useTheme();
 		const [showInfo, setShowInfo] = useState(false);
+
+		const t = useCallback(
+			(path: string, defaultValue: string): string => {
+				if (!dictionary) return defaultValue;
+				return getNestedProperty(dictionary, path) || defaultValue;
+			},
+			[dictionary],
+		);
 
 		const header = data?.header;
 		const isStartNode = data?.isStartNode ?? false;
@@ -94,6 +103,10 @@ export const NodeWrapper = memo(
 
 		const infoAction = header?.actions?.info;
 		const InfoComponent = infoAction?.component;
+
+		const nodeLabel = header?.label
+			? t(header.label, header.label)
+			: (data?.label ? t(data.label as string, data.label as string) : t("flow.nodeWrapper.defaultNodeLabel", "Node"));
 
 		const handleCopy = useCallback(
 			(e: React.MouseEvent) => {
@@ -143,7 +156,7 @@ export const NodeWrapper = memo(
 								style={{ backgroundColor: nodeColor }}
 							/>
 							<BaseNodeHeaderTitle className="truncate">
-								{header?.label ?? data?.label ?? "Node"}
+								{nodeLabel}
 							</BaseNodeHeaderTitle>
 						</div>
 
@@ -166,7 +179,10 @@ export const NodeWrapper = memo(
 									</Badge>
 								</TooltipTrigger>
 								<TooltipContent side="top">
-									<p>Status: {status}</p>
+									<p>
+										{t("flow.nodeWrapper.status", "Status")}
+										: {status}
+									</p>
 								</TooltipContent>
 							</Tooltip>
 
@@ -184,7 +200,15 @@ export const NodeWrapper = memo(
 										</Button>
 									</TooltipTrigger>
 									<TooltipContent side="top">
-										{infoAction?.tooltip ?? "Node Info"}
+										{infoAction?.tooltip
+											? t(
+													infoAction.tooltip,
+													infoAction.tooltip,
+												)
+											: t(
+													"flow.nodeWrapper.infoTooltip",
+													"Node Info",
+												)}
 									</TooltipContent>
 								</Tooltip>
 							)}
@@ -203,7 +227,10 @@ export const NodeWrapper = memo(
 										</Button>
 									</TooltipTrigger>
 									<TooltipContent side="top">
-										Execute Node
+										{t(
+											"flow.nodeWrapper.executeTooltip",
+											"Execute Node",
+										)}
 									</TooltipContent>
 								</Tooltip>
 							)}
@@ -222,7 +249,10 @@ export const NodeWrapper = memo(
 										</Button>
 									</TooltipTrigger>
 									<TooltipContent side="top">
-										Duplicate Node
+										{t(
+											"flow.nodeWrapper.duplicateTooltip",
+											"Duplicate Node",
+										)}
 									</TooltipContent>
 								</Tooltip>
 							)}
@@ -241,7 +271,10 @@ export const NodeWrapper = memo(
 										</Button>
 									</TooltipTrigger>
 									<TooltipContent side="top">
-										Delete Node
+										{t(
+											"flow.nodeWrapper.deleteTooltip",
+											"Delete Node",
+										)}
 									</TooltipContent>
 								</Tooltip>
 							)}
@@ -261,11 +294,11 @@ export const NodeWrapper = memo(
 									className="w-3 h-3 rounded-full shrink-0"
 									style={{ backgroundColor: nodeColor }}
 								/>
-								{header?.label ?? data?.label ?? "Node"}
+								{nodeLabel}
 							</DialogTitle>
 							{header?.description && (
 								<DialogDescription>
-									{header.description}
+									{t(header.description, header.description)}
 								</DialogDescription>
 							)}
 						</DialogHeader>

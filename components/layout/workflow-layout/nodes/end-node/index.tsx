@@ -1,21 +1,32 @@
 // components/layout/workflow-layout/nodes/end-node/index.tsx
 "use client";
 
-import { memo } from "react";
+import { Square } from "lucide-react";
+import { AppNode } from "../../types";
+import { endNodeConfig } from "./config";
+import { getHandleColor } from "../index";
+import { memo, useCallback } from "react";
+import { Badge } from "@/components/ui/badge";
+import { getNestedProperty } from "@/lib/utils";
 import { type NodeProps } from "@xyflow/react";
 import { Handle, Position } from "@xyflow/react";
-import { AppNode } from "../../types";
 import { NodeWrapper } from "../node-wrapper/NodeWrapper";
-import { endNodeConfig } from "./config";
-import { Badge } from "@/components/ui/badge";
-import { Square } from "lucide-react";
-import { getHandleColor } from "../index";
+import { useTheme } from "@/components/context/theme-context";
 
 type EndNodeProps = NodeProps<AppNode>;
 
 const EndNode = memo((props: EndNodeProps) => {
 	const { data } = props;
 	const handleRows = data?.handleRows ?? [];
+	const { dictionary } = useTheme();
+
+	const t = useCallback(
+		(path: string, defaultValue: string): string => {
+			if (!dictionary) return defaultValue;
+			return getNestedProperty(dictionary, path) || defaultValue;
+		},
+		[dictionary],
+	);
 
 	return (
 		<NodeWrapper {...props}>
@@ -25,10 +36,10 @@ const EndNode = memo((props: EndNodeProps) => {
 				</div>
 				<div className="flex flex-col items-center gap-1.5">
 					<Badge variant="destructive" className="text-[10px]">
-						Exit Point
+						{t("flow.nodeTypes.nodes.endNode.badge", "Exit Point")}
 					</Badge>
 					<p className="text-xs text-muted-foreground text-center">
-						Workflow ends here
+						{t("flow.nodeTypes.nodes.endNode.connectMessage", "Workflow ends here")}
 					</p>
 				</div>
 			</div>

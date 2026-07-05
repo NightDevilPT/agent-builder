@@ -1,10 +1,22 @@
 // components/layout/workflow-layout/nodes/start-node/info.tsx
 "use client";
 
-import { memo } from "react";
+import { memo, useCallback } from "react";
+import { getNestedProperty } from "@/lib/utils";
+import { useTheme } from "@/components/context/theme-context";
 import { Play, ArrowRight, Shield, Workflow, Zap } from "lucide-react";
 
 export const StartNodeInfo = memo(() => {
+	const { dictionary } = useTheme();
+
+	const t = useCallback(
+		(path: string, defaultValue: string): string => {
+			if (!dictionary) return defaultValue;
+			return getNestedProperty(dictionary, path) || defaultValue;
+		},
+		[dictionary],
+	);
+
 	return (
 		<div className="space-y-4">
 			{/* Hero */}
@@ -13,24 +25,36 @@ export const StartNodeInfo = memo(() => {
 					<Play className="w-6 h-6 text-primary" />
 				</div>
 				<div>
-					<h3 className="font-semibold text-base">Start Node</h3>
+					<h3 className="font-semibold text-base">
+						{t(
+							"flow.nodeTypes.nodes.startNode.info.title",
+							"Start Node",
+						)}
+					</h3>
 					<p className="text-xs text-muted-foreground">
-						Workflow entry point
+						{t(
+							"flow.nodeTypes.nodes.startNode.info.subtitle",
+							"Workflow entry point",
+						)}
 					</p>
 				</div>
 			</div>
 
 			{/* Description */}
 			<p className="text-sm leading-relaxed">
-				The Start node marks the beginning of every workflow execution.
-				It passes control to the next connected node when the workflow
-				is triggered.
+				{t(
+					"flow.nodeTypes.nodes.startNode.info.description",
+					"The Start node marks the beginning of every workflow execution. It passes control to the next connected node when the workflow is triggered.",
+				)}
 			</p>
 
 			{/* Key Points */}
 			<div className="space-y-2">
 				<h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-					Key Features
+					{t(
+						"flow.nodeTypes.nodes.startNode.info.featuresTitle",
+						"Key Features",
+					)}
 				</h4>
 
 				<div className="space-y-2">
@@ -38,11 +62,16 @@ export const StartNodeInfo = memo(() => {
 						<Zap className="w-4 h-4 text-primary mt-0.5 shrink-0" />
 						<div>
 							<p className="text-sm font-medium">
-								Execution Trigger
+								{t(
+									"flow.nodeTypes.nodes.startNode.info.triggerTitle",
+									"Execution Trigger",
+								)}
 							</p>
 							<p className="text-xs text-muted-foreground">
-								Starts the workflow when triggered manually, via
-								webhook, or on schedule
+								{t(
+									"flow.nodeTypes.nodes.startNode.info.triggerDesc",
+									"Starts the workflow when triggered manually, via webhook, or on schedule",
+								)}
 							</p>
 						</div>
 					</div>
@@ -50,10 +79,17 @@ export const StartNodeInfo = memo(() => {
 					<div className="flex items-start gap-2.5 p-2 rounded-md bg-muted/50">
 						<ArrowRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
 						<div>
-							<p className="text-sm font-medium">Single Output</p>
+							<p className="text-sm font-medium">
+								{t(
+									"flow.nodeTypes.nodes.startNode.info.outputTitle",
+									"Single Output",
+								)}
+							</p>
 							<p className="text-xs text-muted-foreground">
-								Connects to one node to begin the workflow
-								execution chain
+								{t(
+									"flow.nodeTypes.nodes.startNode.info.outputDesc",
+									"Connects to one node to begin the workflow execution chain",
+								)}
 							</p>
 						</div>
 					</div>
@@ -61,9 +97,17 @@ export const StartNodeInfo = memo(() => {
 					<div className="flex items-start gap-2.5 p-2 rounded-md bg-muted/50">
 						<Workflow className="w-4 h-4 text-primary mt-0.5 shrink-0" />
 						<div>
-							<p className="text-sm font-medium">Required Node</p>
+							<p className="text-sm font-medium">
+								{t(
+									"flow.nodeTypes.nodes.startNode.info.requiredTitle",
+									"Required Node",
+								)}
+							</p>
 							<p className="text-xs text-muted-foreground">
-								Every workflow must have exactly one Start node
+								{t(
+									"flow.nodeTypes.nodes.startNode.info.requiredDesc",
+									"Every workflow must have exactly one Start node",
+								)}
 							</p>
 						</div>
 					</div>
@@ -71,10 +115,17 @@ export const StartNodeInfo = memo(() => {
 					<div className="flex items-start gap-2.5 p-2 rounded-md bg-muted/50">
 						<Shield className="w-4 h-4 text-primary mt-0.5 shrink-0" />
 						<div>
-							<p className="text-sm font-medium">Immutable</p>
+							<p className="text-sm font-medium">
+								{t(
+									"flow.nodeTypes.nodes.startNode.info.immutableTitle",
+									"Immutable",
+								)}
+							</p>
 							<p className="text-xs text-muted-foreground">
-								Cannot be deleted or duplicated. Protected
-								workflow entry
+								{t(
+									"flow.nodeTypes.nodes.startNode.info.immutableDesc",
+									"Cannot be deleted or duplicated. Protected workflow entry",
+								)}
 							</p>
 						</div>
 					</div>

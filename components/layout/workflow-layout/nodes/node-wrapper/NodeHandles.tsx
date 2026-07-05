@@ -1,9 +1,5 @@
 "use client";
 
-import { memo } from "react";
-import { Handle, Position } from "@xyflow/react";
-import { HandleRow } from "../../types";
-import { Input } from "@/components/ui/input";
 import {
 	Select,
 	SelectContent,
@@ -11,18 +7,33 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
+import { HandleRow, NodeType } from "../../types";
 import { getHandleColor } from "../index";
+import { memo, useCallback } from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Handle, Position } from "@xyflow/react";
+import { cn, getNestedProperty } from "@/lib/utils";
+import { useTheme } from "@/components/context/theme-context";
 
 interface NodeHandlesProps {
 	handleRows: HandleRow[];
+	nodeType?: string;
 	onChange?: (rowId: string, value: string | number | boolean) => void;
 }
 
 export const NodeHandles = memo(
-	({ handleRows, onChange }: NodeHandlesProps) => {
+	({ handleRows, nodeType, onChange }: NodeHandlesProps) => {
+		const { dictionary } = useTheme();
+		const t = useCallback(
+			(path: string, defaultValue: string): string => {
+				if (!dictionary) return defaultValue;
+				return getNestedProperty(dictionary, path) || defaultValue;
+			},
+			[dictionary],
+		);
+
 		return (
 			<div className="flex flex-col w-full divide-y divide-border/40">
 				{handleRows.map((row) => {
@@ -30,6 +41,18 @@ export const NodeHandles = memo(
 						row.targetHandle && row.targetHandle.visible;
 					const hasSource =
 						row.sourceHandle && row.sourceHandle.visible;
+
+					// Translate label dynamically if present
+					const nodeTypeKeyMap: Record<string, string> = {
+						[NodeType.START]: "startNode",
+						[NodeType.END]: "endNode",
+						[NodeType.TEXT]: "textNode",
+					};
+					const nodeKey = nodeTypeKeyMap[nodeType || ""] || "";
+					const fieldLabelKey = nodeKey ? `flow.nodeTypes.nodes.${nodeKey}.fields.${row.id}.label` : "";
+
+					const labelTranslationKey = fieldLabelKey || `flow.nodeHandles.labels.${row.id}`;
+					const translatedLabel = t(labelTranslationKey, row.label);
 
 					return (
 						<div
@@ -61,10 +84,11 @@ export const NodeHandles = memo(
 								)}
 							>
 								<Label className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground/80 selection:bg-transparent">
-									{row.label}
+									{translatedLabel}
 								</Label>
 								<NodeInputRenderer
 									row={row}
+									nodeType={nodeType}
 									onChange={onChange}
 								/>
 							</div>
@@ -80,7 +104,7 @@ export const NodeHandles = memo(
 									style={{
 										backgroundColor:
 											getHandleColor("source"),
-										right: "-10px"
+										right: "-10px",
 									}}
 								/>
 							)}
@@ -99,14 +123,34 @@ NodeHandles.displayName = "NodeHandles";
  */
 interface NodeInputRendererProps {
 	row: HandleRow;
+	nodeType?: string;
 	onChange?: (rowId: string, value: string | number | boolean) => void;
 }
 
-const NodeInputRenderer = ({ row, onChange }: NodeInputRendererProps) => {
+const NodeInputRenderer = ({ row, nodeType, onChange }: NodeInputRendererProps) => {
 	const { config, targetHandle } = row;
 	const isConnected = targetHandle?.source === "connected";
 	const value = config.value;
 	const placeholder = config.placeholder;
+
+	const { dictionary } = useTheme();
+	const t = useCallback(
+		(path: string, defaultValue: string): string => {
+			if (!dictionary) return defaultValue;
+			return getNestedProperty(dictionary, path) || defaultValue;
+		},
+		[dictionary],
+	);
+
+	const nodeTypeKeyMap: Record<string, string> = {
+		[NodeType.START]: "startNode",
+		[NodeType.END]: "endNode",
+		[NodeType.TEXT]: "textNode",
+	};
+	const nodeKey = nodeTypeKeyMap[nodeType || ""] || "";
+	const placeholderKey = nodeKey ? `flow.nodeTypes.nodes.${nodeKey}.fields.${row.id}.placeholder` : "";
+
+	const resolvedPlaceholder = placeholderKey ? t(placeholderKey, placeholder || "") : (placeholder || "");
 
 	if (isConnected) {
 		return (
@@ -114,7 +158,7 @@ const NodeInputRenderer = ({ row, onChange }: NodeInputRendererProps) => {
 				variant="secondary"
 				className="text-[10px] px-1.5 py-0 h-5 w-fit font-normal bg-primary/10 text-primary border-none select-none"
 			>
-				Connected
+				{t("flow.nodeHandles.connected", "Connected")}
 			</Badge>
 		);
 	}
@@ -124,7 +168,7 @@ const NodeInputRenderer = ({ row, onChange }: NodeInputRendererProps) => {
 			return (
 				<Input
 					value={(value as string) ?? ""}
-					placeholder={placeholder}
+					placeholder={placeholder ? t(placeholder, placeholder) : ""}
 					onChange={(e) => onChange?.(row.id, e.target.value)}
 					className="h-7 text-xs bg-background/50 focus-visible:ring-1"
 				/>
@@ -135,7 +179,7 @@ const NodeInputRenderer = ({ row, onChange }: NodeInputRendererProps) => {
 				<Input
 					type="number"
 					value={(value as number) ?? ""}
-					placeholder={placeholder}
+					placeholder={placeholder ? t(placeholder, placeholder) : ""}
 					onChange={(e) =>
 						onChange?.(
 							row.id,
@@ -153,7 +197,11 @@ const NodeInputRenderer = ({ row, onChange }: NodeInputRendererProps) => {
 					onValueChange={(val: string) => onChange?.(row.id, val)}
 				>
 					<SelectTrigger className="h-7 text-xs bg-background/50 focus:ring-1">
-						<SelectValue placeholder={placeholder} />
+						<SelectValue
+							placeholder={
+								placeholder ? t(placeholder, placeholder) : ""
+							}
+						/>
 					</SelectTrigger>
 					<SelectContent>
 						{config.options?.map((opt) => (
@@ -162,7 +210,7 @@ const NodeInputRenderer = ({ row, onChange }: NodeInputRendererProps) => {
 								value={opt.value}
 								className="text-xs"
 							>
-								{opt.label}
+								{opt.label ? t(opt.label, opt.label) : ""}
 							</SelectItem>
 						))}
 					</SelectContent>
@@ -184,14 +232,19 @@ const NodeInputRenderer = ({ row, onChange }: NodeInputRendererProps) => {
 					}
 				>
 					<SelectTrigger className="h-7 text-xs bg-background/50 focus:ring-1">
-						<SelectValue placeholder="Select bool..." />
+						<SelectValue
+							placeholder={t(
+								"flow.nodeHandles.selectBool",
+								"Select bool...",
+							)}
+						/>
 					</SelectTrigger>
 					<SelectContent>
 						<SelectItem value="true" className="text-xs">
-							True
+							{t("flow.nodeHandles.true", "True")}
 						</SelectItem>
 						<SelectItem value="false" className="text-xs">
-							False
+							{t("flow.nodeHandles.false", "False")}
 						</SelectItem>
 					</SelectContent>
 				</Select>

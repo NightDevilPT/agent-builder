@@ -15,8 +15,8 @@ import { EndNodeInfo } from "./info";
 export const endNodeConfig: AppNodeData = {
 	type: NodeType.END,
 	header: {
-		label: "End",
-		description: "Workflow ends here",
+		label: "flow.nodeTypes.nodes.endNode.label",
+		description: "flow.nodeTypes.nodes.endNode.description",
 		icon: Square,
 		type: NodeType.END,
 		status: NodeExecutionStatus.IDLE,
@@ -33,9 +33,9 @@ export const endNodeConfig: AppNodeData = {
 	handleRows: [
 		{
 			id: "end",
-			label: "End",
+			label: "flow.nodeTypes.nodes.endNode.fields.end.label",
 			type: HandleRowType.INPUT,
-			description: "Workflow ends here",
+			description: "flow.nodeTypes.nodes.endNode.fields.end.description",
 			config: {
 				value: null,
 				inputType: "text",
@@ -43,8 +43,8 @@ export const endNodeConfig: AppNodeData = {
 			targetHandle: {
 				id: "end-input",
 				position: Position.Left,
-				label: "End",
-				description: "Receives final output",
+				label: "flow.nodeTypes.nodes.endNode.fields.end.targetHandle.label",
+				description: "flow.nodeTypes.nodes.endNode.fields.end.targetHandle.description",
 				value: null,
 				defaultValue: null,
 				source: HandleValueSource.DEFAULT,

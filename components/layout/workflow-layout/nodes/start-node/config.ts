@@ -17,8 +17,8 @@ import { StartNodeInfo } from "./info";
 export const startNodeConfig: AppNodeData = {
 	type: NodeType.START,
 	header: {
-		label: "Start",
-		description: "Workflow begins here",
+		label: "flow.nodeTypes.nodes.startNode.label",
+		description: "flow.nodeTypes.nodes.startNode.description",
 		icon: Play,
 		type: NodeType.START,
 		status: NodeExecutionStatus.WAITING,
@@ -38,9 +38,9 @@ export const startNodeConfig: AppNodeData = {
 	handleRows: [
 		{
 			id: "start",
-			label: "Start",
+			label: "flow.nodeTypes.nodes.startNode.fields.start.label",
 			type: HandleRowType.OUTPUT,
-			description: "Triggers workflow execution",
+			description: "flow.nodeTypes.nodes.startNode.fields.start.description",
 			config: {
 				value: null,
 				inputType: "text",
@@ -48,8 +48,8 @@ export const startNodeConfig: AppNodeData = {
 			sourceHandle: {
 				id: "start-output",
 				position: Position.Right,
-				label: "Start",
-				description: "Connect to begin workflow",
+				label: "flow.nodeTypes.nodes.startNode.fields.start.sourceHandle.label",
+				description: "flow.nodeTypes.nodes.startNode.fields.start.sourceHandle.description",
 				value: null,
 				defaultValue: null,
 				source: HandleValueSource.DEFAULT,
