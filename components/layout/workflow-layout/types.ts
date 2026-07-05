@@ -20,6 +20,12 @@ export enum HandleValueSource {
 	DEFAULT = "default",
 }
 
+export enum HandleRowType {
+	INPUT = "input",
+	OUTPUT = "output",
+	INPUT_OUTPUT = "input-output",
+}
+
 // ==================== Handle Validation ====================
 
 export interface HandleValidationConfig {
@@ -75,18 +81,13 @@ export interface BaseHandle {
 	label: string;
 	description?: string;
 	placeholder?: string;
-
 	value: unknown;
 	defaultValue?: unknown;
 	source: HandleValueSource;
 	dataFormat: HandleDataFormat;
-
 	validation: HandleValidation;
-
 	schema?: HandleSchema;
-
 	tooltip?: ElementType;
-
 	visible: boolean;
 	disabled: boolean;
 }
@@ -109,6 +110,43 @@ export interface OutputHandle extends BaseHandle {
 		connectedNodeIds: string[];
 		connectedHandleIds: string[];
 	};
+}
+
+// ==================== Handle Row ====================
+
+export interface KeyValuePair {
+	id: string;
+	key: string;
+	value: string;
+	source: "manual" | "connection";
+	connectedNodeId?: string;
+	connectedHandleId?: string;
+}
+
+export interface HandleRowConfig {
+	value: unknown;
+	defaultValue?: unknown;
+	inputType:
+		| "text"
+		| "number"
+		| "select"
+		| "textarea"
+		| "json"
+		| "key-value"
+		| "boolean";
+	placeholder?: string;
+	options?: { label: string; value: string }[];
+	keyValuePairs?: KeyValuePair[];
+}
+
+export interface HandleRow {
+	id: string;
+	label: string;
+	type: HandleRowType;
+	description?: string;
+	config: HandleRowConfig;
+	targetHandle?: InputHandle;
+	sourceHandle?: OutputHandle;
 }
 
 // ==================== Handle Definition ====================
@@ -193,6 +231,7 @@ export interface AppNodeData extends Record<string, unknown> {
 	config: NodeConfig;
 	inputHandles: InputHandle[];
 	outputHandles: OutputHandle[];
+	handleRows: HandleRow[];
 	isStartNode: boolean;
 	isEndNode: boolean;
 	[key: string]: unknown;

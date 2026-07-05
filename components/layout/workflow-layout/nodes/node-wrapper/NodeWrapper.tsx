@@ -10,6 +10,7 @@ import {
 	XCircle,
 	Clock,
 	Info,
+	GripVertical,
 } from "lucide-react";
 import {
 	Tooltip,
@@ -46,7 +47,13 @@ const statusConfig: Record<
 	NodeExecutionStatus,
 	{
 		icon: React.ElementType;
-		variant: "secondary" | "default" | "destructive" | "outline";
+		variant:
+			| "secondary"
+			| "default"
+			| "destructive"
+			| "outline"
+			| "success"
+			| "waiting";
 	}
 > = {
 	[NodeExecutionStatus.IDLE]: {
@@ -59,7 +66,7 @@ const statusConfig: Record<
 	},
 	[NodeExecutionStatus.SUCCESS]: {
 		icon: CheckCircle2,
-		variant: "default",
+		variant: "success",
 	},
 	[NodeExecutionStatus.FAILURE]: {
 		icon: XCircle,
@@ -67,7 +74,7 @@ const statusConfig: Record<
 	},
 	[NodeExecutionStatus.WAITING]: {
 		icon: Clock,
-		variant: "outline",
+		variant: "waiting",
 	},
 };
 
@@ -118,9 +125,8 @@ export const NodeWrapper = memo(
 		}, []);
 
 		const actions = header?.actions;
-		const showCopy = actions?.copy?.isEnabled && !isStartNode && !isEndNode;
-		const showDelete =
-			actions?.delete?.isEnabled && !isStartNode && !isEndNode;
+		const showCopy = actions?.copy?.isEnabled && !isStartNode;
+		const showDelete = actions?.delete?.isEnabled && !isStartNode;
 		const showExecute =
 			actions?.execute?.isEnabled &&
 			status !== NodeExecutionStatus.RUNNING;
@@ -128,9 +134,7 @@ export const NodeWrapper = memo(
 
 		return (
 			<>
-				<BaseNode
-					className={cn(selected && `ring-2 !ring-[${nodeColor}]`)}
-				>
+				<BaseNode className={cn(selected && "ring-2 ring-primary")}>
 					{/* Header */}
 					<BaseNodeHeader>
 						<div className="flex items-center gap-2 flex-1 min-w-0">
@@ -144,7 +148,7 @@ export const NodeWrapper = memo(
 						</div>
 
 						<div className="flex items-center gap-0.5">
-							{/* Status Icon only - no text */}
+							{/* Status Icon */}
 							<Tooltip>
 								<TooltipTrigger asChild>
 									<Badge

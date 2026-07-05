@@ -1,9 +1,13 @@
+// ==================== START NODE ====================
+
 // components/layout/workflow-layout/nodes/start-node/config.ts
 import {
 	NodeType,
 	NodeExecutionStatus,
-	type OutputHandle,
-	InputHandle,
+	HandleRowType,
+	HandleDataFormat,
+	HandleValueSource,
+	type AppNode,
 	AppNodeData,
 } from "../../types";
 import { Position } from "@xyflow/react";
@@ -17,7 +21,7 @@ export const startNodeConfig: AppNodeData = {
 		description: "Workflow begins here",
 		icon: Play,
 		type: NodeType.START,
-		status: NodeExecutionStatus.IDLE,
+		status: NodeExecutionStatus.WAITING,
 		actions: {
 			copy: { isEnabled: false },
 			delete: { isEnabled: false },
@@ -29,41 +33,50 @@ export const startNodeConfig: AppNodeData = {
 		},
 	},
 	config: {},
-	inputHandles: [] as InputHandle[],
-	outputHandles: [
+	inputHandles: [],
+	outputHandles: [],
+	handleRows: [
 		{
-			id: "start-output",
-			type: "source",
-			position: Position.Right,
+			id: "start",
 			label: "Start",
+			type: HandleRowType.OUTPUT,
 			description: "Triggers workflow execution",
-			value: null,
-			defaultValue: null,
-			source: "default",
-			dataFormat: "any",
-			validation: {
-				config: {
-					required: false,
+			config: {
+				value: null,
+				inputType: "text",
+			},
+			sourceHandle: {
+				id: "start-output",
+				position: Position.Right,
+				label: "Start",
+				description: "Connect to begin workflow",
+				value: null,
+				defaultValue: null,
+				source: HandleValueSource.DEFAULT,
+				dataFormat: HandleDataFormat.ANY,
+				validation: {
+					config: { required: false },
 				},
+				type: "source",
+				connection: {
+					maxConnections: 1,
+					connectableNodes: [
+						NodeType.API,
+						NodeType.LLM,
+						NodeType.CONDITIONAL,
+						NodeType.LOOP,
+						NodeType.INPUT,
+						NodeType.OUTPUT,
+						NodeType.END,
+					],
+					required: false,
+					connectedNodeIds: [],
+					connectedHandleIds: [],
+				},
+				visible: true,
+				disabled: false,
 			},
-			connection: {
-				maxConnections: 1,
-				connectableNodes: [
-					NodeType.API,
-					NodeType.LLM,
-					NodeType.CONDITIONAL,
-					NodeType.LOOP,
-					NodeType.INPUT,
-					NodeType.OUTPUT,
-					NodeType.END,
-				],
-				required: false,
-				connectedNodeIds: [],
-				connectedHandleIds: [],
-			},
-			visible: true,
-			disabled: false,
-		} as OutputHandle,
+		},
 	],
 	isStartNode: true,
 	isEndNode: false,

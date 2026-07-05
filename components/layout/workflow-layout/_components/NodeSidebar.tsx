@@ -1,7 +1,12 @@
 // components/layout/workflow-layout/NodeSidebar.tsx
 "use client";
 
-import { memo, useState, type DragEvent as ReactDragEvent } from "react";
+import {
+	memo,
+	useState,
+	useMemo,
+	type DragEvent as ReactDragEvent,
+} from "react";
 import { Panel } from "@xyflow/react";
 import { NodeType } from "../types";
 import { nodeSidebarGroups } from "../nodes";
@@ -14,6 +19,8 @@ import {
 	AccordionContent,
 } from "@/components/ui/accordion";
 import { Search } from "lucide-react";
+import { useWorkflow } from "@/components/context/workflow-context";
+import { cn } from "@/lib/utils";
 
 interface NodeSidebarProps {
 	onDragStart: (
@@ -25,19 +32,41 @@ interface NodeSidebarProps {
 export const NodeSidebar = memo(({ onDragStart }: NodeSidebarProps) => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [isCollapsed, setIsCollapsed] = useState(false);
+	const { nodes } = useWorkflow();
+
+	// Check which unique nodes already exist on the canvas
+	const existingUniqueNodes = useMemo(() => {
+		const uniqueTypes = new Set<NodeType>();
+		nodeSidebarGroups.forEach((group) => {
+			group.items.forEach((item) => {
+				if (
+					item.unique &&
+					nodes.some((n) => n.data?.type === item.type)
+				) {
+					uniqueTypes.add(item.type);
+				}
+			});
+		});
+		return uniqueTypes;
+	}, [nodes]);
 
 	const filteredGroups = nodeSidebarGroups
 		.map((group) => ({
 			...group,
-			items: group.items.filter(
-				(item) =>
-					item.label
-						.toLowerCase()
-						.includes(searchQuery.toLowerCase()) ||
-					item.description
-						.toLowerCase()
-						.includes(searchQuery.toLowerCase()),
-			),
+			items: group.items
+				.filter(
+					(item) =>
+						item.label
+							.toLowerCase()
+							.includes(searchQuery.toLowerCase()) ||
+						item.description
+							.toLowerCase()
+							.includes(searchQuery.toLowerCase()),
+				)
+				.map((item) => ({
+					...item,
+					disabled: item.unique && existingUniqueNodes.has(item.type),
+				})),
 		}))
 		.filter((group) => group.items.length > 0);
 
@@ -98,49 +127,65 @@ export const NodeSidebar = memo(({ onDragStart }: NodeSidebarProps) => {
 												<AccordionContent className="pb-1">
 													<div className="space-y-1">
 														{group.items.map(
-															(item) => (
-																<div
-																	key={
-																		item.type
-																	}
-																	className="flex items-center gap-2 p-2 rounded-md cursor-grab hover:bg-accent transition-colors border border-transparent hover:border-border"
-																	draggable
-																	onDragStart={(
-																		e,
-																	) =>
-																		onDragStart(
-																			e,
-																			item.type,
-																		)
-																	}
-																>
+															(item) => {
+																const isDisabled =
+																	item.disabled ??
+																	false;
+
+																return (
 																	<div
-																		className="flex items-center justify-center w-7 h-7 rounded-md shrink-0"
-																		style={{
-																			backgroundColor: `${item.color}15`,
+																		key={
+																			item.type
+																		}
+																		className={cn(
+																			"flex items-center gap-2 p-2 rounded-md transition-colors border",
+																			isDisabled
+																				? "opacity-50 cursor-not-allowed border-transparent"
+																				: "cursor-grab hover:bg-accent border-transparent hover:border-border",
+																		)}
+																		draggable={
+																			!isDisabled
+																		}
+																		onDragStart={(
+																			e,
+																		) => {
+																			if (
+																				!isDisabled
+																			)
+																				onDragStart(
+																					e,
+																					item.type,
+																				);
 																		}}
 																	>
-																		<item.icon
-																			className="w-3.5 h-3.5"
+																		<div
+																			className="flex items-center justify-center w-7 h-7 rounded-md shrink-0"
 																			style={{
-																				color: item.color,
+																				backgroundColor: `${item.color}15`,
 																			}}
-																		/>
-																	</div>
-																	<div className="flex-1 min-w-0">
-																		<div className="text-xs font-medium truncate">
-																			{
-																				item.label
-																			}
+																		>
+																			<item.icon
+																				className="w-3.5 h-3.5"
+																				style={{
+																					color: item.color,
+																				}}
+																			/>
 																		</div>
-																		<div className="text-[10px] text-muted-foreground truncate">
-																			{
-																				item.description
-																			}
+																		<div className="flex-1 min-w-0">
+																			<div className="text-xs font-medium truncate">
+																				{
+																					item.label
+																				}
+																			</div>
+																			<div className="text-[10px] text-muted-foreground truncate">
+																				{isDisabled
+																					? "Already added"
+																					: item.description}
+																			</div>
 																		</div>
 																	</div>
-																</div>
-															),
+																);
+															},
 														)}
 													</div>
 												</AccordionContent>
